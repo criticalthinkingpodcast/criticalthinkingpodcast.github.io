@@ -1,6 +1,46 @@
 ---
 layout: default
 ---
+<style>
+::-webkit-scrollbar {
+      width: 0px;
+}
+</style>
+<script>
+var test;
+fetch("https://proxy.cors.sh/https://media.rss.com/ctbbpodcast/feed.xml").then(a=>a.text()).then((text)=>{
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(text,"text/xml");
+    test= xmlDoc;
+    test.children[0].children[0].querySelectorAll("item").forEach((item)=>{
+        var title = item.querySelector("title").innerHTML.replace("<![CDATA[", "").replace("]]>", "");
+        var episodeId = item.querySelector("link").innerHTML.replace("<![CDATA[", "").replace("]]>", "").split("/").slice(-1)[0];
+        var i = document.createElement('iframe');
+        i.src = `https://player.rss.com/ctbbpodcast/${episodeId}?theme=dark`;
+        i.style= "width:100%;height:8.75em;border-radius:1em;border:none;margin:1em 0em;"
+        i.title = "Critical Thinking - A Bug Bounty Podcast";
+        i.frameborder = "0";
+        i.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        i.allowfullscreen ="true"
+        var a = document.createElement("a")
+        a.href = `https://rss.com/podcasts/ctbbpodcast/${episodeId}/`
+        a.innerText = title
+        i.appendChild(a)
+        document.getElementById("episodeContainer").appendChild(i)
+    })
+
+
+    console.log(xmlDoc)
+
+    
+})
+/*template = `<iframe src="https://player.rss.com/ctbbpodcast/${episodeId}?theme=dark" style="width: 100%;height:8.75em;border-radius:1em;" title="Critical Thinking - A Bug Bounty Podcast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen><a href="https://rss.com/podcasts/ctbbpodcast/${episodeId}/"> ${episodeTitle} | RSS.com</a></iframe>`*/
+
+</script>
+<div id="episodeContainer">
+
+
+</div>
 
 Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`.
 
