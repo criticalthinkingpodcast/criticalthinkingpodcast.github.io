@@ -123,4 +123,7 @@ fetch("https://proxy.cors.sh/https://media.rss.com/ctbbpodcast/feed.xml")
 });
 </script>
 
-## [View All Episodes →](https://rss.com/podcasts/ctbbpodcast/)
+<div style="text-align: center; margin: 30px 0;">
+    <a href="/episodes/" style="display: inline-block; padding: 12px 25px; background-color: #252525; color: #58a6ff; border: 1px solid #444; border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">View All Episodes →</a>
+</div>
+
