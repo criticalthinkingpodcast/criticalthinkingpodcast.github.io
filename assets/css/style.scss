@@ -1,1 +1,132 @@
 @import 'jekyll-theme-hacker';
+
+// Import Fira Code font
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+// Override all font families in the theme
+body, 
+p, 
+span, 
+a, 
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+header, 
+section, 
+div, 
+pre, 
+code, 
+.container, 
+#main_content {
+  font-family: 'Fira Code', monospace !important;
+}
+
+// Additional styling for headings
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600 !important;
+}
+
+// Make sure code blocks still use the monospace font
+code, pre {
+  font-family: 'Fira Code', monospace !important;
+}
+
+// Ensure content in the container uses the font
+.container #main_content {
+  font-family: 'Fira Code', monospace !important;
+}
+
+/* Header and Layout Styling */
+header {
+position: fixed;
+min-width: 800px;
+overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: rgba(24, 24, 24, 0.9);
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  padding-top: 150px; /* Match the header height */
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* Logo Styling */
+#a-title img {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Episode Container Styling */
+.episode-container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.episode-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #58a6ff;
+}
+
+/* Make links stand out */
+a {
+  color: #58a6ff;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff5252;
+  text-decoration: none;
+}
+
+/* View All Episodes Link */
+a[href^="https://rss.com/podcasts"] {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #383838;
+  color: #58a6ff;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+a[href^="https://rss.com/podcasts"]:hover {
+  background-color: #4a4a4a;
+  transform: translateY(-2px);
+}
+
+/* Make canvas responsive */
+canvas.plexus {
+  width: 100%;
+  height: 100%;
+}
+
+/* Basic responsive adjustments */
+@media screen and (max-width: 800px) {
+  #a-title img {
+    max-width: 320px; /* Smaller logo on medium screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #a-title img {
+    max-width: 250px; /* Even smaller logo on mobile */
+  }
+}

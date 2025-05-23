@@ -33,13 +33,55 @@ h1, h2 {
 .welcome-text {
     max-width: 600px;
     margin: 0 auto 40px auto;
+    padding: 0 20px; /* Adiciona padding para mobile */
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .episode-container {
+        padding: 15px;
+    }
+    
+    .episode-title {
+        font-size: 1.1em;
+        margin: 15px 0 8px 0;
+    }
+    
+    .welcome-text {
+        padding: 0 15px;
+        margin: 0 auto 30px auto;
+    }
+    
+    h1, h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .episode-container {
+        padding: 10px;
+    }
+    
+    .episode-title {
+        font-size: 1em;
+        margin: 12px 0 6px 0;
+    }
+    
+    .welcome-text {
+        padding: 0 10px;
+        margin: 0 auto 20px auto;
+        font-size: 0.9em;
+    }
+    
+    h1, h2 {
+        font-size: 1.3em;
+    }
 }
 </style>
 
 
 <div class="welcome-text">
-Welcome to our podcast where we explore the world of bug bounty hunting and web security.
-</div>
+Critical Thinking is a "by hackers, for hackers" podcast designed to be both technical and fun to listen to. </div>
 
 ## Latest Episodes
 

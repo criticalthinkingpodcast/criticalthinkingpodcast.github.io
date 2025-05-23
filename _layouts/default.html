@@ -1,7 +1,7 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic&subset=latin,latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/plexus-style.css" media="screen">
     <script src="/assets/js/plexus-math.js"></script>
     <script src="/assets/js/plexus.js"></script>
@@ -10,11 +10,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 <style>
+    * {
+        font-family: 'Fira Code', monospace !important;
+        box-sizing: border-box; /* Importante para responsividade */
+    }
+    
+    body, p, h1, h2, h3, h4, h5, h6, a, span, div {
+        font-family: 'Fira Code', monospace !important;
+    }
+    
     .buttonCenter {
         display:block;
         position:absolute;
         left:50%;
         transform: translate(-50%, -250%);
+    }
+    
+    /* Responsividade para o header */
+    @media (max-width: 768px) {
+        header div {
+            height: 120px !important; /* Header menor no mobile */
+        }
+        
+        header img {
+            max-width: 280px !important; /* Logo menor no mobile */
+            padding: 5px !important;
+        }
+        
+        /* Ajusta o spacer para mobile */
+        .container::before {
+            content: '';
+            display: block;
+            height: 130px; /* Spacer menor para mobile */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        header div {
+            height: 100px !important; /* Header ainda menor em telas muito pequenas */
+        }
+        
+        header img {
+            max-width: 220px !important;
+        }
+        
+        .container::before {
+            height: 110px;
+        }
+    }
+    
+    /* Container responsivo */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 15px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 10px;
+        }
     }
 </style>
     {% include head-custom.html %}
@@ -24,18 +86,22 @@
 
   <body>
 
-    <header>
-      <div style="width:100% !important;height:25%;">
-        <canvas id="plexus-test" class="plexus"></canvas>
-        <a id="a-title" href="{{ '/' | relative_url }}">
-        <span>
-            <img src="/assets/images/CTLogo.png" style="width:100%;max-width:500px;position:absolute;left:50%;transform: translate(-50%, 0%);background-color:rgba(24,24,24,.7);border-radius:10%;">
-            <!--<b style="display:block;position:absolute;left:50%;transform: translate(-50%, -150%);">By Hackers For Hackers</b>-->
-        </span>
-        </a>
-
+    <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(24,24,24,0.9);">
+      <div style="position: relative; width: 100%; height: 150px; overflow: hidden;">
+        <!-- Background animation -->
+        <canvas id="plexus-test" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        
+        <!-- Logo centered in the header -->
+        <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
+          <a id="a-title" href="{{ '/' | relative_url }}">
+            <img src="/assets/images/CTLogo.png" style="width: 100%; max-width: 400px; background-color: rgba(24,24,24,0.7); border-radius: 10px; padding: 10px;">
+          </a>
+        </div>
       </div>
     </header>
+    
+    <!-- Spacer to prevent content from being hidden under the fixed header -->
+    <div style="height: 160px;"></div>
 
     <div class="container">
       <section id="main_content">
@@ -43,10 +109,15 @@
       </section>
     </div>
     <script>
-        var plexus = new Plexus("plexus-test", {
-            pointsSpeed: 0.5,
-            pointsRadius: 1.1,
-            pointsStartDistance: 60
+        // Initialize plexus animation with better settings for header background
+        document.addEventListener("DOMContentLoaded", function() {
+            var plexus = new Plexus("plexus-test", {
+                pointsSpeed: 0.3, // Slightly slower for better appearance
+                pointsRadius: 1.0,
+                pointsStartDistance: 80, // Wider connections
+                linesWidth: 0.8, // Thinner lines
+                backgroundColor: "rgba(24, 24, 24, 0)" // Transparent background
+            });
         });
     </script>
   </body>
