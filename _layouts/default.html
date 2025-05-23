@@ -1,0 +1,53 @@
+<DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic&subset=latin,latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/plexus-style.css" media="screen">
+    <script src="/assets/js/plexus-math.js"></script>
+    <script src="/assets/js/plexus.js"></script>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+<style>
+    .buttonCenter {
+        display:block;
+        position:absolute;
+        left:50%;
+        transform: translate(-50%, -250%);
+    }
+</style>
+    {% include head-custom.html %}
+
+    {% seo %}
+  </head>
+
+  <body>
+
+    <header>
+      <div style="width:100% !important;height:25%;">
+        <canvas id="plexus-test" class="plexus"></canvas>
+        <a id="a-title" href="{{ '/' | relative_url }}">
+        <span>
+            <img src="/assets/images/CTLogo.png" style="width:100%;max-width:500px;position:absolute;left:50%;transform: translate(-50%, 0%);background-color:rgba(24,24,24,.7);border-radius:10%;">
+            <!--<b style="display:block;position:absolute;left:50%;transform: translate(-50%, -150%);">By Hackers For Hackers</b>-->
+        </span>
+        </a>
+
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        {{ content }}
+      </section>
+    </div>
+    <script>
+        var plexus = new Plexus("plexus-test", {
+            pointsSpeed: 0.5,
+            pointsRadius: 1.1,
+            pointsStartDistance: 60
+        });
+    </script>
+  </body>
+</html>
