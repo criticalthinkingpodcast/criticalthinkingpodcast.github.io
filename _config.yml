@@ -2,5 +2,5 @@ title: Critical Thinking - Bug Bounty Podcast
 description: "A 'by Hackers for Hackers' podcast focused on technical content ranging from bug bounty tips, to write-up explanations, to the latest exploitation techniques."
 show_downloads: true
 google_analytics:
-baseurl: "/CriticalResearchLab"
+baseurl: ""
 url: "https://criticalthinkingpodcast.github.io"
