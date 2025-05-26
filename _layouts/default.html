@@ -15,8 +15,36 @@
         box-sizing: border-box; /* Importante para responsividade */
     }
     
-    body, p, h1, h2, h3, h4, h5, h6, a, span, div {
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
         font-family: 'Fira Code', monospace !important;
+    }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+    }
+    
+    p, h1, h2, h3, h4, h5, h6, a, span, div {
+        font-family: 'Fira Code', monospace !important;
+    }
+    
+    .page-wrapper {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container {
+        flex: 1 0 auto;
+    }
+    
+    footer {
+        flex-shrink: 0;
+        margin-top: auto;
     }
     
     .buttonCenter {
@@ -26,8 +54,7 @@
         transform: translate(-50%, -250%);
     }
     
-    /* Responsividade para o header */
-    @media (max-width: 768px) {
+    /* Responsividade para o header */    @media (max-width: 768px) {
         header div {
             height: 120px !important; /* Header menor no mobile */
         }
@@ -52,6 +79,14 @@
         /* Ajusta o spacer geral para acomodar o menu */
         div[style*="height: 190px"] {
             height: 160px !important;
+        }
+        
+        footer {
+            padding: 20px 0 !important;
+        }
+        
+        footer div {
+            padding: 0 15px !important;
         }
     }
     
@@ -82,6 +117,19 @@
         div[style*="height: 190px"] {
             height: 140px !important;
         }
+        
+        footer {
+            padding: 15px 0 !important;
+        }
+        
+        footer div {
+            padding: 0 10px !important;
+        }
+        
+        footer a {
+            margin: 0 5px !important;
+            font-size: 0.8em !important;
+        }
     }
     
     /* Container responsivo */
@@ -106,45 +154,43 @@
 </style>
     {% include head-custom.html %}
 
-    {% seo %}
-  </head>
+    {% seo %}  </head>
 
   <body>
-
-    <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(24,24,24,0.9);">
-      <div style="position: relative; width: 100%; height: 150px; overflow: hidden;">
-        <!-- Background animation -->
-        <canvas id="plexus-test" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
-        
-        <!-- Logo centered in the header -->
-        <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
-          <a id="a-title" href="{{ '/' | relative_url }}">
-            <img src="/assets/images/CTLogo.png" style="width: 100%; max-width: 400px; background-color: rgba(24,24,24,0.7); border-radius: 10px; padding: 10px;">
-          </a>
+    <div class="page-wrapper">
+      <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(24,24,24,0.9);">
+        <div style="position: relative; width: 100%; height: 150px; overflow: hidden;">
+          <!-- Background animation -->
+          <canvas id="plexus-test" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+          
+          <!-- Logo centered in the header -->
+          <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
+            <a id="a-title" href="{{ '/' | relative_url }}">
+              <img src="/assets/images/CTLogo.png" style="width: 100%; max-width: 400px; background-color: rgba(24,24,24,0.7); border-radius: 10px; padding: 10px;">
+            </a>
+          </div>
         </div>
+      </header>
+      
+      <!-- Navigation Menu -->
+      <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: #0f0f0f; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+        <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center;">
+          <a href="{{ '/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Home</a>
+          <a href="{{ '/research/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Research</a>
+          <a href="{{ '/about/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">About</a>
+        </div>
+      </nav>
+      
+      <!-- Spacer to prevent content from being hidden under the fixed header and navigation -->
+      <div style="height: 190px;"></div>      <div class="container">
+        <section id="main_content">
+          {{ content }}
+        </section>
       </div>
-    </header>
-    
-    <!-- Navigation Menu -->
-    <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: #0f0f0f; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
-      <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center;">
-        <a href="{{ '/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Home</a>
-        <a href="{{ '/research/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Research</a>
-        <a href="{{ '/about/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">About</a>
-      </div>
-    </nav>
-    
-    <!-- Spacer to prevent content from being hidden under the fixed header and navigation -->
-    <div style="height: 190px;"></div>
-
-    <div class="container">
-      <section id="main_content">
-        {{ content }}
-      </section>
-    </div>
+    </div><!-- End page-wrapper -->
     
     <!-- Footer -->
-    <footer style="background-color: #0f0f0f; padding: 30px 0; margin-top: 50px; border-top: 1px solid #333;">
+    <footer style="background-color: #0f0f0f; padding: 30px 0; margin-top: auto; border-top: 1px solid #333; width: 100%;">
       <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 20px;">
         <div style="margin-bottom: 20px;">
           <a href="https://twitter.com/ctbbpodcast" target="_blank" rel="noopener" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">Twitter</a>
@@ -190,8 +236,7 @@
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
-                });
-            });
+                });            });
         });
     </script>
   </body>

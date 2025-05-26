@@ -1,0 +1,184 @@
+/**
+ * Vibrant Syntax Highlighting for Blog Posts
+ * Enhanced colors for better readability and visual appeal
+ */
+
+/* Code syntax highlighting elements */
+.highlight {
+  color: #f8f8f2;
+}
+
+/* Plain text */
+.highlight .w {
+  color: #f8f8f2;
+}
+
+/* Error */
+.highlight .err {
+  color: #ffffff;
+  background-color: #ff5555;
+}
+
+/* Comments */
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #779db0;
+}
+
+/* Preprocessor */
+.highlight .cp {
+  color: #ff9d00;
+}
+
+/* Keywords */
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ff79c6;
+}
+
+/* Keyword types */
+.highlight .kt {
+  color: #ffb86c;
+}
+
+/* Strings */
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, 
+.highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss {
+  color: #3adf8f;
+}
+
+/* Numbers */
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo {
+  color: #bd93f9;
+}
+
+/* Variables */
+.highlight .na, .highlight .nb, .highlight .nc, .highlight .nd, .highlight .ne, .highlight .nf, .highlight .nx {
+  color: #50fa7b;
+}
+
+/* Class name */
+.highlight .nc {
+  color: #a5e1ff;
+}
+
+/* Function name */
+.highlight .nf {
+  color: #50fa7b;
+}
+
+/* Namespace */
+.highlight .nn {
+  color: #8be9fd;
+}
+
+/* Other */
+.highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #66d9ef;
+}
+
+/* Operator */
+.highlight .o, .highlight .ow {
+  color: #ff9d00;
+}
+
+/* Literal */
+.highlight .l {
+  color: #ae81ff;
+}
+
+/* Function */
+.highlight .n, .highlight .py, .highlight .nl, .highlight .ni {
+  color: #f8f8f2;
+}
+
+/* Tag */
+.highlight .nt {
+  color: #ff79c6;
+}
+
+/* Attributes */
+.highlight .na {
+  color: #50fa7b;
+}
+
+/* GraphQL syntax - specialized */
+/* Directive */
+pre[data-language="GRAPHQL"] .highlight .nt {
+  color: #ff79c6;
+}
+
+/* Type */
+pre[data-language="GRAPHQL"] .highlight .nn {
+  color: #ff9d00;
+}
+
+/* Field */
+pre[data-language="GRAPHQL"] .highlight .na {
+  color: #50fa7b;
+}
+
+/* Parameter */
+pre[data-language="GRAPHQL"] .highlight .nx {
+  color: #8be9fd;
+}
+
+/* Markdown syntax - specialized */
+/* Headers */
+pre[data-language="MARKDOWN"] .highlight .nt {
+  color: #ff79c6;
+}
+
+/* Links */
+pre[data-language="MARKDOWN"] .highlight .no {
+  color: #50fa7b;
+}
+
+/* Bold */
+pre[data-language="MARKDOWN"] .highlight .gs {
+  color: #ffb86c;
+  font-weight: bold;
+}
+
+/* Italic */
+pre[data-language="MARKDOWN"] .highlight .ge {
+  color: #8be9fd;
+  font-style: italic;
+}
+
+/* Lists */
+pre[data-language="MARKDOWN"] .highlight .kd {
+  color: #ff9d00;
+}
+
+/* JSON specific */
+pre[data-language="JSON"] .highlight .s2 {
+  color: #3adf8f; /* key strings */
+}
+
+pre[data-language="JSON"] .highlight .mf,
+pre[data-language="JSON"] .highlight .mi {
+  color: #bd93f9; /* numbers */
+}
+
+pre[data-language="JSON"] .highlight .kc {
+  color: #ff79c6; /* true, false, null */
+}
+
+/* YAML specific */
+pre[data-language="YAML"] .highlight .l-Scalar-Plain {
+  color: #50fa7b;
+}
+
+pre[data-language="YAML"] .highlight .s {
+  color: #3adf8f;
+}
+
+/* Extra styling for copy button */
+.copy-code-button {
+  background-color: #444 !important;
+  color: #ddd !important;
+}
+
+.copy-code-button.copied {
+  background-color: #50fa7b !important;
+  color: #333 !important;
+}

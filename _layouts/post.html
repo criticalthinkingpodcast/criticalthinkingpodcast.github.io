@@ -2,13 +2,320 @@
 layout: default
 ---
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
+<link rel="stylesheet" href="/assets/css/code-highlighting.css">
+<link rel="stylesheet" href="/assets/css/vibrant-syntax.css">
+<link rel="stylesheet" href="/assets/css/graphql-highlighting.css">
+<script src="/assets/js/code-formatting.js"></script>
+<script src="/assets/js/scroll-to-top.js"></script>
 
-<p class="view">by {{ page.author | default: site.author }}</p>
+<style>
+::-webkit-scrollbar {
+    width: 0px;
+}
+body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    animation: fadeIn 0.6s ease-in;
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
 
-{{content}}
+.post-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
 
-{% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
-{% endif %}
+.post-meta {
+    margin-bottom: 20px;
+    color: #999;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.post-content {
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.post-content h1 {
+    font-size: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #ffffff;
+}
+
+.post-content h2 {
+    font-size: 1.75em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #ffffff;
+}
+
+.post-content h3 {
+    font-size: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #ffffff;
+}
+
+.post-content h4 {
+    font-size: 1.25em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #ffffff;
+}
+
+.post-content p {
+    margin-bottom: 1em;
+}
+
+.post-content a {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(88, 166, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+.post-content a:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.post-content ul, .post-content ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2em auto;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.post-content blockquote {
+    border-left: 4px solid #58a6ff;
+    padding-left: 1em;
+    color: #999;
+    font-style: italic;
+    margin: 1.5em 0;
+}
+
+.post-content hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 2em 0;
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+}
+
+.post-content table th, .post-content table td {
+    border: 1px solid #333;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.post-content table th {
+    background-color: #252525;
+}
+
+.post-content table tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid #333;
+}
+
+.post-nav-item {
+    max-width: 48%;
+}
+
+.post-nav-prev {
+    text-align: left;
+}
+
+.post-nav-next {
+    text-align: right;
+}
+
+.post-nav-label {
+    display: block;
+    font-size: 0.8em;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.post-nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.post-nav a:hover {
+    text-decoration: underline;
+}
+
+.post-tags {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.post-tag {
+    display: inline-block;
+    background-color: #2d333b;
+    color: #58a6ff;
+    padding: 3px 10px;
+    margin: 0 5px 5px 0;
+    border-radius: 12px;
+    font-size: 0.8em;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.post-tag:hover {
+    background-color: #354052;
+    color: white;
+}
+
+/* Enhanced post navigation */
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid #333;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.post-nav-item {
+    max-width: 48%;
+    transition: transform 0.3s ease;
+}
+
+.post-nav-item:hover {
+    transform: translateY(-3px);
+}
+
+.post-nav-prev {
+    text-align: left;
+}
+
+.post-nav-next {
+    text-align: right;
+}
+
+.post-nav-label {
+    display: block;
+    font-size: 0.8em;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.post-nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.post-nav a:hover {
+    color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .post-container {
+        padding: 15px;
+    }
+    
+    .post-content h1 {
+        font-size: 1.8em;
+    }
+    
+    .post-content h2 {
+        font-size: 1.6em;
+    }
+    
+    .post-content h3 {
+        font-size: 1.4em;
+    }
+    
+    .post-nav-item {
+        max-width: 100%;
+    }
+}
+</style>
+
+<div class="post-container">
+    <article class="post">
+        <header class="post-header">
+            <h1>{{ page.title }}</h1>
+        </header>
+        
+        <div class="post-meta">
+            {% if page.date %}
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%B %d, %Y" }}
+            </time>
+            {% endif %}
+            {% if page.author %}
+            • {{ page.author }}
+            {% endif %}
+        </div>
+
+        <div class="post-content">
+            {{ content }}
+        </div>
+        
+        {% if page.tags %}
+        <div class="post-tags">
+            {% for tag in page.tags %}
+            <a href="/research/?tag={{ tag }}" class="post-tag">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+
+        <div class="post-nav">
+            <div class="post-nav-item post-nav-prev">
+                {% if page.previous %}
+                <span class="post-nav-label">Previous Article</span>
+                <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">
+                    {{ page.previous.title | truncate: 40 }}
+                </a>
+                {% endif %}
+            </div>
+            <div class="post-nav-item post-nav-next">
+                {% if page.next %}
+                <span class="post-nav-label">Next Article</span>
+                <a href="{{ page.next.url }}" title="{{ page.next.title }}">
+                    {{ page.next.title | truncate: 40 }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+</div>

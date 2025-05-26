@@ -1,0 +1,235 @@
+/**
+ * Enhanced Code Syntax Highlighting for Blog Posts
+ * Based on VS Code's dark theme with vibrant colors for better readability
+ */
+
+/* Code blocks - the <pre><code> combination */
+pre {
+    background-color: #1a1a1a !important;
+    border: 1px solid #383838 !important;
+    border-left: 4px solid #3b9cff !important; /* More vibrant blue border */
+    border-radius: 5px !important;
+    margin: 20px 0 !important;
+    padding: 16px !important;
+    overflow: auto !important;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    background-image: linear-gradient(transparent 50%, rgba(69, 69, 69, 0.09) 50%) !important;
+    background-size: 3em 3em !important;
+}
+
+/* Language-specific left borders - Vibrant colors */
+pre[data-language="HTML"] {
+    border-left-color: #ff5722 !important; /* More vibrant orange-red */
+}
+
+pre[data-language="CSS"] {
+    border-left-color: #7e57c2 !important; /* More vibrant purple */
+}
+
+pre[data-language="JAVASCRIPT"] {
+    border-left-color: #ffdd00 !important; /* More vibrant yellow */
+}
+
+pre[data-language="TYPESCRIPT"] {
+    border-left-color: #007acc !important; /* More vibrant blue */
+}
+
+pre[data-language="PYTHON"] {
+    border-left-color: #4584ff !important; /* More vibrant blue */
+}
+
+pre[data-language="PHP"] {
+    border-left-color: #777bb3 !important; /* More vibrant purple-blue */
+}
+
+pre[data-language="RUBY"] {
+    border-left-color: #e51400 !important; /* More vibrant red */
+}
+
+pre[data-language="JAVA"] {
+    border-left-color: #f89820 !important; /* More vibrant orange */
+}
+
+pre[data-language="CSHARP"] {
+    border-left-color: #31d644 !important; /* More vibrant green */
+}
+
+pre[data-language="GOLANG"], pre[data-language="GO"] {
+    border-left-color: #29beb0 !important; /* More vibrant teal */
+}
+
+pre[data-language="JSON"] {
+    border-left-color: #40c9ff !important; /* More vibrant light blue */
+}
+
+pre[data-language="YAML"], pre[data-language="YML"] {
+    border-left-color: #ff2d20 !important; /* More vibrant red */
+}
+
+pre[data-language="BASH"], pre[data-language="SH"] {
+    border-left-color: #98e02b !important; /* More vibrant green */
+}
+
+pre[data-language="MARKDOWN"], pre[data-language="MD"] {
+    border-left-color: #0b68da !important; /* More vibrant blue */
+}
+
+pre[data-language="SQL"] {
+    border-left-color: #ff9800 !important; /* More vibrant orange */
+}
+
+pre[data-language="DOCKERFILE"] {
+    border-left-color: #2496ed !important; /* Docker blue */
+}
+
+pre[data-language="GRAPHQL"] {
+    border-left-color: #ff38c3 !important; /* More vibrant pink */
+    background-color: #1a1a1a !important;
+}
+
+pre[data-language="OAUTH"] {
+    border-left-color: #FF7A33 !important; /* More vibrant orange */
+    background-color: #1a1a1a !important;
+}
+
+/* Code language label */
+.code-language-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-bottom-left-radius: 4px;
+    font-family: Monaco, Consolas, "Liberation Mono", monospace;
+    opacity: 0.8;
+}
+
+/* Language-specific labels - Vibrant colors */
+pre[data-language="HTML"] .code-language-label {
+    background-color: #ff5722;
+}
+
+pre[data-language="CSS"] .code-language-label {
+    background-color: #7e57c2;
+}
+
+pre[data-language="JAVASCRIPT"] .code-language-label {
+    background-color: #ffdd00;
+    color: #333;
+}
+
+pre[data-language="TYPESCRIPT"] .code-language-label {
+    background-color: #007acc;
+}
+
+pre[data-language="PYTHON"] .code-language-label {
+    background-color: #4584ff;
+}
+
+pre[data-language="PHP"] .code-language-label {
+    background-color: #777bb3;
+}
+
+pre[data-language="RUBY"] .code-language-label {
+    background-color: #e51400;
+}
+
+pre[data-language="JAVA"] .code-language-label {
+    background-color: #f89820;
+}
+
+pre[data-language="CSHARP"] .code-language-label {
+    background-color: #31d644;
+}
+
+pre[data-language="GOLANG"] .code-language-label,
+pre[data-language="GO"] .code-language-label {
+    background-color: #29beb0;
+}
+
+pre[data-language="JSON"] .code-language-label {
+    background-color: #40c9ff;
+}
+
+pre[data-language="YAML"] .code-language-label,
+pre[data-language="YML"] .code-language-label {
+    background-color: #ff2d20;
+}
+
+pre[data-language="BASH"] .code-language-label,
+pre[data-language="SH"] .code-language-label {
+    background-color: #98e02b;
+    color: #333;
+}
+
+pre[data-language="MARKDOWN"] .code-language-label,
+pre[data-language="MD"] .code-language-label {
+    background-color: #0b68da;
+}
+
+pre[data-language="SQL"] .code-language-label {
+    background-color: #ff9800;
+}
+
+pre[data-language="DOCKERFILE"] .code-language-label {
+    background-color: #2496ed;
+}
+
+pre[data-language="GRAPHQL"] .code-language-label {
+    background-color: #ff38c3;
+}
+
+pre[data-language="OAUTH"] .code-language-label {
+    background-color: #FF7A33;
+}
+
+/* Copy button for code blocks */
+.copy-code-button {
+    position: absolute;
+    top: 0;
+    right: 45px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.copy-code-button.copied {
+    background-color: #58a6ff;
+}
+
+pre:hover .copy-code-button {
+    opacity: 0.8;
+}
+
+.copy-code-button:hover {
+    opacity: 1 !important;
+    background-color: #444;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    pre {
+        padding: 12px !important;
+        font-size: 0.9em;
+    }
+    
+    .code-language-label {
+        font-size: 0.6rem;
+    }
+    
+    .copy-code-button {
+        opacity: 0.8; /* Always visible on mobile */
+        font-size: 0.6rem;
+    }
+}
