@@ -100,6 +100,27 @@ h1, h2 {
         font-size: 1.3em;
     }
 }
+    .videoWrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+    }
+    .videoWrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .videoUpNextWrapper {
+        margin-top: 40px;
+    }
+    .videoUpNext {
+        display:inline-block;
+        width:49%;
+        margin:auto;
+        padding-bottom: 24% !important;
+    }
 </style>
 
 <div class="home-container">
@@ -115,10 +136,39 @@ h1, h2 {
         <h2>Latest Episodes</h2>
         <div id="episodeContainer" class="episode-container">
         <!-- Episodes will be loaded here -->
+        <div class="videoWrapper">
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7">
+            </iframe>
         </div>
+        <div class="videoUpNextWrapper">
+        <div class="videoWrapper videoUpNext">
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=2">
+            </iframe>
+        </div>
+        <div class="videoWrapper videoUpNext">
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=3">
+            </iframe>
+        </div>
+        </div>
+        <div class="videoUpNextWrapper">
+        <div class="videoWrapper videoUpNext">
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=4">
+            </iframe>
+        </div>
+        <div class="videoWrapper videoUpNext">
+            <iframe
+                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=5">
+            </iframe>
+        </div>
+        </div>        
     </div>
 
 <script>
+/**
 fetch("https://proxy.cors.sh/https://media.rss.com/ctbbpodcast/feed.xml")
 .then(a => a.text())
 .then((text) => {
@@ -149,11 +199,11 @@ fetch("https://proxy.cors.sh/https://media.rss.com/ctbbpodcast/feed.xml")
         document.getElementById("episodeContainer").appendChild(titleDiv);
         document.getElementById("episodeContainer").appendChild(iframe);
     });
-});
+});*/
 </script>
 
     <div class="home-section" style="text-align: center; margin: 30px 0;">
-        <a href="/episodes/" style="display: inline-block; padding: 12px 25px; background-color: #252525; color: #58a6ff; border: 1px solid #444; border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">View All Episodes →</a>
+        <a href="https://www.youtube.com/playlist?list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7" style="display: inline-block; padding: 12px 25px; background-color: #252525; color: #58a6ff; border: 1px solid #444; border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">View All Episodes →</a>
     </div>
 </div>
 

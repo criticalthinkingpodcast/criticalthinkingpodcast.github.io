@@ -209,9 +209,9 @@ body {
         <div class="host-container">
             <div class="host-card">
                 <img src="/assets/images/Rhyno.jpg" alt="Justin Gardner" class="host-image">
-                <h3 class="host-name">Justin Gardner</h3>
+                <h3 class="host-name">Justin Gardner (@Rhynorater)</h3>
                 <div class="host-bio">
-                    <p>Justin is a full-time bug bounty hunter and top-ranked live hacking event competitor. He has taken home two Most Valuable Hacker awards and countless other 1st place & 2nd place trophies.</p>
+                    <p>Justin is a full-time bug bounty hunter and top-ranked live hacking event competitor. He has taken home four Most Valuable Hacker awards and countless other 1st place & 2nd place trophies.</p>
                     <p>While Justin specializes in web hacking, he also dabbles in IoT and mobile hacking. He is also the HackerOne Ambassador for the Eastern US region.</p>
                     <p>Outside of hacking, Justin enjoys Volleyball, Brazilian Jiu Jitsu, and Real Estate investing.</p>
                 </div>
@@ -223,15 +223,15 @@ body {
             
             <div class="host-card">
                 <img src="/assets/images/Rez0.jpg" alt="Joseph Thacker" class="host-image">
-                <h3 class="host-name">Joseph Thacker (Rez0)</h3>
+                <h3 class="host-name">Joseph Thacker (@rez0)</h3>
                 <div class="host-bio">
-                    <p>Joseph is a security researcher and full-time bug bounty hunter specializing in application security and AI.</p>
-                    <p>He has helped Fortune 500 companies avoid costly vulnerabilities and has contributed to over 1,000 security findings through platforms like HackerOne and Bugcrowd.</p> 
-                    <p>Passionate about identifying recurring security flaws, works to address them through hacking, teaching, and consulting.</p>
+                    <p>Joseph is a full-time Bug Bounty Hunter, Startup Advisor, and Solo Founder who specializes in application security and AI. </p>
+                    <p>He's attended 12+ live hacking events, submitted over 1,000 vulnerabilities, and has 9 live event awards. He loves building and breaking things, especially AI-integrated applications.</p> 
                 </div>
                 <div class="social-links">
-                    <a href="https://x.com/Rez0__" class="social-link" target="_blank" rel="noopener">X</a>
-
+                    <a href="https://x.com/Rez0__" class="social-link" target="_blank" rel="noopener">X</a> |
+                    <a href="https://www.linkedin.com/in/josephthacker/" class="social-link" target="_blank" rel="noopener">LinkedIn</a> |                    
+                    <a href="https://josephthacker.com/" class="social-link" target="_blank" rel="noopener">josephthacker.com</a>
                 </div>
             </div>
         </div>
