@@ -18,10 +18,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
-/* Override code keyword color for dark backgrounds */
+/* Override code keyword color for dark backgrounds with higher specificity */
+.highlight code .kd,
 .highlight .kd {
   color: #ffb86c !important; /* Use a warm yellow/orange for visibility */
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 // Override all font families in the theme
@@ -43,7 +44,7 @@ code,
 .container, 
 #main_content {
   font-family: 'Fira Code', monospace !important;
-}
+} 
 
 // Additional styling for headings
 h1, h2, h3, h4, h5, h6 {
