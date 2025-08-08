@@ -1,7 +1,28 @@
+/* Fix code block background for dark theme and remove white corners */
+.highlight, .highlight pre, .highlight code {
+  background: #181818 !important;
+  background-color: #181818 !important;
+  color: #f8f8f2;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+/* Remove any border or box-shadow that may cause white corners */
+.highlight, .highlight pre {
+  border: none !important;
+  box-shadow: none !important;
+}
 @import 'jekyll-theme-hacker';
 
 // Import Fira Code font
+
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+/* Override code keyword color for dark backgrounds */
+.highlight .kd {
+  color: #ffb86c !important; /* Use a warm yellow/orange for visibility */
+  font-weight: bold;
+}
 
 // Override all font families in the theme
 body, 
