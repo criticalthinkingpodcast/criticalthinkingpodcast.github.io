@@ -1,3 +1,7 @@
+/* Force override for Markdown code keyword color */
+pre[data-language="MARKDOWN"] .highlight .kd {
+  color: orange !important;
+}
 /* Fix code block background for dark theme and remove white corners */
 .highlight, .highlight pre, .highlight code {
   background: #181818 !important;
@@ -21,7 +25,7 @@
 /* Override code keyword color for dark backgrounds with higher specificity */
 .highlight code .kd,
 .highlight .kd {
-  color: #ffb86c !important; /* Use a warm yellow/orange for visibility */
+  color: orange !important;
   font-weight: bold !important;
 }
 
