@@ -4,7 +4,7 @@ title: Exploiting Web Worker XSS with Blobs
 author: Jorian Woltjer
 date: 2025-08-08
 tags: [xss, client-side, javascript, trick]
-image: /assets/images/worker_xss.png
+image: worker_xss.png
 description: "Ways to turn XSS in a Web Worker into full XSS, covering known tricks and a new generic exploit using Blob URLs with the Drag and Drop API"
 ---
 
@@ -207,3 +207,4 @@ The following gist contains a simple vulnerable server that forwards a `postMess
 <https://gist.github.com/JorianWoltjer/e81e7b1a3e892a3dcd250934a38f1174>
 
 ![Animation of dragging on the page resulting in XSS on http://127.0.0.1:8000](worker_xss_recording.gif)
+
