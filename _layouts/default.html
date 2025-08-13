@@ -53,6 +53,13 @@
         left:50%;
         transform: translate(-50%, -250%);
     }
+
+    /* Override code keyword color for dark backgrounds with higher specificity */
+    .highlight code .kd,
+    .highlight .kd {
+        color: orange !important;
+        font-weight: bold !important;
+    }
     
     /* Responsividade para o header */    @media (max-width: 768px) {
         header div {

@@ -22,12 +22,6 @@ pre[data-language="MARKDOWN"] .highlight .kd {
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
-/* Override code keyword color for dark backgrounds with higher specificity */
-.highlight code .kd,
-.highlight .kd {
-  color: orange !important;
-  font-weight: bold !important;
-}
 
 // Override all font families in the theme
 body, 
