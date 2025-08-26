@@ -5,6 +5,9 @@ author: Jorian Woltjer
 date: 2025-08-08
 tags: [xss, client-side, javascript, trick]
 image: /worker_xss.png
+profile_picture: /assets/images/JW_Logo_V2_Transparant.webp
+handle: j0r1an
+social_links: [https://x.com/J0R1AN, https://jorianwoltjer.com/]
 description: "Ways to turn XSS in a Web Worker into full XSS, covering known tricks and a new generic exploit using Blob URLs with the Drag and Drop API"
 ---
 
