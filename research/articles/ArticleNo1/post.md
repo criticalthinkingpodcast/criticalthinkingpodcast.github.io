@@ -8,7 +8,9 @@ image: /worker_xss.png
 profile_picture: /assets/images/JW_Logo_V2_Transparant.webp
 handle: j0r1an
 social_links: [https://x.com/J0R1AN, https://jorianwoltjer.com/]
+
 description: "Ways to turn XSS in a Web Worker into full XSS, covering known tricks and a new generic exploit using Blob URLs with the Drag and Drop API"
+permalink: /research/Exploiting-web-worker-XSS-with-blobs
 ---
 
 One edge case that you may encounter in Cross-Site Scripting (XSS) is being locked inside of a [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). Your JavaScript payload will be running same-origin to the main window, but won't have access to many APIs that a regular XSS would.  
