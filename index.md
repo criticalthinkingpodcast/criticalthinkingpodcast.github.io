@@ -1,209 +1,96 @@
 ---
 layout: default
-title: Critical Thinking Bug Bounty Podcast
+title: Research - Critical Thinking Bug Bounty Podcast
 ---
 <style>
-::-webkit-scrollbar {
-    width: 0px;
-}
-body {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-.home-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: left;
-    animation: fadeIn 0.6s ease-in;
-}
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+    body {
+        background-color: #1e1e1e;
+        color: #ffffff;
+    }
+    .research-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: left;
+        animation: fadeIn 0.6s ease-in;
+    }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-.home-header {
-    margin-bottom: 30px;
-    text-align: center;
-}
+    .research-header {
+        margin-bottom: 30px;
+        text-align: center;
+    }
 
-.home-section {
-    margin-bottom: 40px;
-    line-height: 1.7;
-}
+    .research-section {
+        margin-bottom: 40px;
+        line-height: 1.7;
+    }
 
-.episode-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    .research-breadcrumb {
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #999;
+    }
 
-.episode-title {
-    margin: 20px 0 10px 0;
-    font-size: 1.2em;
-    color: #ffffff;
-}
+    .research-breadcrumb a {
+        color: #58a6ff;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
 
-a {
-    color: #58a6ff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-h1, h2 {
-    text-align: center;
-}
-
-.welcome-text {
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 768px) {
-    .home-container {
-        padding: 15px;
+    .research-breadcrumb a:hover {
+        color: #fff;
+        text-decoration: underline;
     }
-    
-    .episode-container {
-        padding: 15px;
-    }
-    
-    .episode-title {
-        font-size: 1.1em;
-        margin: 15px 0 8px 0;
-    }
-    
-    h1, h2 {
-        font-size: 1.5em;
-    }
-}
-
-@media (max-width: 480px) {
-    .home-container {
-        padding: 10px;
-    }
-    
-    .episode-container {
-        padding: 10px;
-    }
-    
-    .episode-title {
-        font-size: 1em;
-        margin: 12px 0 6px 0;
-    }
-    
-    h1, h2 {
-        font-size: 1.3em;
-    }
-}
-    .videoWrapper {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-    }
-    .videoWrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .videoUpNextWrapper {
-        margin-top: 40px;
-    }
-    .videoUpNext {
-        display:inline-block;
-        width:49%;
-        margin:auto;
-        padding-bottom: 24% !important;
-    }
+    .article-list { margin-top: 30px; }
+    .article-item { background-color: #252525; margin-bottom: 15px; padding: 15px; border-radius: 4px; border-left: 3px solid #58a6ff; transition: all 0.3s ease; }
+    .article-item:hover { background-color: #2a2a2a; transform: translateX(3px); }
+    .article-title { margin-top: 0; margin-bottom: 8px; font-size: 1.2em; }
+    .article-title a { color: #58a6ff; text-decoration: none; }
+    .article-title a:hover { text-decoration: underline; }
+    .article-subtitle { font-size: 0.9em; color: #ccc; margin-bottom: 10px; font-style: italic; }
+    .article-meta { font-size: 0.8em; color: #999; margin-bottom: 8px; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+    .article-tag { display: inline-block; font-size: 0.75em; padding: 3px 8px; background-color: #333; border-radius: 12px; color: #58a6ff; }
+    .new-badge { background-color: #ff4757; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.7em; margin-left: 10px; }
+    .article-summary { margin-bottom: 15px; }
+    .read-more { display: inline-block; padding: 6px 14px; background-color: #333; color: #58a6ff; border-radius: 4px; text-decoration: none; font-size: 0.9em; transition: all 0.2s ease; }
+    .read-more:hover { background-color: #444; color: #fff; }
+    .all-articles { text-align: center; margin-top: 30px; }
+    .all-articles-btn { display: inline-block; padding: 10px 20px; background-color: #333; color: #58a6ff; border-radius: 4px; text-decoration: none; font-weight: 500; border: 1px solid #444; transition: all 0.3s ease; }
+    .all-articles-btn:hover { background-color: #444; color: #fff; border-color: #58a6ff; }
 </style>
 
-<div class="home-container">
-    <div class="home-header">
-        <h1>Critical Thinking Bug Bounty Podcast</h1>
+<div class="research-container">
+    <div class="research-header">
+        <h1>Security Research</h1>
+        <nav class="research-breadcrumb">
+            <a href="/">Research</a>
+        </nav>
     </div>
     
-    <div class="home-section welcome-text">
-        <p><strong><span style="color: #ff5252;">Crit</span>ical <span style="color: #58a6ff;">Thinking</span> is a "by hackers, for hackers" podcast</strong> designed to be both technical and fun to listen to.</p>
+    <div class="research-section">
+        <p>Welcome to our research section. Here we publish detailed technical writeups, vulnerability disclosures, and security analysis that complement our podcast episodes. Our goal is to provide in-depth technical content that helps security professionals and bug bounty hunters advance their skills.</p>
     </div>
-
-    <div class="home-section">
-        <h2>Latest Episodes</h2>
-        <div id="episodeContainer" class="episode-container">
-        <!-- Episodes will be loaded here -->
-        <div class="videoWrapper">
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7">
-            </iframe>
-        </div>
-        <div class="videoUpNextWrapper">
-        <div class="videoWrapper videoUpNext">
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=2">
-            </iframe>
-        </div>
-        <div class="videoWrapper videoUpNext">
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=3">
-            </iframe>
-        </div>
-        </div>
-        <div class="videoUpNextWrapper">
-        <div class="videoWrapper videoUpNext">
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=4">
-            </iframe>
-        </div>
-        <div class="videoWrapper videoUpNext">
-            <iframe
-                src="https://www.youtube.com/embed?listType=playlist&list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7&index=5">
-            </iframe>
-        </div>
-        </div>        
-    </div>
-
-<script>
-/**
-fetch("https://proxy.cors.sh/https://media.rss.com/ctbbpodcast/feed.xml")
-.then(a => a.text())
-.then((text) => {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(text, "text/xml");
-    const items = xmlDoc.querySelectorAll("item");
     
-    // Get only the first 3 items
-    Array.from(items).slice(0, 2).forEach((item) => {
-        const title = item.querySelector("title").innerHTML
-            .replace("<![CDATA[", "").replace("]]>", "");
-        const episodeId = item.querySelector("link").innerHTML
-            .replace("<![CDATA[", "").replace("]]>", "")
-            .split("/").slice(-1)[0];
-            
-        const titleDiv = document.createElement("div");
-        titleDiv.className = "episode-title";
-        titleDiv.textContent = title;
-        
-        const iframe = document.createElement("iframe");
-        iframe.src = `https://player.rss.com/ctbbpodcast/${episodeId}?theme=dark`;
-        iframe.style = "width:100%;height:8.75em;border-radius:1em;border:none;margin:0.5em 0em;";
-        iframe.title = title;
-        iframe.frameBorder = "0";
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        
-        document.getElementById("episodeContainer").appendChild(titleDiv);
-        document.getElementById("episodeContainer").appendChild(iframe);
-    });
-});*/
-</script>
-
-    <div class="home-section" style="text-align: center; margin: 30px 0;">
-        <a href="https://www.youtube.com/playlist?list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7" style="display: inline-block; padding: 12px 25px; background-color: #252525; color: #58a6ff; border: 1px solid #444; border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">View All Episodes →</a>
+    <div class="research-section">
+        <h2>Featured Articles</h2>
+        <div class="article-list" id="featuredArticles">
+            <!-- Featured articles will be loaded here by the script -->
+        </div>
     </div>
+    
+    <div class="all-articles">
+        <a href="/research/all" class="all-articles-btn">View All Research Articles</a>
+    </div>
+    <script src="/assets/js/research-simple.js"></script>
+    <script src="/assets/js/scroll-to-top.js"></script>
 </div>
 
