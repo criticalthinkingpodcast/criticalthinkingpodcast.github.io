@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   // Create article HTML with enhanced simplified layout
                 articlesHTML += `
                     <div class="article-item">
+                        ${article.image ? `<img src="${article.image}" alt="${article.title}" style="max-width:100%;border-radius:8px;margin-bottom:10px;">` : ''}
                         <h3 class="article-title">
                             <a href="${article.url}">${article.title}</a>
                             ${newBadge}
