@@ -245,9 +245,10 @@ body {
 
 /* Search */
 .search-container {
-    margin: 20px 0;
-    position: relative;
+    margin: 20px auto;
+    position: fixed;
     max-width: 500px;
+    text-align: center;
 }
 
 #articleSearch {
@@ -260,6 +261,9 @@ body {
     font-family: 'Fira Code', monospace;
     font-size: 0.9em;
     transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+
 }
 
 #articleSearch:focus {

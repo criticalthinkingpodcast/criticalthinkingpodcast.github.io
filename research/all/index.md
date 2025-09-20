@@ -46,7 +46,9 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
     }
 
     .search-container {
-        margin: 15px 0;
+        display: flex;
+        justify-content: center;
+        margin: 20px auto;
         position: relative;
         max-width: 500px;
     }
@@ -241,12 +243,12 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
             <a href="/">Home</a> &raquo; <a href="/research/">Research</a> &raquo; <span>All Articles</span>
         </nav>
     
-    <div class="search-container">
+        <div class="search-container">
         <input type="text" id="articleSearch" placeholder="Search articles..." oninput="searchArticles()">
         <button id="searchClear" onclick="clearSearch()">✕</button>
-    </div>
+     </div>
     
-    <div class="filter-container">
+    <div class="filter-container" style="display: none;">
         <span class="filter-label">Filter by:</span>
         <div class="filter-tags" id="filterTags">
             <!-- Tags will be populated dynamically -->
@@ -256,6 +258,7 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
     <div id="articleList">
         <!-- All articles will be loaded here -->
     </div>
+    
     
     <ul class="pagination" id="pagination"></ul>
 

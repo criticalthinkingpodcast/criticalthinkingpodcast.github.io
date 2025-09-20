@@ -76,21 +76,21 @@ title: Research - Critical Thinking Bug Bounty Podcast
         </nav>
     </div>
     
-    <div class="research-section">
-        <p>Welcome to our research section. Here we publish detailed technical writeups, vulnerability disclosures, and security analysis that complement our podcast episodes. Our goal is to provide in-depth technical content that helps security professionals and bug bounty hunters advance their skills.</p>
+<div class="research-section">
+    <p>Welcome to our research section. Here we publish detailed technical writeups, vulnerability disclosures, and security analysis that complement our podcast episodes. Our goal is to provide in-depth technical content that helps security professionals and bug bounty hunters advance their skills.</p>
+</div>
+
+<div class="research-section">
+    <h2>Featured Articles</h2>
+    <div class="article-list" id="featuredArticles">
+        <!-- Featured articles will be loaded here by the script -->
     </div>
-    
-    <div class="research-section">
-        <h2>Featured Articles</h2>
-        <div class="article-list" id="featuredArticles">
-            <!-- Featured articles will be loaded here by the script -->
-        </div>
-    </div>
-    
-    <div class="all-articles">
-        <a href="/research/all" class="all-articles-btn">View All Research Articles</a>
-    </div>
-    <script src="/assets/js/research-simple.js"></script>
-    <script src="/assets/js/scroll-to-top.js"></script>
+</div>
+
+<div class="all-articles">
+    <a href="/research/all" class="all-articles-btn">View All Research Articles</a>
+</div>
+<script src="/assets/js/research-simple.js"></script>
+<script src="/assets/js/scroll-to-top.js"></script>
 </div>
 

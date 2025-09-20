@@ -40,6 +40,10 @@
         font-family: 'Fira Code', monospace !important;
     }
     
+    div.highlight {
+        border-radius: 10px;
+    }
+    
     .page-wrapper {
         flex: 1 0 auto;
         display: flex;
@@ -62,6 +66,17 @@
         transform: translate(-50%, -250%);
     }
 
+    /* Header logo responsivo */
+    .header-logo {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        background-color: rgba(24,24,24,0.7);
+        border-radius: 10px;
+        padding: 10px;
+        object-fit: contain;
+    }
+
     /* Override code keyword color for dark backgrounds with higher specificity */
     .highlight code .kd,
     .highlight .kd {
@@ -69,27 +84,26 @@
         font-weight: bold !important;
     }
     
-        .highlight code .kc,
+    .highlight code .kc,
     .highlight .kc {
         color: orange !important;
         font-weight: bold !important;
     }
     
-    /* Responsividade para o header */    @media (max-width: 768px) {
-        header div {
-            height: 120px !important; /* Header menor no mobile */
+    /* Responsividade para o header */
+    @media (max-width: 768px) {
+        #main-header header div {
+            height: 120px !important;
         }
         
-        header img {
-            max-width: 280px !important; /* Logo menor no mobile */
-            padding: 5px !important;
+        .header-logo {
+            max-width: 280px !important;
+            padding: 8px !important;
         }
         
         /* Ajusta o spacer para mobile */
-        .container::before {
-            content: '';
-            display: block;
-            height: 130px; /* Spacer menor para mobile */
+        div[style*="height: 190px"] {
+            height: 160px !important;
         }
         
         /* Ajustes do menu de navegação */
@@ -97,31 +111,34 @@
             top: 120px !important;
         }
         
-        /* Ajusta o spacer geral para acomodar o menu */
-        div[style*="height: 190px"] {
-            height: 160px !important;
-        }
-        
         footer {
             padding: 20px 0 !important;
         }
         
-        footer div {
+        footer > div {
             padding: 0 15px !important;
         }
+        
+        footer a {
+            margin: 0 8px !important;
+            font-size: 0.85em !important;
+        }
+        
     }
     
     @media (max-width: 480px) {
-        header div {
-            height: 100px !important; /* Header ainda menor em telas muito pequenas */
+        #main-header header div {
+            height: 100px !important;
         }
         
-        header img {
+        .header-logo {
             max-width: 220px !important;
+            padding: 5px !important;
         }
         
-        .container::before {
-            height: 110px;
+        /* Ajusta o spacer geral para acomodar o menu */
+        div[style*="height: 190px"] {
+            height: 140px !important;
         }
         
         /* Ajustes do menu de navegação */
@@ -131,25 +148,58 @@
         
         nav a {
             padding: 8px 10px !important;
-            font-size: 0.7em !important;
-        }
-        
-        /* Ajusta o spacer geral para acomodar o menu */
-        div[style*="height: 190px"] {
-            height: 140px !important;
+            font-size: 0.85em !important;
         }
         
         footer {
             padding: 15px 0 !important;
         }
         
-        footer div {
+        footer > div {
             padding: 0 10px !important;
         }
         
         footer a {
             margin: 0 5px !important;
             font-size: 0.8em !important;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        
+        /* Links do footer em linha para telas muito pequenas */
+        footer > div > div:first-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .header-logo {
+            max-width: 180px !important;
+            padding: 3px !important;
+        }
+        
+        #main-header header div {
+            height: 80px !important;
+        }
+        
+        nav {
+            top: 80px !important;
+        }
+        
+        div[style*="height: 190px"] {
+            height: 120px !important;
+        }
+        
+        nav a {
+            padding: 6px 8px !important;
+            font-size: 0.8em !important;
+        }
+        
+        footer a {
+            font-size: 0.75em !important;
         }
     }
     
@@ -160,7 +210,14 @@
         margin: 0 auto;
         padding: 0 20px;
     }
-    
+    /* Quebra de linha para links longos */
+    #main_content a, .language-plaintext {
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+
     @media (max-width: 768px) {
         .container {
             padding: 0 15px;
@@ -178,8 +235,10 @@
     {% seo %}  </head>
 
   <body>
+    
     <div class="page-wrapper">
-      <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(24,24,24,0.9);">
+        <div id="main-header">
+<header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(24,24,24,0.9); transition: transform 0.3s ease-in-out;">
         <div style="position: relative; width: 100%; height: 150px; overflow: hidden;">
           <!-- Background animation -->
           <canvas id="plexus-test" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
@@ -187,21 +246,21 @@
           <!-- Logo centered in the header -->
           <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
             <a id="a-title" href="{{ '/' | relative_url }}">
-              <img src="/assets/images/CTLogo.png" style="width: 100%; max-width: 400px; background-color: rgba(24,24,24,0.7); border-radius: 10px; padding: 10px;">
+              <img src="/assets/images/CTLogo.png" class="header-logo" alt="Critical Thinking Podcast Logo">
             </a>
           </div>
         </div>
       </header>
       
       <!-- Navigation Menu -->
-      <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: #0f0f0f; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+      <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: #0f0f0f; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: transform 0.3s ease-in-out;">
         <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: center;">
                     <a href="{{ '/episodes/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Episodes</a>
                     <a href="{{ '/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">Research</a>
           <a href="{{ '/about/' | relative_url }}" style="padding: 10px 15px; color: #58a6ff; text-decoration: none; font-size: 0.9em;">About</a>
         </div>
       </nav>
-      
+     </div>     
       <!-- Spacer to prevent content from being hidden under the fixed header and navigation -->
       <div style="height: 190px;"></div>      <div class="container">
         <section id="main_content">
@@ -233,18 +292,34 @@
         // Initialize plexus animation with better settings for header background
         document.addEventListener("DOMContentLoaded", function() {
             var plexus = new Plexus("plexus-test", {
-                pointsSpeed: 0.3, // Slightly slower for better appearance
+                pointsSpeed: 0.3,
                 pointsRadius: 1.0,
-                pointsStartDistance: 80, // Wider connections
-                linesWidth: 0.8, // Thinner lines
-                backgroundColor: "rgba(24, 24, 24, 0)" // Transparent background
+                pointsStartDistance: 80,
+                linesWidth: 0.8,
+                backgroundColor: "rgba(24, 24, 24, 0)"
             });
             
-            // Back to top button functionality
-            const backToTopButton = document.getElementById('backToTop');
+            // Header hide/show on scroll
+            let lastScrollTop = 0;
+            const header = document.getElementById('main-header');
+            const nav = document.querySelector('nav');
             
-            // Show/hide button based on scroll position
             window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down - hide header
+                    header.style.transform = 'translateY(-100%)';
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scrolling up - show header
+                    header.style.transform = 'translateY(0)';
+                    nav.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop;
+                
+                // Back to top button logic
                 if (window.pageYOffset > 300) {
                     backToTopButton.style.opacity = '1';
                 } else {
