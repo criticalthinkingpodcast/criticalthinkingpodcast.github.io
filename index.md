@@ -67,14 +67,6 @@ title: Research - Critical Thinking Bug Bounty Podcast
     .all-articles-btn { display: inline-block; padding: 10px 20px; background-color: #333; color: #58a6ff; border-radius: 4px; text-decoration: none; font-weight: 500; border: 1px solid #444; transition: all 0.3s ease; }
     .all-articles-btn:hover { background-color: #444; color: #fff; border-color: #58a6ff; }
 </style>
-
-<div class="research-container">
-    <div class="research-header">
-        <h1>Security Research</h1>
-        <nav class="research-breadcrumb">
-            <a href="/">Research</a>
-        </nav>
-    </div>
     
 <div class="research-section">
     <p>Welcome to our research section. Here we publish detailed technical writeups, vulnerability disclosures, and security analysis that complement our podcast episodes. Our goal is to provide in-depth technical content that helps security professionals and bug bounty hunters advance their skills.</p>
