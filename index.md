@@ -71,6 +71,9 @@ title: Research - Critical Thinking Bug Bounty Podcast
 <div class="research-container">
     <div class="research-header">
         <h1>Security Research</h1>
+        <nav class="research-breadcrumb">
+            <a href="/">Research</a>
+        </nav>
     </div>
     
 <div class="research-section">
