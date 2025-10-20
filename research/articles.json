@@ -15,6 +15,7 @@ layout: null
         "summary": "{{ article.content | strip_html | truncatewords: 50 | escape }}",
         "url": "{{ article.url | relative_url }}",
         "author": "{{ article.author | escape }}",
+        "profile_picture": "{{ article.profile_picture | escape }}",
         "thumbnail": "{{ '/research/articles/ArticleNo' | append: article_number | append: '/thumbnail.svg' | relative_url }}",
         "tags": [
           {% if article.tags %}
