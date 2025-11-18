@@ -63,3 +63,76 @@ function getUrlParameter(name) {
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
+
+/**
+ * Convert Obsidian-style callouts to styled HTML divs
+ * Supports: [!info], [!success], [!failure], [!danger], [!warning], [!question], [!note]
+ */
+function convertObsidianCallouts() {
+    // Find all blockquotes in the document
+    const blockquotes = document.querySelectorAll('blockquote');
+    
+    blockquotes.forEach(function(blockquote) {
+        // Get all child nodes of the blockquote
+        const children = Array.from(blockquote.childNodes);
+        let headerNode = null;
+        let headerMatch = null;
+        const headerRegex = /^\[!(info|success|failure|danger|warning|question|note)\]\s*(.*)$/i;
+        // Find the header node
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].nodeType === Node.TEXT_NODE || children[i].nodeType === Node.ELEMENT_NODE) {
+                const text = children[i].textContent.trim();
+                if (headerRegex.test(text)) {
+                    headerNode = children[i];
+                    headerMatch = text.match(headerRegex);
+                    break;
+                }
+            }
+        }
+        if (headerNode && headerMatch) {
+            const type = headerMatch[1].toLowerCase();
+            const title = headerMatch[2].trim();
+            // Collect all nodes after the header as content
+            const contentNodes = [];
+            let foundHeader = false;
+            children.forEach(node => {
+                if (node === headerNode) {
+                    foundHeader = true;
+                    return;
+                }
+                if (foundHeader) {
+                    contentNodes.push(node.cloneNode(true));
+                }
+            });
+            // If no content after header, use all except header
+            if (contentNodes.length === 0) {
+                children.forEach(node => {
+                    if (node !== headerNode) {
+                        contentNodes.push(node.cloneNode(true));
+                    }
+                });
+            }
+            // Create the callout div
+            const calloutDiv = document.createElement('div');
+            calloutDiv.className = `callout callout-${type}`;
+            calloutDiv.innerHTML = `
+                <div class="callout-title">${title}</div>
+                <div class="callout-content"></div>
+            `;
+            const contentDiv = calloutDiv.querySelector('.callout-content');
+            contentNodes.forEach(node => {
+                contentDiv.appendChild(node);
+            });
+            // Replace the blockquote with the callout
+            blockquote.parentNode.replaceChild(calloutDiv, blockquote);
+        }
+    });
+}
+
+// Auto-convert callouts when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', convertObsidianCallouts);
+} else {
+    // DOM is already loaded
+    convertObsidianCallouts();
+}

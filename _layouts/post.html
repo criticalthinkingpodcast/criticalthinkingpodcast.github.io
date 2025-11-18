@@ -5,6 +5,7 @@ layout: default
 <link rel="stylesheet" href="/assets/css/code-highlighting.css">
 <link rel="stylesheet" href="/assets/css/vibrant-syntax.css">
 <link rel="stylesheet" href="/assets/css/graphql-highlighting.css">
+<script src="/assets/js/research-utils.js"></script>
 <script src="/assets/js/code-formatting.js"></script>
 <script src="/assets/js/scroll-to-top.js"></script>
 
@@ -268,6 +269,83 @@ body {
     display: inline-block;
 }
 
+/* Obsidian Callout Support */
+.callout {
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-left: 4px solid;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.callout-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.callout-title::before {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.callout-content {
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.callout-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Callout Types */
+
+.callout-info { 
+    border-color: #58a6ff; 
+    background-color: #182c3a; 
+}
+.callout-info .callout-title::before { content: "ℹ️"; }
+
+.callout-success { 
+    border-color: #3fb950; 
+    background-color: #1c2e1c; 
+}
+.callout-success .callout-title::before { content: "✅"; }
+
+.callout-failure, .callout-danger { 
+    border-color: #f85149; 
+    background-color: #2a1818; 
+}
+.callout-failure .callout-title::before, 
+.callout-danger .callout-title::before { content: "❌"; }
+
+.callout-warning { 
+    border-color: #d29922; 
+    background-color: #2e261c; 
+}
+.callout-warning .callout-title::before { content: "⚠️"; }
+
+.callout-question { 
+    border-color: #a371f7; 
+    background-color: #241c2e; 
+}
+.callout-question .callout-title::before { content: "❓"; }
+
+.callout-note { 
+    border-color: #79c0ff; 
+    background-color: #1c2630; 
+}
+.callout-note .callout-title::before { content: "📝"; }
+
+/* Make sure callouts work in dark theme */
+@media (prefers-color-scheme: dark) {
+    .callout {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     .post-container {
@@ -326,6 +404,17 @@ body {
 
         <div class="post-content">
             {{ content }}
+            <!-- Callout Test Block -->
+            <div style="margin-top:40px;">
+                <h2>Callout Style Test</h2>
+                <blockquote>[!info] Info callout<br>This is an info callout.</blockquote>
+                <blockquote>[!success] Success callout<br>This is a success callout.</blockquote>
+                <blockquote>[!failure] Failure callout<br>This is a failure callout.</blockquote>
+                <blockquote>[!danger] Danger callout<br>This is a danger callout.</blockquote>
+                <blockquote>[!warning] Warning callout<br>This is a warning callout.</blockquote>
+                <blockquote>[!question] Question callout<br>This is a question callout.</blockquote>
+                <blockquote>[!note] Note callout<br>This is a note callout.</blockquote>
+            </div>
         </div>
         
         {% if page.tags %}
