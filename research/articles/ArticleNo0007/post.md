@@ -391,19 +391,20 @@ Next peach of the puzzle is the web.config and the flows how IIS and ASP.NET MVC
 
   ↓
 
->[!info] Step 2: IIS Request Filtering Module
+> [!info] Step 2: IIS Request Filtering Module
 ```
 - URL has empty extension (.)
 - Empty extension IS in whitelist
 - No ".." in URL
-  
+```
+
 ALLOWED - Passes to ASP.NET
-```
 
-  ↓
 
->[!info] Step 3: MVC Routing
-```
+↓
+
+> [!info] Step 3: MVC Routing
+
 - Matches: {controller}/{action}
 - Creates: ControllerController
 - Calls: Method()
@@ -422,19 +423,19 @@ ALLOWED - Passes to ASP.NET
 - Can access ANY file extension
 ```
 
-  ↓
+↓
 
 >[!info] Step 6: Check ~/Controller/Method.cshtml
-  
-  ↓
+
+↓
   
 >[!info] Step 7: File.Exists('C:\inetpub\wwwroot\App\Controller\Method.cshtml')
   
-  ↓
+↓
   
-  >[!success] Step 8: SUCCESS - File found!
+>[!success] Step 8: SUCCESS - File found!
   
-  ↓
+↓
   
 >[!danger] Step 9: Razor Engine Compiles and Executes
 ```
