@@ -54,7 +54,7 @@ After finding first bug in this endpoint they fixed allowed characters and the f
 Only some unicodes were allowed.
 
 -------
-# The bug
+**The bug**
 
 2 months passed by after the fix...
 
@@ -82,9 +82,7 @@ Response:
 
 Interesting. In this error you can see that unicode got translated into UTF-8. What if I could smuggle anything to hit the internal API with %3f character? Is there something like that even possible?
 
-I opened shazzer website: 
-https://shazzer.co.uk/unicode-table?fromTo=0x2a&highlightsFromTo= and started testing endpoint manually.
-
+I opened shazzer [website](https://shazzer.co.uk/unicode-table?fromTo=0x2a&highlightsFromTo=) and started testing endpoint manually.
 When I reached unicode surrogates I finally bypassed it:
 
 ```
@@ -95,21 +93,20 @@ When I reached unicode surrogates I finally bypassed it:
 }
 ```
 -------------
-### Explanation:
+Explanation:
 
-It's not unicode truncation but something different. UTF-8 parsers can't properly display unicode surrogates:
-https://jrgraphix.net/r/Unicode/DC00-DFFF which are often used in emojis with low and high surrogate pair.
+It's not unicode truncation but something different. UTF-8 parsers can't properly display unicode surrogates ([https://jrgraphix.net/r/Unicode/DC00-DFFF](https://jrgraphix.net/r/Unicode/DC00-DFFF)) which are often used in emojis with low and high surrogate pair.
 
-All you get when you try to display them is unicode replacement character: https://www.compart.com/en/unicode/U+FFFD.
+All you get when you try to display them is unicode replacement character: [https://www.compart.com/en/unicode/U+FFFD](https://www.compart.com/en/unicode/U+FFFD).
 
 Some parsers apparently go one step further and simplify replacement character to a question mark (?) and that's why the vulnerability was caused.
 
 From what I know I would name 2 databases where "?" can be used as a wildcard:
 - solr
-- elasticsearch
+- elasticsearch 
 
 ----
-## Takeaways:
+Takeaways:
 
 - test for wildcards - there are plenty of them in various DBs
 - if question mark is blocked and you need it in your chain - try unicode surrogates
