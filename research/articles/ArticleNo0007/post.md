@@ -331,7 +331,7 @@ public class CustomRazorViewEngine : RazorViewEngine
 ---
 # Flows for file access in IIS/ASP.NET MVC
 
-Next peach of the puzzle is the web.config and the flows how IIS and ASP.NET MVC deal with file restrictions. Here is an example of web.config restricting file extensions
+Next piece of the puzzle is the web.config and the flows how IIS and ASP.NET MVC deal with file restrictions. Here is an example of web.config restricting file extensions
 ```
 <security>
 <!-- Prevent "double escaping": if the URL after 2x escaping gives a different result,
