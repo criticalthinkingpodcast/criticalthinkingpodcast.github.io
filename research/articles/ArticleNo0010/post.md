@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Write Path Traversal to an RCE Art Department
+title: Write Path Traversal to a RCE Art Department
 author: Diyan Apostolov
 date: 2025-11-28
 tags: [Write Path Traversal, RCE, Ruby, Express, Laravel, Django, Flask, GoLang]
@@ -8,7 +8,7 @@ profile_picture: /assets/images/fsi.jpg
 handle: fsi
 social_links: [https://x.com/thefosi]
 description: "Abusing Write Path Traversal for Living Off the Land Remote Code Execution"
-permalink: /research/write-path-traversal-to-an-RCE-art-department
+permalink: /research/write-path-traversal-to-RCE-art-department
 ---
 
 CriticalThinking Research members are treated as artists thus here is my small and rare moment of sharing publicly thoughts, insides and art. In the modern world, it is common people to hide, to hide knowledge, to hide thoughts, to hide from life, but in the CT community, we do opposite, we can share what we know, what we feel, what we think, what we critically think! [Play](https://youtu.be/NCNRKev5tq4) that music and enjoy the process of sharing!
