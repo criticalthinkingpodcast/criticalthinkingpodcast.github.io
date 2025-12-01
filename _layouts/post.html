@@ -81,6 +81,24 @@ body {
     text-decoration: none;
     border-bottom: 1px solid rgba(88, 166, 255, 0.3);
     transition: all 0.2s ease;
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    white-space: break-spaces !important;
+    max-width: 100% !important;
+    display: inline-block !important;
+}
+
+.post-content pre, .post-content code, .post-content pre code {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    max-width: 100% !important;
+}
+
+.post-content pre {
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
 }
 
 .post-content a:hover {
