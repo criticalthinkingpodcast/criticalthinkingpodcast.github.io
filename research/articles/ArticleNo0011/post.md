@@ -124,7 +124,7 @@ What if there was a built in function that would act as a "win" `this.foo(this.b
 
 I had really bad ideas around static analysis of browser code (or even worse, static analysis of dumped JIT code at runtime to back these functions), but that sounded really hard and complicated. Jorian had the great idea of fuzzing for this. We found some interesting behaviors that are cool to know about regarding member gets of `this` when calling certain globally scoped functions, but ultimately did not find a universal "win" gadget. Some iterator and regex related functions could lead to additional function call, some code paths in the torque implementations for some of the v8 builtins looked promising, but ultimately, we did not find a universal gadget that would call `this.foo(this.bar)` to gain function call argument control.
 
-If you are interested in exploring this further, or understanding how this was done, [here](/files/gadgetfuzz.js) is a crappy modified version of Jorian's BFS JS object exploration code with a Proxy wrapped object to intercept all member gets after implicit toString call with each discovered function accessible from the global window object.
+If you are interested in exploring this further, or understanding how this was done, [here](https://www.turb0.one/files/gadgetfuzz.js) is a crappy modified version of Jorian's BFS JS object exploration code with a Proxy wrapped object to intercept all member gets after implicit toString call with each discovered function accessible from the global window object.
 
 ### WAF Bypass applications
 
