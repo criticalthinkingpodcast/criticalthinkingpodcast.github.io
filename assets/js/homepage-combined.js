@@ -7,7 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Number of featured items to display total
-    const totalFeaturedCount = 3;
+    const totalFeaturedCount = 5;
     
     // Function to create HTML for any content item
     function createContentHTML(item, type) {
