@@ -6,7 +6,15 @@ redirect_to: /
 ---
 <style>
     ::-webkit-scrollbar {
-        width: 0px;
+        width: 8px;
+        background: #222;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
     body {
         background-color: #1e1e1e;

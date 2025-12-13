@@ -1,7 +1,15 @@
 /* Estilos para a página de pesquisa */
 
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 8px;
+    background: #222;
+}
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 body {
