@@ -414,17 +414,21 @@ body {
             <span class="post-author">{{ page.author }}</span><br>
         {% endif %}
         {% if page.social_links %}
-        <span class="post-socials">
-            {% for social_link in page.social_links %}
-            <a href="{{ social_link }}" class="post-socials social-link">{{ social_link }}</a>
-            {% endfor %}
-        </span><br>
-        {% endif %}
+        <span class="post-socials-block" style="display:inline-block;">
+            <span class="post-socials">
+                {% for social_link in page.social_links %}
+                <a href="{{ social_link }}" class="post-socials social-link">{{ social_link }}</a>
+                {% endfor %}
+            </span>
             {% if page.date %}
-            <time datetime="{{ page.date | date_to_xmlschema }}">
-                {{ page.date | date: "%B %d, %Y" }}
-            </time>
+            <span class="post-date" style="display:block; margin-top:8px; margin-left:0; text-align:left;">
+                <time datetime="{{ page.date | date_to_xmlschema }}">
+                    {{ page.date | date: "%B %d, %Y" }}
+                </time>
+            </span>
             {% endif %}
+        </span>
+        {% endif %}
         </div>
         </div>
 

@@ -130,9 +130,7 @@ title: Research - Critical Thinking Bug Bounty Podcast
         <h1>Critical Thinking Security Content</h1>
     </div>
     <div class="research-section" style="text-align: center;">
-        <p>Here we publish detailed technical research, vulnerability disclosures, bug bounty writeups, and security analysis that complement our podcast episodes.
-        <br>
-        Our goal is to provide in-depth technical content that helps security professionals and bug bounty hunters advance their skills.</p>
+        <p>Here we publish detailed technical research, vulnerability disclosures, bug bounty writeups, and security analysis that complement our podcast episodes.</p>
     </div>
     <div style="text-align: center; margin-bottom: 30px;">
         <a href="https://www.criticalthinkingpodcast.io/p/critical-research-lab" style="color: #58a6ff; text-decoration: underline; font-weight: 500;">

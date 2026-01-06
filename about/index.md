@@ -198,6 +198,7 @@ body {
 }
 </style>
 
+<!--
 <div class="about-container">
     <div class="about-header">
         <h1>About the Podcast</h1>
@@ -246,3 +247,4 @@ body {
     </div>
 
 </div>
+-->
