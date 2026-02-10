@@ -2,7 +2,7 @@
 layout: post
 title: Azure DevOps Agent Interception
 author: Diyan Apostolov
-date: 2026-02-13
+date: 2026-02-10
 tags: [AzureDevOpsAgent, CloudPE, PE]
 profile_picture: /assets/images/fsi.jpg
 handle: fsi
