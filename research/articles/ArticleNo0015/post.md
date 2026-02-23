@@ -8,7 +8,7 @@ profile_picture: /assets/images/fsi.jpg
 handle: fsi
 social_links: [https://x.com/thefosi]
 description: "Pivoting from a compromised Windows VM to the cloud by intercepting Azure DevOps Agent traffic"
-permalink: /writeups/azure-devops-agent-interception
+permalink: /research/azure-devops-agent-interception
 ---
 Imagine the scenario: you just ended up on a Windows Azure VM with RCE in your hands and start wondering how to potentially bring more impact, and then you notice the Azure DevOps agent folder. As an ex-DevOps engineer, I couldn't stop, so Critical Thinking mode was enabled. This article documents the technical flow for intercepting and decrypting Azure DevOps agent communications, ultimately extracting tokens, secrets, and more from pipeline job messages to escalate privileges
 
