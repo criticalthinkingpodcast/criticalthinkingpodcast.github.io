@@ -19,7 +19,7 @@ title: Research - Critical Thinking Bug Bounty Podcast
         color: #ffffff;
     }
     .research-container {
-        max-width: 800px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
         text-align: left;
@@ -98,24 +98,26 @@ title: Research - Critical Thinking Bug Bounty Podcast
         flex-wrap: wrap;
     }
     
-    .article-list { margin-top: 20px; }
+    .article-list { margin-top: 30px; }
     .article-item { background-color: #2a2a2a; margin-bottom: 15px; padding: 15px; border-radius: 4px; border-left: 3px solid #58a6ff; transition: all 0.3s ease; }
     .article-item.writeup { border-left-color: #6bff77ff; }
     .article-item:hover { background-color: #333; transform: translateX(3px); }
-    .article-title { margin-top: 0; margin-bottom: 8px; font-size: 1.1em; }
+    .article-title { margin-top: 0; margin-bottom: 8px; font-size: 1.2em; }
     .article-title a { color: #58a6ff; text-decoration: none; }
+    .article-title a code { background-color: rgba(88, 166, 255, 0.15); padding: 2px 6px; border-radius: 4px; color: #58a6ff; font-size: inherit; }
     .article-title.writeup a { color: #6bff77ff; }
+    .article-title.writeup a code { color: #6bff77ff; background-color: rgba(107, 255, 119, 0.15); }
     .article-title a:hover { text-decoration: underline; }
-    .article-subtitle { font-size: 0.85em; color: #ccc; margin-bottom: 8px; font-style: italic; }
-    .article-meta { font-size: 0.75em; color: #999; margin-bottom: 8px; }
+    .article-subtitle { font-size: 0.9em; color: #ccc; margin-bottom: 8px; font-style: italic; }
+    .article-meta { font-size: 0.8em; color: #999; margin-bottom: 8px; }
     .article-author { display: inline-flex; align-items: center; gap: 6px; }
     .author-avatar { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; border: 1px solid #444; margin-left: 6px; }
     .article-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
-    .article-tag { display: inline-block; font-size: 0.7em; padding: 2px 6px; background-color: #333; border-radius: 10px; color: #58a6ff; }
+    .article-tag { display: inline-block; font-size: 0.75em; padding: 3px 8px; background-color: #333; border-radius: 10px; color: #58a6ff; }
     .article-tag.writeup { color: #6bff77ff; }
-    .new-badge { background-color: #ff4757; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.65em; margin-left: 8px; }
+    .new-badge { background-color: #ff4757; color: white; padding: 3px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 8px; }
     .article-summary { margin-bottom: 10px; font-size: 0.85em; color: #ccc; }
-    .read-more { display: inline-block; padding: 4px 10px; background-color: #333; color: #58a6ff; border-radius: 3px; text-decoration: none; font-size: 0.8em; transition: all 0.2s ease; }
+    .read-more { display: inline-block; padding: 6px 14px; background-color: #333; color: #58a6ff; border-radius: 3px; text-decoration: none; font-size: 0.9em; transition: all 0.2s ease; }
     .read-more.writeup { color: #6bff77ff; }
     .read-more:hover { background-color: #444; color: #fff; }
     .all-articles { text-align: center; margin-top: 20px; }
@@ -130,11 +132,10 @@ title: Research - Critical Thinking Bug Bounty Podcast
         <h1>Critical Thinking Security Content</h1>
     </div>
     <div class="research-section" style="text-align: center;">
-        <p>Here we publish detailed technical research, vulnerability disclosures, bug bounty writeups, and security analysis that complement our podcast episodes.</p>
     </div>
     <div style="text-align: center; margin-bottom: 30px;">
         <a href="https://www.criticalthinkingpodcast.io/p/critical-research-lab" style="color: #58a6ff; text-decoration: underline; font-weight: 500;">
-        - More info on how to submit your content -
+- More info on how to submit your content -
         </a>
     </div>
 

@@ -26,7 +26,7 @@ body {
     color: #ffffff;
 }
 .post-container {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
     text-align: left;
@@ -38,6 +38,17 @@ body {
 .post-header {
     margin-bottom: 30px;
     text-align: center;
+}
+
+.post-header h1 code {
+    background-color: rgba(88, 166, 255, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #58a6ff;
+    font-size: inherit;
+    background-color: rgba(47, 48, 49, 0.15);
+    padding: 2px;
+    border-radius: 10px;
 }
 
 .post-meta {
@@ -78,6 +89,19 @@ body {
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     color: #ffffff;
+}
+
+.post-content h1 code,
+.post-content h2 code,
+.post-content h3 code,
+.post-content h4 code,
+.post-content h5 code,
+.post-content h6 code {
+    font-size: inherit;
+    background-color: rgba(47, 48, 49, 0.15);
+    padding: 2px;
+    border-radius: 10px;
+    color: #fb6961;
 }
 
 .post-content p {
@@ -506,4 +530,20 @@ body {
 
     // Replace all links with a specific class
     document.querySelectorAll('.social-link').forEach(replaceLinkWithIcon);
+
+    // Process title to convert backticks to code tags
+    function processBackticks() {
+        const h1 = document.querySelector('.post-header h1');
+        if (h1) {
+            // Get the text content
+            const text = h1.textContent;
+            // Replace backticks with code tags
+            const html = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // Set the HTML
+            h1.innerHTML = html;
+        }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', processBackticks);
 </script>

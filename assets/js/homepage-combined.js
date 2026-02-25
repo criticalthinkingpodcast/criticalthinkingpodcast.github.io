@@ -105,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update the container
             combinedContainer.innerHTML = combinedHTML;
             
+            // Process backticks in article titles
+            processArticleTitleBackticks();
+            
             // If no content found
             if (featuredContent.length === 0) {
                 combinedContainer.innerHTML = `
@@ -132,6 +135,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }
+    }
+    
+    // Process backticks in article titles
+    function processArticleTitleBackticks() {
+        const titles = document.querySelectorAll('.article-title a');
+        titles.forEach(titleLink => {
+            const text = titleLink.innerHTML;
+            const processed = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            titleLink.innerHTML = processed;
+        });
     }
     
     // Load the combined content

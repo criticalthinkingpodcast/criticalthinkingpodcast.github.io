@@ -15,11 +15,11 @@ title: Episodes - Critical Thinking Bug Bounty Podcast
     background: #555;
 }
 body { background-color: #1e1e1e; color: #ffffff; }
-.home-container { max-width: 800px; margin: 0 auto; padding: 20px; text-align: left; animation: fadeIn 0.6s ease-in; }
+.home-container { max-width: 1100px; margin: 0 auto; padding: 20px; text-align: left; animation: fadeIn 0.6s ease-in; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .home-header { margin-bottom: 15px; text-align: center; }
 .home-section { margin-bottom: 20px; line-height: 1.7; }
-.episode-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.episode-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 .episode-title { margin: 20px 0 10px 0; font-size: 1.2em; color: #ffffff; }
 a { color: #58a6ff; text-decoration: none; }
 a:hover { text-decoration: underline; }

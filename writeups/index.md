@@ -20,7 +20,7 @@ permalink: /writeups/
         color: #ffffff;
     }
     .writeups-container {
-        max-width: 800px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
         text-align: left;
@@ -86,6 +86,14 @@ permalink: /writeups/
     .article-title a {
         color: #6bff77ff;
         text-decoration: none;
+    }
+    
+    .article-title a code {
+        background-color: rgba(88, 166, 255, 0.15);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #6bff77ff;
+        font-size: inherit;
     }
     
     .article-title a:hover {

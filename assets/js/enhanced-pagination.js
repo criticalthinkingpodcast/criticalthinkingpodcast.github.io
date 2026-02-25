@@ -18,7 +18,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
     if (currentPage === 1) {
         paginationHTML += `<li class="disabled"><span>&laquo;</span></li>`;
     } else {
-        paginationHTML += `<li><a href="#" onclick="${onClickFunction}(${currentPage - 1}); return false;" title="Previous Page">&laquo;</a></li>`;
+        paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(${currentPage - 1}); return false;" title="Previous Page">&laquo;</a></li>`;
     }
     
     // Page numbers with ellipsis for many pages
@@ -28,7 +28,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
             if (i === currentPage) {
                 paginationHTML += `<li class="active"><span>${i}</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="${onClickFunction}(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(${i}); return false;">${i}</a></li>`;
             }
         }
     } else {
@@ -38,7 +38,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
         if (currentPage === 1) {
             paginationHTML += `<li class="active"><span>1</span></li>`;
         } else {
-            paginationHTML += `<li><a href="#" onclick="${onClickFunction}(1); return false;">1</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(1); return false;">1</a></li>`;
         }
         
         // Calculate range to show around current page
@@ -62,7 +62,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
             if (i === currentPage) {
                 paginationHTML += `<li class="active"><span>${i}</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="${onClickFunction}(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(${i}); return false;">${i}</a></li>`;
             }
         }
         
@@ -75,7 +75,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
         if (currentPage === totalPages) {
             paginationHTML += `<li class="active"><span>${totalPages}</span></li>`;
         } else {
-            paginationHTML += `<li><a href="#" onclick="${onClickFunction}(${totalPages}); return false;">${totalPages}</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(${totalPages}); return false;">${totalPages}</a></li>`;
         }
     }
     
@@ -83,7 +83,7 @@ function createPaginationHTML(currentPage, totalPages, onClickFunction) {
     if (currentPage === totalPages) {
         paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
     } else {
-        paginationHTML += `<li><a href="#" onclick="${onClickFunction}(${currentPage + 1}); return false;" title="Next Page">&raquo;</a></li>`;
+        paginationHTML += `<li><a href="javascript:void(0)" onclick="${onClickFunction}(${currentPage + 1}); return false;" title="Next Page">&raquo;</a></li>`;
     }
     
     return paginationHTML;

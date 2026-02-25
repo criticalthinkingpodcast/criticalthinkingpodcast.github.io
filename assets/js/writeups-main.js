@@ -110,7 +110,7 @@ function displayOlderWriteups() {
         if (currentPage === 1) {
             paginationHTML += `<span>&laquo;</span>`;
         } else {
-            paginationHTML += `<a href="#" onclick="changePage(${currentPage - 1}); return false;">&laquo;</a>`;
+            paginationHTML += `<a href="javascript:void(0)" onclick="changePage(${currentPage - 1}); return false;">&laquo;</a>`;
         }
         paginationHTML += `</li>`;
         
@@ -119,7 +119,7 @@ function displayOlderWriteups() {
             if (i === currentPage) {
                 paginationHTML += `<li class="active"><span>${i}</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="changePage(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changePage(${i}); return false;">${i}</a></li>`;
             }
         }
         
@@ -128,7 +128,7 @@ function displayOlderWriteups() {
         if (currentPage === totalPages) {
             paginationHTML += `<span>&raquo;</span>`;
         } else {
-            paginationHTML += `<a href="#" onclick="changePage(${currentPage + 1}); return false;">&raquo;</a>`;
+            paginationHTML += `<a href="javascript:void(0)" onclick="changePage(${currentPage + 1}); return false;">&raquo;</a>`;
         }
         paginationHTML += `</li>`;
         
@@ -288,13 +288,13 @@ function filterByTag(tag) {
         if (i === 1) {
             paginationHTML += `<li class="active"><span>1</span></li>`;
         } else {
-            paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
         }
     }
     
     // Next button
     if (totalFilteredPages > 1) {
-        paginationHTML += `<li><a href="#" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
+        paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
     } else {
         paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
     }
@@ -325,7 +325,7 @@ function filterByTag(tag) {
                     li.innerHTML = `<span>&laquo;</span>`;
                 } else {
                     li.className = '';
-                    li.innerHTML = `<a href="#" onclick="changeFilteredPage(${pageNumber - 1}); return false;">&laquo;</a>`;
+                    li.innerHTML = `<a href="javascript:void(0)" onclick="changeFilteredPage(${pageNumber - 1}); return false;">&laquo;</a>`;
                 }
             } else if (index === paginationLinks.length - 1) {
                 // Next button
@@ -334,7 +334,7 @@ function filterByTag(tag) {
                     li.innerHTML = `<span>&raquo;</span>`;
                 } else {
                     li.className = '';
-                    li.innerHTML = `<a href="#" onclick="changeFilteredPage(${pageNumber + 1}); return false;">&raquo;</a>`;
+                    li.innerHTML = `<a href="javascript:void(0)" onclick="changeFilteredPage(${pageNumber + 1}); return false;">&raquo;</a>`;
                 }
             } else {
                 // Page numbers
@@ -344,7 +344,7 @@ function filterByTag(tag) {
                     li.innerHTML = `<span>${pageNum}</span>`;
                 } else {
                     li.className = '';
-                    li.innerHTML = `<a href="#" onclick="changeFilteredPage(${pageNum}); return false;">${pageNum}</a>`;
+                    li.innerHTML = `<a href="javascript:void(0)" onclick="changeFilteredPage(${pageNum}); return false;">${pageNum}</a>`;
                 }
             }
         });

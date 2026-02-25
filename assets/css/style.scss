@@ -62,7 +62,7 @@ code, pre {
 /* Header and Layout Styling */
 header {
 position: fixed;
-min-width: 800px;
+min-width: 1100px;
 overflow: hidden;
   top: 0;
   left: 0;
@@ -80,7 +80,7 @@ body {
 .container {
   margin: 0 auto;
   width: 90%;
-  max-width: 800px;
+  max-width: 1100px;
   text-align: center;
 }
 
@@ -139,7 +139,7 @@ canvas.plexus {
 }
 
 /* Basic responsive adjustments */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
   #a-title img {
     max-width: 320px; /* Smaller logo on medium screens */
   }

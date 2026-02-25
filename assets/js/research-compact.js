@@ -166,11 +166,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         articlesContainer.innerHTML = articlesHTML;
         
+        // Process backticks in article titles
+        processArticleTitleBackticks();
+        
         // Use enhanced pagination
         updatePagination(page);
         
         // Update pagination info
         updatePaginationInfo();
+    }
+    
+    // Process backticks in article titles
+    function processArticleTitleBackticks() {
+        const titles = document.querySelectorAll('.article-title a');
+        titles.forEach(titleLink => {
+            const text = titleLink.innerHTML;
+            const processed = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+            titleLink.innerHTML = processed;
+        });
     }
     
     // Update pagination UI using the enhanced pagination helper
@@ -196,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Previous button
             if (currentPage > 1) {
-                paginationHTML += `<li><a href="#" onclick="changePage(${currentPage - 1}); return false;">&laquo;</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changePage(${currentPage - 1}); return false;">&laquo;</a></li>`;
             } else {
                 paginationHTML += `<li class="disabled"><span>&laquo;</span></li>`;
             }
@@ -206,13 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (i === currentPage) {
                     paginationHTML += `<li class="active"><span>${i}</span></li>`;
                 } else {
-                    paginationHTML += `<li><a href="#" onclick="changePage(${i}); return false;">${i}</a></li>`;
+                    paginationHTML += `<li><a href="javascript:void(0)" onclick="changePage(${i}); return false;">${i}</a></li>`;
                 }
             }
             
             // Next button
             if (currentPage < totalPages) {
-                paginationHTML += `<li><a href="#" onclick="changePage(${currentPage + 1}); return false;">&raquo;</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changePage(${currentPage + 1}); return false;">&raquo;</a></li>`;
             } else {
                 paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
             }
@@ -302,13 +315,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (i === 1) {
                 paginationHTML += `<li class="active"><span>1</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
             }
         }
         
         // Next button
         if (totalPages > 1) {
-            paginationHTML += `<li><a href="#" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
         } else {
             paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
         }
@@ -341,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Previous button
         if (page > 1) {
-            paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${page - 1}); return false;">&laquo;</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${page - 1}); return false;">&laquo;</a></li>`;
         } else {
             paginationHTML += `<li class="disabled"><span>&laquo;</span></li>`;
         }
@@ -351,13 +364,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (i === page) {
                 paginationHTML += `<li class="active"><span>${i}</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
             }
         }
         
         // Next button
         if (page < totalPages) {
-            paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${page + 1}); return false;">&raquo;</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${page + 1}); return false;">&raquo;</a></li>`;
         } else {
             paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
         }
@@ -370,12 +383,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPage = page;
         updateURL(page);
         displayArticles(page);
-        
-        // Scroll to top of article list with a smooth animation
-        document.getElementById('articleList').scrollIntoView({
-            behavior: 'smooth', 
-            block: 'start'
-        });
     };
     
     // Search articles
@@ -435,13 +442,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (i === 1) {
                 paginationHTML += `<li class="active"><span>1</span></li>`;
             } else {
-                paginationHTML += `<li><a href="#" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
+                paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(${i}); return false;">${i}</a></li>`;
             }
         }
         
         // Next button
         if (totalPages > 1) {
-            paginationHTML += `<li><a href="#" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
+            paginationHTML += `<li><a href="javascript:void(0)" onclick="changeFilteredPage(2); return false;">&raquo;</a></li>`;
         } else {
             paginationHTML += `<li class="disabled"><span>&raquo;</span></li>`;
         }

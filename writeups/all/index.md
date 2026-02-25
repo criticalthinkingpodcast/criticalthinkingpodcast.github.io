@@ -19,7 +19,7 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         color: #ffffff;
     }
     .writeups-container {
-        max-width: 800px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
         text-align: left;
@@ -146,6 +146,14 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     .article-title a {
         color: #6bff77ff;
         text-decoration: none;
+    }
+    
+    .article-title a code {
+        background-color: rgba(88, 166, 255, 0.15);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #6bff77ff;
+        font-size: inherit;
     }    
     
     .article-title a:hover {
@@ -372,15 +380,6 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
 </div>
 
 <ul class="pagination" id="pagination"></ul>
-
-<div class="section-navigation">
-    <a href="/writeups/all/" class="nav-button">
-        <span class="nav-icon">←</span>
-    </a>
-    <a href="/writeups/all/" class="nav-button">
-        <span class="nav-icon">→</span>
-    </a>
-</div>
 
 <script src="/assets/js/writeups-utils.js"></script>
 <script src="/assets/js/enhanced-pagination.js"></script>

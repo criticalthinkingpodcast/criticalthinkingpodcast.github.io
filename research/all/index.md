@@ -19,7 +19,7 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
         color: #ffffff;
     }
     .research-container {
-        max-width: 800px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
         text-align: left;
@@ -146,7 +146,17 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
     .article-title a {
         color: #58a6ff;
         text-decoration: none;
-    }    .article-title a:hover {
+    }
+
+    .article-title a code {
+        background-color: rgba(88, 166, 255, 0.15);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #58a6ff;
+        font-size: inherit;
+    }
+
+    .article-title a:hover {
         text-decoration: underline;
     }
 
@@ -371,15 +381,6 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
 
 
 <ul class="pagination" id="pagination"></ul>
-
-<div class="section-navigation">
-    <a href="/research/all/" class="nav-button">
-        <span class="nav-icon">←</span>
-    </a>
-    <a href="/research/all/" class="nav-button">
-        <span class="nav-icon">→</span>
-    </a>
-</div>
 
 <script src="/assets/js/enhanced-pagination.js"></script>
 <script src="/assets/js/research-compact.js"></script>

@@ -19,7 +19,7 @@ body {
     color: #ffffff;
 }
 .about-container {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
     text-align: left;

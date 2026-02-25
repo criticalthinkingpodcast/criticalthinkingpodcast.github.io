@@ -18,7 +18,7 @@ body {
 }
 
 .research-container {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
     text-align: left;
@@ -37,7 +37,7 @@ body {
 
 .research-section:not(.loaded) .research-item {
     background: linear-gradient(to right, #1e1e1e 8%, #2a2a2a 18%, #1e1e1e 33%);
-    background-size: 800px 104px;
+    background-size: 1100px 104px;
     animation: shimmer 1.5s infinite linear;
     min-height: 150px;
     border-radius: 4px;
