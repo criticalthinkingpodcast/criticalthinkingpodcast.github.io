@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVB734XKY6"></script>
     <script>
@@ -276,7 +277,7 @@
         <div style="margin-bottom: 20px;">
           <a href="https://twitter.com/ctbbpodcast" target="_blank" rel="noopener" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">Twitter</a>
           <a href="https://github.com/criticalthinkingpodcast" target="_blank" rel="noopener" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">GitHub</a>
-          <a href="https://rss.com/podcasts/ctbbpodcast/" target="_blank" rel="noopener" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">RSS Feed</a>
+          <a href="{{ '/feed.xml' | relative_url }}" target="_blank" rel="noopener" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">RSS Feed</a>
           <a href="mailto:contact@criticalthinkingpodcast.com" style="color: #58a6ff; text-decoration: none; margin: 0 10px; font-size: 0.9em;">Contact</a>
         </div>
         <div style="color: #777; font-size: 0.85em;">
@@ -338,3 +339,5 @@
     </script>
   </body>
 </html>
+
+
