@@ -9,7 +9,7 @@ handle: 0xn3va
 social_links: [https://x.com/0xn3va, https://github.com/0xn3va]
 
 description: "Unauthorised access across LangSmith agent deployments and path normalisation differences between Nginx and GCP LB"
-permalink: /writeup/chaining-service-key-leakage-and-path-confusion-in-langsmith
+permalink: /writeups/chaining-service-key-leakage-and-path-confusion-in-langsmith
 ---
 
 ## Introduction
