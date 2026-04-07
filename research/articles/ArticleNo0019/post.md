@@ -46,7 +46,7 @@ Encoded path traversal payloads may be normalized on the front or the backend. F
 
 So I built lab apps, compiled them, read the minified output, traced the decoding functions, and tested every encoding variant I could think of. Here's the framework-by-framework breakdown.
 
-> Labs available here: https://github.com/xssdoctor/cspt_research
+> Labs available here: [https://github.com/xssdoctor/cspt_research](https://github.com/xssdoctor/cspt_research)
 
 ## Paths
 
