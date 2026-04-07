@@ -46,6 +46,8 @@ Encoded path traversal payloads may be normalized on the front or the backend. F
 
 So I built lab apps, compiled them, read the minified output, traced the decoding functions, and tested every encoding variant I could think of. Here's the framework-by-framework breakdown.
 
+> Labs available here: https://github.com/xssdoctor/cspt_research
+
 ## Paths
 
 Lets start with the path itself. Specifically, lets think about how these frameworks handle dynamic path segments, like `/users/:userId`. When you navigate to `/users/..%2Fadmin`, does `userId` become `../admin`? Does it stay as `..%2Fadmin`? Does it become something else entirely?
