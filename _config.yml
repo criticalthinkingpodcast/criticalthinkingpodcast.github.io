@@ -3,4 +3,6 @@ description: "A 'by Hackers for Hackers' podcast focused on technical content ra
 show_downloads: true
 google_analytics:
 baseurl: ""
+
 url: "https://criticalthinkingpodcast.github.io"
+
