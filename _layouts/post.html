@@ -170,10 +170,17 @@ body {
     margin: 2em 0;
 }
 
-.post-content table {
-    width: 100%;
-    border-collapse: collapse;
+.post-content .table-scroll-wrapper {
+    overflow-x: auto;
+    max-width: 100%;
     margin: 2em 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.post-content table {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 0;
 }
 
 .post-content table th, .post-content table td {
@@ -544,6 +551,18 @@ body {
         }
     }
 
+    function wrapTablesForScroll() {
+        document.querySelectorAll('.post-content table').forEach(function(table) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-scroll-wrapper';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    }
+
     // Run on page load
-    document.addEventListener('DOMContentLoaded', processBackticks);
+    document.addEventListener('DOMContentLoaded', function() {
+        processBackticks();
+        wrapTablesForScroll();
+    });
 </script>
