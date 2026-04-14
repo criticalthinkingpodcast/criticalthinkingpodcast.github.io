@@ -29,7 +29,7 @@ permalink: /feed.xml
       <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
       <author>{{ post.author | xml_escape }}</author>
       <description>{{ post.description | xml_escape }}</description>
-      <content:encoded><![CDATA[{{ post.content }}]]></content:encoded>
+      <content:encoded><![CDATA[{{ post.content | markdownify }}]]></content:encoded>
     </item>
     {% endfor %}
   </channel>
