@@ -1,0 +1,35 @@
+---
+layout: null
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <description>{{ site.description | xml_escape }}</description>
+    <link>{{ site.url }}</link>
+    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <language>en-us</language>
+
+    {% assign research_pages = site.html_pages | where_exp: "item", "item.path contains 'research/articles/ArticleNo'" %}
+    {% assign research_posts = research_pages | where_exp: "item", "item.path contains 'post.md'" %}
+
+    {% assign writeup_pages = site.html_pages | where_exp: "item", "item.path contains 'writeups/articles/WriteupNo'" %}
+    {% assign writeup_posts = writeup_pages | where_exp: "item", "item.path contains 'post.md'" %}
+
+    {% assign all_posts = research_posts | concat: writeup_posts | sort: "date" | reverse %}
+
+    {% for post in all_posts %}
+    <item>
+      <title>{{ post.title | xml_escape }}</title>
+      <link>{{ site.url }}{{ post.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      <author>{{ post.author | xml_escape }}</author>
+      <description>{{ post.description | xml_escape }}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
