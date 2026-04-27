@@ -4,7 +4,6 @@ title: Stopping Redirects
 author: Jorian Woltjer
 date: 2025-12-04
 tags: [browser, xss, oauth, redirect]
-image: /research/articles/ArticleNo0012/stopping-redirects.png
 profile_picture: /assets/images/JW_Logo_V2_Transparant.webp
 handle: j0r1an
 social_links: [https://x.com/J0R1AN, https://jorianwoltjer.com/]

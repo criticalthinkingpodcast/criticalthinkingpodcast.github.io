@@ -12,4 +12,49 @@
 <!-- RSS Autodiscovery -->
 <link rel="alternate" type="application/rss+xml" title="{{ site.title | xml_escape }}" href="{{ site.url }}/feed.xml">
 
+{%- comment -%}
+  Resolve a social preview image for posts in:
+    research/articles/ArticleNoXXXX/  or  writeups/articles/WriteupNoXXXX/
+  Resolution order:
+    1. page.image (front matter) — absolute URL, root-absolute path, or filename relative to article folder
+    2. auto-detect thumbnail.{svg|png|jpg|jpeg|gif|webp} in article folder
+  Emitted BEFORE {% seo %} so values take precedence in parsers that pick the first occurrence.
+{%- endcomment -%}
+{%- assign article_folder = nil -%}
+{%- if page.path contains 'research/articles/ArticleNo' -%}
+  {%- assign folder_name = page.path | split: '/' | slice: -2, 1 | first -%}
+  {%- assign article_folder = '/research/articles/' | append: folder_name -%}
+{%- elsif page.path contains 'writeups/articles/WriteupNo' -%}
+  {%- assign folder_name = page.path | split: '/' | slice: -2, 1 | first -%}
+  {%- assign article_folder = '/writeups/articles/' | append: folder_name -%}
+{%- endif -%}
+{%- if article_folder -%}
+  {%- assign social_img = '' -%}
+  {%- if page.image -%}
+    {%- assign image_first = page.image | slice: 0,1 -%}
+    {%- if page.image contains '://' -%}
+      {%- assign social_img = page.image -%}
+    {%- elsif image_first == '/' -%}
+      {%- assign social_img = site.url | append: page.image -%}
+    {%- else -%}
+      {%- assign social_img = site.url | append: article_folder | append: '/' | append: page.image -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign thumb_exts = 'svg,png,jpg,jpeg,gif,webp' | split: ',' -%}
+    {%- for ext in thumb_exts -%}
+      {%- assign candidate = article_folder | append: '/thumbnail.' | append: ext -%}
+      {%- assign matched = site.static_files | where_exp: 'f', 'f.path == candidate' -%}
+      {%- if matched.size > 0 -%}
+        {%- assign social_img = site.url | append: candidate -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if social_img != '' -%}
+<meta property="og:image" content="{{ social_img }}">
+<meta name="twitter:image" content="{{ social_img }}">
+<meta name="twitter:card" content="summary_large_image">
+  {%- endif -%}
+{%- endif -%}
+
 <!-- end custom head snippets -->

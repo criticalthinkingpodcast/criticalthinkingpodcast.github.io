@@ -16,14 +16,25 @@ layout: null
         "url": "{{ article.url | relative_url }}",
         "author": "{{ article.author | escape }}",
         "profile_picture": "{{ article.profile_picture | escape }}",
+        {% assign article_folder = '/research/articles/ArticleNo' | append: article_number %}
         {% assign thumb_url = '' %}
-        {% assign thumb_base = '/research/articles/ArticleNo' | append: article_number | append: '/thumbnail.' %}
-        {% assign thumb_exts = 'svg,png,jpg,jpeg,gif,webp' | split: ',' %}
-        {% for ext in thumb_exts %}
-          {% assign candidate = thumb_base | append: ext %}
-          {% assign matched = site.static_files | where_exp: 'f', 'f.path == candidate' %}
-          {% if matched.size > 0 %}{% assign thumb_url = candidate %}{% break %}{% endif %}
-        {% endfor %}
+        {% if article.image %}
+          {% assign image_first = article.image | slice: 0,1 %}
+          {% if article.image contains '://' %}
+            {% assign thumb_url = article.image %}
+          {% elsif image_first == '/' %}
+            {% assign thumb_url = article.image %}
+          {% else %}
+            {% assign thumb_url = article_folder | append: '/' | append: article.image %}
+          {% endif %}
+        {% else %}
+          {% assign thumb_exts = 'svg,png,jpg,jpeg,gif,webp' | split: ',' %}
+          {% for ext in thumb_exts %}
+            {% assign candidate = article_folder | append: '/thumbnail.' | append: ext %}
+            {% assign matched = site.static_files | where_exp: 'f', 'f.path == candidate' %}
+            {% if matched.size > 0 %}{% assign thumb_url = candidate %}{% break %}{% endif %}
+          {% endfor %}
+        {% endif %}
         "thumbnail": "{% if thumb_url != '' %}{{ thumb_url | relative_url }}{% endif %}",
         "tags": [
           {% if article.tags %}

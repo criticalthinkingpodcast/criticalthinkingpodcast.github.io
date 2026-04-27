@@ -4,7 +4,6 @@ title: Abusing libmagic﹕ Inconsistencies That Lead to Type Confusion
 author: Hamid Sj
 date: 2025-10-06
 tags: [cspt, xss, file-upload, chain, confusion]
-image: /research/articles/ArticleNo4/thumbnail.png
 profile_picture: /assets/images/hamidsj.jpg
 handle: hamidsj
 social_links: [https://linktr.ee/hamedsj5]
