@@ -12,10 +12,7 @@ description: "A prototype pollution bug in Figma's variant counter, chained thro
 permalink: /research/figma-desktop-zero-click-rce/
 ---
 
-# Zero-Click RCE in Figma Desktop: A Race-Conditioned Prototype Pollution Chain That Escapes the Plugin Sandbox
-
-
-## Important Note :
+### Important Note :
 Before getting into the details, I want to note upfront that Figma responded and fixed the issue within a few hours. At no point were customer environments exposed.
 
 With that context, here's the write-up of what we found and how it was handled:*
