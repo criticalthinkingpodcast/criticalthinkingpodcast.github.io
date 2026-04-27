@@ -6,4 +6,4 @@ baseurl: ""
 url: "https://lab.ctbb.show"
 
 exclude:
-  - research/articles/_TEMPLATE/
+  - README.md
