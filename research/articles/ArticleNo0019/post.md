@@ -12,6 +12,7 @@ description: "A deep-dive into the URL decoding pipelines of React Router, Next.
 permalink: /research/the-dot-dot-slash-that-frameworks-hand-you
 ---
 
+{% raw %}
 _How I mapped the decoding pipelines of 8 frontend frameworks and found that every single one gives attackers traversal primitives_
 
 ---
@@ -855,3 +856,4 @@ Every framework decodes query parameters. There are no exceptions.
 | **Nuxt**       | `getRouterParam(event, 'id', { decode: true })` → `$fetch()` | YES (opt-in)                      | SSRF to internal services        |
 | **SvelteKit**  | `+page.server.ts` / `+server.ts` params → `fetch()`          | YES (`decode_params()`)           | SSRF, bypasses `hooks.server.ts` |
 | **SolidStart** | `query("use server")` args → `fetch()`                       | Passthrough (exact client string) | SSRF if input already decoded    |
+{% endraw %}

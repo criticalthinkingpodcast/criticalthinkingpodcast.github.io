@@ -14,9 +14,9 @@ let writeups = [];
 // Function to create writeup HTML
 function createWriteupHTML(writeup, isFeatured = false) {
     const style = isFeatured ? 'background-color: rgba(255, 107, 107, 0.1); border-color: rgba(255, 107, 107, 0.3);' : '';
-    const thumbnailHTML = writeup.thumbnail ? 
+    const thumbnailHTML = writeup.thumbnail ?
         `<div class="writeups-thumbnail">
-            <img src="${writeup.thumbnail}" alt="${writeup.title}">
+            <img src="${writeup.thumbnail}" alt="${writeup.title}" onerror="this.parentElement.remove()">
         </div>` : '';
     
     // Check if writeup is new

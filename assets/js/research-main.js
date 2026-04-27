@@ -14,9 +14,9 @@ let articles = [];
 // Function to create article HTML
 function createArticleHTML(article, isFeatured = false) {
     const style = isFeatured ? 'background-color: rgba(88, 166, 255, 0.1); border-color: rgba(88, 166, 255, 0.3);' : '';
-    const thumbnailHTML = article.thumbnail ? 
+    const thumbnailHTML = article.thumbnail ?
         `<div class="research-thumbnail">
-            <img src="${article.thumbnail}" alt="${article.title}">
+            <img src="${article.thumbnail}" alt="${article.title}" onerror="this.parentElement.remove()">
         </div>` : '';
     
     // Check if article is new
