@@ -26,8 +26,8 @@ date: YYYY-MM-DD                          # the publish date you want shown
 tags: [tag1, tag2, tag3]                  # 3–5 lowercase, hyphenated topic tags
 profile_picture: /assets/images/your.jpg  # path; send the file if it isn't in the repo yet
 handle: your_handle                       # your hacker handle (no @)
-social_links: [https://x.com/your_handle, https://your-blog.com/]
-description: "One or two sentences. Used in link previews and the article-index card."
+social_links: [https://your.links.com]    # SM profiles and blogs
+description: "One or two sentences."
 permalink: /research/your-post-slug       # research → /research/<slug>
                                           # writeups → /writeups/<slug>
                                           # use kebab-case
