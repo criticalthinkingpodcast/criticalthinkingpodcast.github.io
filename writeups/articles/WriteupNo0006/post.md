@@ -2,7 +2,7 @@
 layout: post
 title: "Zero-Click RCE in Figma Desktop: A Race-Conditioned Prototype Pollution Chain That Escapes the Plugin Sandbox"
 author: Benjamin Mamoud (DavenSec) 
-date: 2026-04-22
+date: 2026-04-27
 tags: [client-side, prototype-pollution, race-condition, rce]
 image: None
 profile_picture: /assets/images/davensec.jpg
