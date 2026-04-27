@@ -4,7 +4,7 @@ Source for [lab.ctbb.show](https://lab.ctbb.show)
 
 ## Submitting a Research Post or Writeup
 
-After submitting your post through the form [here](https://www.criticalthinkingpodcast.io/critical-research-lab/), we'll send you this page so you can copy the front-matter and then send us the final version of the post again. 
+After submitting your post through the form [here](https://www.criticalthinkingpodcast.io/critical-research-lab/), we'll send you this page so you can copy the front-matter and then send us the final version of the post again. (if it has been approved, of course)
 
 ### What to send
 
