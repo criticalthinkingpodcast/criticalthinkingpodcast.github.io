@@ -36,6 +36,26 @@ title: Research - Critical Thinking Bug Bounty Podcast
         text-align: center;
     }
 
+    .research-header h1 {
+        display: inline-block;
+        position: relative;
+        padding-bottom: 4px;
+        margin-bottom: 0;
+    }
+
+    .research-header h1::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 1px;
+        background: #58a6ff;
+        border-radius: 2px;
+        box-shadow: 0 0 6px #58a6ff, 0 0 12px rgba(88, 166, 255, 0.5), 0 0 22px rgba(88, 166, 255, 0.25);
+    }
+
     .research-section {
         margin-bottom: 40px;
         line-height: 1.7;
@@ -125,17 +145,48 @@ title: Research - Critical Thinking Bug Bounty Podcast
     .all-articles-btn.writeup { color: #6bff77ff; border-color: #444; }
     .all-articles-btn:hover { background-color: #444; color: #fff; }
     .all-articles-btn.writeup:hover { border-color: #6bff77ff; }
+
+    .submit-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 18px;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 999px;
+        color: #58a6ff;
+        text-decoration: none;
+        font-size: 0.9em;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    }
+
+    .submit-chip:hover {
+        border-color: #58a6ff;
+        background-color: #1f242c;
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    .submit-chip-arrow {
+        transition: transform 0.25s ease;
+    }
+
+    .submit-chip:hover .submit-chip-arrow {
+        transform: translateX(3px);
+    }
 </style>
 
 <div class="research-container">
     <div class="research-header">
-        <h1>Critical Thinking Security Content</h1>
+        <h1>Critical Research Lab</h1>
     </div>
     <div class="research-section" style="text-align: center;">
     </div>
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="https://www.criticalthinkingpodcast.io/p/critical-research-lab" style="color: #58a6ff; text-decoration: underline; font-weight: 500;">
-- More info on how to submit your content -
+    <div style="text-align: center; margin-bottom: 40px;">
+        <a href="/submit/" class="submit-chip">
+            <span>Publish your research or write-up with us</span>
+            <span class="submit-chip-arrow">→</span>
         </a>
     </div>
 
