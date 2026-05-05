@@ -2,25 +2,28 @@
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
     <script>
-      // Set the active theme on <html> before paint to avoid a flash.
-      // The data-theme value MUST match a [data-theme="…"] block in
-      // assets/css/theme.css — otherwise no var(--token) resolves and
-      // the page renders unstyled. We validate against KNOWN_THEMES and
-      // fall back to the default for anything else (e.g. a stale
-      // localStorage value from a previous deploy).
-      //
-      // When you add a new theme: list its name in KNOWN_THEMES and ship
-      // a matching [data-theme="…"] block in assets/css/theme.css.
+      /* ================================================================
+         THEME REGISTRY — the single source of truth.
+         Add a theme: append one entry below + the matching
+         [data-theme="<id>"] block in assets/css/theme.css. That's it.
+         The picker dropdown renders itself from this list.
+         ================================================================ */
+      window.SITE_THEMES = [
+        { id: 'ct-dark', label: 'CT Dark' }
+      ];
+      window.DEFAULT_THEME = 'ct-dark';
+
+      // FOUC-safe theme application (runs before paint).
       (function() {
-        var KNOWN_THEMES = ['ct-dark'];
-        var DEFAULT_THEME = 'ct-dark';
+        var known = window.SITE_THEMES.map(function(t) { return t.id; });
+        var fallback = window.DEFAULT_THEME;
         try {
           var stored = localStorage.getItem('theme');
-          var theme = (stored && KNOWN_THEMES.indexOf(stored) !== -1) ? stored : DEFAULT_THEME;
+          var theme = (stored && known.indexOf(stored) !== -1) ? stored : fallback;
           document.documentElement.setAttribute('data-theme', theme);
           if (stored !== theme) localStorage.setItem('theme', theme);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', DEFAULT_THEME);
+          document.documentElement.setAttribute('data-theme', fallback);
         }
       })();
     </script>
@@ -108,7 +111,9 @@
         background: var(--scrollbar-thumb-hover);
     }
 
-    /* Header logo responsivo */
+    /* Header logo — JS sets the .src attribute based on the active
+       theme's --shell-bg luminance (or --logo-image override).
+       Direct .src mutation re-renders reliably when themes flip. */
     .header-logo {
         width: 100%;
         max-width: 400px;
@@ -303,11 +308,22 @@
 <!--          <a href="{{ '/about/' | relative_url }}" style="padding: 10px 15px; color: var(--shell-accent); text-decoration: none; font-size: 0.9em;">About</a> -->
                     <div class="theme-menu">
                         <button id="theme-toggle" class="theme-toggle" aria-label="Theme menu" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu-dropdown" type="button">
-                            <span aria-hidden="true">☾</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="12" y1="2" x2="12" y2="4"/>
+                                <line x1="12" y1="20" x2="12" y2="22"/>
+                                <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                                <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                                <line x1="2" y1="12" x2="4" y2="12"/>
+                                <line x1="20" y1="12" x2="22" y2="12"/>
+                                <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                                <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                                <path d="M14 8a4 4 0 1 0 0 8 3 3 0 0 1 0-8z"/>
+                            </svg>
                         </button>
                         <div id="theme-menu-dropdown" class="theme-menu-dropdown" role="menu" hidden>
-                            <div class="theme-menu-title">Themes coming soon</div>
-                            <div class="theme-menu-sub">Want to ship one? See <a href="{{ '/themes/' | relative_url }}" style="color: var(--shell-accent);">/themes</a>.</div>
+                            <div class="theme-menu-title">Theme</div>
+                            <div id="theme-options-container"></div>
+                            <div class="theme-menu-sub" style="margin-top: 8px;">Want to ship one? See <a href="{{ '/themes/' | relative_url }}" style="color: var(--shell-accent);">/themes</a>.</div>
                         </div>
                     </div>
         </div>
@@ -351,29 +367,149 @@
                 backgroundColor: "rgba(24, 24, 24, 0)"
             });
 
-            // Theme menu dropdown — opens/closes a small popover.
+            // ── Logo auto-picker ─────────────────────────────────────
+            // Reads --shell-bg + --logo-image for a given theme via a
+            // hidden probe element. If the theme sets --logo-image, use
+            // that. Otherwise pick light or dark variant by luminance.
+            function parseColorToRGB(str) {
+                str = (str || '').trim();
+                if (str.charAt(0) === '#') {
+                    var hex = str.slice(1);
+                    if (hex.length === 3) {
+                        hex = hex.split('').map(function(c) { return c + c; }).join('');
+                    }
+                    return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
+                }
+                var m = str.match(/rgba?\(([^)]+)\)/);
+                if (m) {
+                    var parts = m[1].split(',').map(function(p) { return parseFloat(p.trim()); });
+                    return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+                }
+                return [0, 0, 0];
+            }
+            function relativeLuminance(rgb) {
+                var lin = rgb.map(function(v) {
+                    v = v / 255;
+                    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+            }
+            function pickLogoForTheme(themeName) {
+                var probe = document.createElement('div');
+                probe.setAttribute('data-theme', themeName);
+                probe.style.cssText = 'position:fixed;left:-9999px;width:0;height:0;visibility:hidden;pointer-events:none;';
+                document.body.appendChild(probe);
+                var style = getComputedStyle(probe);
+                var explicit = style.getPropertyValue('--logo-image').trim();
+                var shellBg = style.getPropertyValue('--shell-bg').trim();
+                document.body.removeChild(probe);
+                if (explicit) {
+                    // Strip the CSS url("…") / url(…) wrapper to a raw path.
+                    var m = explicit.match(/^url\((['"]?)([^'")]+)\1\)$/);
+                    return m ? m[2] : explicit;
+                }
+                var lum = relativeLuminance(parseColorToRGB(shellBg));
+                return lum > 0.5
+                    ? '/assets/images/CTLogo_LightBG.png'
+                    : '/assets/images/CTLogo.png';
+            }
+            function applyThemeLogo(themeName) {
+                var url = pickLogoForTheme(themeName);
+                var logo = document.querySelector('.header-logo');
+                if (logo && logo.getAttribute('src') !== url) {
+                    logo.src = url;
+                }
+            }
+
+            // Theme menu dropdown — opens/closes + theme selection.
             // (Bound first so any later DOM error can't block it.)
             var themeToggle = document.getElementById('theme-toggle');
             var themeMenuDropdown = document.getElementById('theme-menu-dropdown');
             if (themeToggle && themeMenuDropdown) {
+                // Render dropdown options from window.SITE_THEMES.
+                var optionsContainer = document.getElementById('theme-options-container');
+                if (optionsContainer && window.SITE_THEMES) {
+                    optionsContainer.innerHTML = '';
+                    window.SITE_THEMES.forEach(function(t) {
+                        var btn = document.createElement('button');
+                        btn.className = 'theme-option';
+                        btn.type = 'button';
+                        btn.setAttribute('role', 'menuitemradio');
+                        btn.setAttribute('data-theme-value', t.id);
+                        btn.innerHTML = '<span class="theme-option-preview" aria-hidden="true"></span><span class="theme-option-label"></span>';
+                        btn.querySelector('.theme-option-label').textContent = t.label;
+                        optionsContainer.appendChild(btn);
+                    });
+                }
+
                 var closeThemeMenu = function() {
                     themeMenuDropdown.hidden = true;
                     themeToggle.setAttribute('aria-expanded', 'false');
                 };
+                var markActiveOption = function() {
+                    var current = document.documentElement.getAttribute('data-theme');
+                    themeMenuDropdown.querySelectorAll('.theme-option').forEach(function(btn) {
+                        btn.classList.toggle('is-active', btn.getAttribute('data-theme-value') === current);
+                        btn.setAttribute('aria-checked', btn.getAttribute('data-theme-value') === current ? 'true' : 'false');
+                    });
+                };
+                // Generate each option's preview swatch from its theme tokens.
+                // A hidden probe element with [data-theme="…"] makes the
+                // theme's CSS variables resolvable via getComputedStyle().
+                var paintOptionPreviews = function() {
+                    themeMenuDropdown.querySelectorAll('.theme-option').forEach(function(btn) {
+                        var name = btn.getAttribute('data-theme-value');
+                        var preview = btn.querySelector('.theme-option-preview');
+                        if (!name || !preview) return;
+                        var probe = document.createElement('div');
+                        probe.setAttribute('data-theme', name);
+                        probe.style.position = 'fixed';
+                        probe.style.left = '-9999px';
+                        probe.style.width = '0';
+                        probe.style.height = '0';
+                        probe.style.visibility = 'hidden';
+                        probe.style.pointerEvents = 'none';
+                        document.body.appendChild(probe);
+                        var style = getComputedStyle(probe);
+                        var bg = style.getPropertyValue('--base').trim();
+                        var accent = style.getPropertyValue('--blue').trim();
+                        document.body.removeChild(probe);
+                        if (bg && accent) {
+                            preview.style.background = 'linear-gradient(135deg, ' + bg + ' 0%, ' + bg + ' 50%, ' + accent + ' 50%, ' + accent + ' 100%)';
+                        }
+                    });
+                };
+                paintOptionPreviews();
                 themeToggle.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var willOpen = themeMenuDropdown.hidden;
                     themeMenuDropdown.hidden = !willOpen;
                     themeToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                    if (willOpen) markActiveOption();
                 });
                 themeMenuDropdown.addEventListener('click', function(e) {
                     e.stopPropagation();
+                });
+                themeMenuDropdown.querySelectorAll('.theme-option').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var theme = btn.getAttribute('data-theme-value');
+                        if (!theme) return;
+                        document.documentElement.setAttribute('data-theme', theme);
+                        try { localStorage.setItem('theme', theme); } catch (e) {}
+                        applyThemeLogo(theme);
+                        markActiveOption();
+                        closeThemeMenu();
+                    });
                 });
                 document.addEventListener('click', closeThemeMenu);
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape') closeThemeMenu();
                 });
+                markActiveOption();
             }
+
+            // Apply the right logo for the active theme on first paint.
+            applyThemeLogo(document.documentElement.getAttribute('data-theme') || 'ct-dark');
 
             // Header hide/show on scroll
             let lastScrollTop = 0;

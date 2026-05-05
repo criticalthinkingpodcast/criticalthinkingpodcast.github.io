@@ -62,15 +62,37 @@ permalink: /themes/
     }
 
     /* ====== Code template ====== */
+    .template-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    @media (max-width: 800px) {
+        .template-grid { grid-template-columns: 1fr; }
+    }
+
     .template-box {
         position: relative;
         background-color: var(--code-bg);
         border: 1px solid var(--code-border);
         border-radius: 6px;
-        padding: 16px 18px;
-        margin-bottom: 16px;
-        max-height: 460px;
+        padding: 38px 18px 16px;
+        max-height: 540px;
         overflow: auto;
+        min-width: 0;
+    }
+
+    .template-label {
+        position: absolute;
+        top: 10px;
+        left: 14px;
+        font-size: 0.72em;
+        color: var(--blue);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 600;
     }
 
     .template-box pre {
@@ -496,7 +518,10 @@ permalink: /themes/
 
     .demo-button-row {
         margin-top: 24px;
-        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
     }
 
     /* Prefixed with .demo-post to win specificity over .demo-post a */
@@ -522,7 +547,6 @@ permalink: /themes/
         background-color: var(--surface2);
         color: var(--blue);
         border-color: var(--border-strong);
-        margin-left: 8px;
     }
 
     .demo-post .demo-button.ghost:hover {
@@ -580,11 +604,17 @@ permalink: /themes/
         </nav>
     </div>
 
-    <h2 class="section-title" id="copy-template">1. Copy this template</h2>
-    <div class="template-box">
-        <button class="copy-btn" id="copy-template" type="button">Copy</button>
-        <pre id="template-text">{% raw %}[data-theme="your-theme-name"] {
-    /* ── Neutrals (light → dark scale) ── */
+    <h2 class="section-title" id="copy-template">1. Copy a template</h2>
+    <p style="color: var(--subtext1); margin: -4px 0 14px;">
+        Pick the template that matches your design. Each block is complete on its own — palette, shadows, banner, and (for the light variant) shell overrides for the header / navbar / footer.
+    </p>
+
+    <div class="template-grid">
+        <div class="template-box">
+            <span class="template-label">For dark themes</span>
+            <button class="copy-btn" data-copy-target="template-text-dark" type="button">Copy</button>
+            <pre id="template-text-dark">{% raw %}[data-theme="your-dark-theme"] {
+    /* Neutrals (light → dark scale) */
     --text:      #ffffff;
     --subtext1:  #dddddd;
     --subtext0:  #cccccc;
@@ -598,7 +628,7 @@ permalink: /themes/
     --mantle:    #1a1a1a;
     --crust:     #181818;
 
-    /* ── Accents (14 hues) ── */
+    /* Accents (14 hues) */
     --rosewater: #f5e0dc;
     --flamingo:  #f2cdcd;
     --pink:      #f5c2e7;
@@ -614,29 +644,124 @@ permalink: /themes/
     --blue:      #58a6ff;
     --lavender:  #b4befe;
 
-    /* ── Code surfaces ── */
+    /* Code surfaces */
     --code-bg:     #0d1117;
     --code-text:   #c9d1d9;
     --code-border: #30363d;
 
-    /* ── Mix percentages ── */
-    --alpha-strong:  15%;   /* "-strong" companion = base darkened by this */
+    /* Mix percentages */
+    --alpha-strong:  15%;
     --alpha-tint:    15%;
     --alpha-glow:    25%;
     --alpha-callout: 18%;
 
-    /* ── Solid-accent contrast ── */
+    /* Solid-accent contrast */
     --on-accent: #0f0f0f;
 
-    /* ── Shadows ── */
+    /* Shadows */
     --shadow-card:        0 3px 10px rgba(0, 0, 0, 0.2);
     --shadow-card-hover:  0 5px 15px rgba(0, 0, 0, 0.3);
+
+    /* Shell — header / nav / footer */
+    --shell-bg: #0f0f0f;
+    --shell-bg-overlay: rgba(24, 24, 24, 0.8);
+    --shell-bg-overlay-subtle: rgba(24, 24, 24, 0.7);
+    --shell-text: #ffffff;
+    --shell-text-faded: #777777;
+    --shell-accent: #58a6ff;
+    --shell-border: #333333;
+    --shell-border-strong: #444444;
+
+    /* Banner */
+    --logo-image: url(/assets/images/CTLogo.png);
 }{% endraw %}</pre>
+        </div>
+
+        <div class="template-box">
+            <span class="template-label">For light themes</span>
+            <button class="copy-btn" data-copy-target="template-text-light" type="button">Copy</button>
+            <pre id="template-text-light">{% raw %}[data-theme="your-light-theme"] {
+    /* Neutrals (light → dark scale) */
+    --text:      #4c4f69;
+    --subtext1:  #5c5f77;
+    --subtext0:  #6c6f85;
+    --overlay2:  #7c7f93;
+    --overlay1:  #8c8fa1;
+    --overlay0:  #9ca0b0;
+    --surface2:  #acb0be;
+    --surface1:  #bcc0cc;
+    --surface0:  #ccd0da;
+    --base:      #eff1f5;
+    --mantle:    #e6e9ef;
+    --crust:     #dce0e8;
+
+    /* Accents (14 hues) */
+    --rosewater: #dc8a78;
+    --flamingo:  #dd7878;
+    --pink:      #ea76cb;
+    --mauve:     #8839ef;
+    --red:       #d20f39;
+    --maroon:    #e64553;
+    --peach:     #fe640b;
+    --yellow:    #df8e1d;
+    --green:     #40a02b;
+    --teal:      #179299;
+    --sky:       #04a5e5;
+    --sapphire:  #209fb5;
+    --blue:      #1e66f5;
+    --lavender:  #7287fd;
+
+    /* Code surfaces */
+    --code-bg:     #eff1f5;
+    --code-text:   #4c4f69;
+    --code-border: #ccd0da;
+
+    /* Mix percentages */
+    --alpha-strong:  15%;
+    --alpha-tint:    15%;
+    --alpha-glow:    25%;
+    --alpha-callout: 18%;
+
+    /* Solid-accent contrast */
+    --on-accent: #ffffff;
+
+    /* Shadows */
+    --shadow-card:        0 3px 10px rgba(76, 79, 105, 0.08);
+    --shadow-card-hover:  0 5px 15px rgba(76, 79, 105, 0.14);
+
+    /* Shell — header / nav / footer */
+    --shell-bg: #dce0e8;
+    --shell-bg-overlay: rgba(220, 224, 232, 0.8);
+    --shell-bg-overlay-subtle: rgba(220, 224, 232, 0.7);
+    --shell-text: #4c4f69;
+    --shell-text-faded: #8c8fa1;
+    --shell-accent: #1e66f5;
+    --shell-border: #bcc0cc;
+    --shell-border-strong: #acb0be;
+
+    /* Banner */
+    --logo-image: url(/assets/images/CTLogo_LightBG.png);
+}{% endraw %}</pre>
+        </div>
     </div>
 
-    <h2 class="section-title" id="paste-it">2. Paste it into <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">assets/css/theme.css</code></h2>
-    <p style="color: var(--subtext1); margin: -4px 0 12px;">
-        Rename the selector. Edit values. Add the theme name to <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">KNOWN_THEMES</code> in <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">_layouts/default.html</code>. Preview by running <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">localStorage.setItem('theme', 'your-theme-name')</code> in the browser console and reloading.
+    <h2 class="section-title" id="paste-it">2. Two tiny edits</h2>
+    <p style="color: var(--subtext1); margin: -4px 0 10px;">That's it — the rest happens automatically. Open a PR.</p>
+
+    <ol style="color: var(--subtext1); padding-left: 20px; line-height: 1.7; margin: 0 0 14px;">
+        <li>
+            Paste the template into <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">assets/css/theme.css</code> and rename the <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">[data-theme="..."]</code> selector to your theme's id.
+        </li>
+        <li>
+            Add one line to the <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">SITE_THEMES</code> array in <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">_layouts/default.html</code>:
+            <pre style="margin: 8px 0 4px; padding: 10px 12px; background-color: var(--code-bg); border: 1px solid var(--code-border); border-radius: 4px; color: var(--code-text); font-family: 'Fira Code', monospace; font-size: 0.85em; overflow-x: auto;">window.SITE_THEMES = [
+  { id: 'ct-dark', label: 'CT Dark' },
+  <span style="color: var(--green);">{ id: 'your-theme-id', label: 'Your Theme Name' }</span>
+];</pre>
+        </li>
+    </ol>
+    <p style="color: var(--subtext0); margin: 0 0 16px; font-size: 0.9em;">
+        Preview locally without a deploy: <code style="background-color: var(--blue-tint); color: var(--blue); padding: 1px 6px; border-radius: 3px;">localStorage.setItem('theme', 'your-theme-id')</code> in the browser console, reload, done.
     </p>
 
     <details class="disclosure" id="live-preview">
@@ -931,35 +1056,36 @@ permalink: /themes/
     }
 
     function setupCopy() {
-        var btn = document.getElementById('copy-template');
-        var text = document.getElementById('template-text');
-        if (!btn || !text) return;
-        btn.addEventListener('click', function() {
-            var content = text.textContent;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(content).then(showCopied).catch(fallback);
-            } else {
-                fallback();
-            }
-            function fallback() {
-                var ta = document.createElement('textarea');
-                ta.value = content;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.select();
-                try { document.execCommand('copy'); } catch (e) {}
-                document.body.removeChild(ta);
-                showCopied();
-            }
-            function showCopied() {
-                btn.classList.add('copied');
-                btn.textContent = 'Copied!';
-                setTimeout(function() {
-                    btn.classList.remove('copied');
-                    btn.textContent = 'Copy';
-                }, 1500);
-            }
+        document.querySelectorAll('.copy-btn[data-copy-target]').forEach(function(btn) {
+            var text = document.getElementById(btn.getAttribute('data-copy-target'));
+            if (!text) return;
+            btn.addEventListener('click', function() {
+                var content = text.textContent;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(content).then(showCopied).catch(fallback);
+                } else {
+                    fallback();
+                }
+                function fallback() {
+                    var ta = document.createElement('textarea');
+                    ta.value = content;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); } catch (e) {}
+                    document.body.removeChild(ta);
+                    showCopied();
+                }
+                function showCopied() {
+                    btn.classList.add('copied');
+                    btn.textContent = 'Copied!';
+                    setTimeout(function() {
+                        btn.classList.remove('copied');
+                        btn.textContent = 'Copy';
+                    }, 1500);
+                }
+            });
         });
     }
 

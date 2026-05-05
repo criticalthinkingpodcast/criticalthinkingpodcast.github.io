@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollButton.style.width = '40px';
     scrollButton.style.fontSize = '20px';
     scrollButton.style.lineHeight = '1';
-    scrollButton.style.background = 'var(--bg-tag)';
-    scrollButton.style.color = 'var(--accent-blue)';
+    scrollButton.style.background = 'var(--surface2)';
+    scrollButton.style.color = 'var(--blue)';
     scrollButton.style.border = '1px solid var(--border-strong)';
     scrollButton.style.borderRadius = '50%';
     scrollButton.style.cursor = 'pointer';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     scrollButton.addEventListener('mouseout', function() {
         this.style.opacity = '0.8';
-        this.style.backgroundColor = 'var(--bg-tag)';
+        this.style.backgroundColor = 'var(--surface2)';
     });
     
     // Click behavior to scroll to top
