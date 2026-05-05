@@ -1,8 +1,8 @@
 /* Badges and special effects for research articles */
 
 .new-badge {
-    background-color: #ff4757;
-    color: white;
+    background-color: var(--red);
+    color: var(--text);
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 0.7em;
@@ -10,7 +10,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-card);
     animation: pulse 2s infinite;
     z-index: 1;
 }
@@ -22,8 +22,8 @@
 }
 
 .featured-badge {
-    background-color: #58a6ff;
-    color: white;
+    background-color: var(--blue);
+    color: var(--on-accent);
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 0.7em;
@@ -31,7 +31,7 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-card);
     z-index: 1;
 }
 
@@ -43,8 +43,8 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: radial-gradient(circle, 
-        rgba(88, 166, 255, 0.15) 0%, 
+    background: radial-gradient(circle,
+        var(--blue-tint) 0%,
         rgba(0, 0, 0, 0) 70%);
     opacity: 0;
     transition: opacity 0.3s;

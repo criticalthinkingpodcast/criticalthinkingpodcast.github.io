@@ -3,21 +3,6 @@ layout: default
 title: About Us - Critical Thinking Bug Bounty Podcast
 ---
 <style>
-::-webkit-scrollbar {
-    width: 8px;
-    background: #222;
-}
-::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-body {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
 .about-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -50,17 +35,17 @@ body {
 
 .host-card {
     width: 48%;
-    background-color: #1a1a1a;
+    background-color: var(--mantle);
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-card);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .host-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .host-image {
@@ -70,12 +55,12 @@ body {
     margin: 0 auto 15px;
     display: block;
     object-fit: cover;
-    border: 3px solid #58a6ff;
+    border: 3px solid var(--blue);
 }
 
 .host-name {
     font-size: 1.3em;
-    color: #58a6ff;
+    color: var(--blue);
     margin-bottom: 10px;
     text-align: center;
 }
@@ -93,16 +78,16 @@ body {
 
 .social-link {
     margin: 0 5px;
-    color: #999;
+    color: var(--overlay2);
     transition: color 0.3s ease;
 }
 
 .social-link:hover {
-    color: #58a6ff;
+    color: var(--blue);
 }
 
 .contact-section {
-    background-color: #1a1a1a;
+    background-color: var(--mantle);
     padding: 30px;
     border-radius: 6px;
     margin-top: 40px;
@@ -122,7 +107,7 @@ body {
     top: 0;
     height: 100%;
     width: 3px;
-    background: #333;
+    background: var(--border-default);
 }
 
 .timeline-item {
@@ -138,19 +123,19 @@ body {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #58a6ff;
-    border: 3px solid #1e1e1e;
+    background: var(--blue);
+    border: 3px solid var(--base);
 }
 
 .timeline-date {
     font-size: 0.9em;
-    color: #999;
+    color: var(--overlay2);
     margin-bottom: 5px;
 }
 
 .timeline-content {
     padding: 15px;
-    background: #1a1a1a;
+    background: var(--mantle);
     border-radius: 5px;
 }
 
@@ -205,7 +190,7 @@ body {
     </div>
     
     <div class="about-section">
-        <p><strong><span style="color: #ff5252;">Crit</span>ical <span style="color: #58a6ff;">Thinking</span> is a "by hackers, for hackers" podcast</strong> designed to be both technical and fun to listen to. We keep it real, talking about everything from technical exploit breakdowns to hacker mental health issues.</p>
+        <p><strong><span class="t-red">Crit</span>ical <span class="t-blue">Thinking</span> is a "by hackers, for hackers" podcast</strong> designed to be both technical and fun to listen to. We keep it real, talking about everything from technical exploit breakdowns to hacker mental health issues.</p>
         <p>From new techniques and research to the live hacking event scene, CT will be dropping a pod weekly to keep you up to date and in the loop with the hacker life.</p>
         <p>While the pod is focused primarily on the bug bounty hunting experience, we also cover topics relevant to appsec, pentesting, security research, and secure software development.</p>
         

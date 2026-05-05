@@ -1,0 +1,288 @@
+/* ======================================================================
+   Theme system
+
+   Architecture
+   ----------------------------------------------------------------------
+   Two layers:
+
+     1. UNIVERSAL  — applied via [data-theme] (any theme).
+                     Owns the shell tokens (header / nav / footer, always
+                     dark) and every derived token (-strong, -tint, -glow,
+                     -bg-hover, borders, scrollbar, callouts).
+                     Contributors don't edit this layer when forking.
+
+     2. PER-THEME  — applied via [data-theme="<name>"].
+                     Owns the source palette only — the values a theme
+                     author actually picks. Everything else recomputes
+                     from these via color-mix().
+
+   The active theme is set on <html data-theme="…"> by the inline script
+   in default.html before paint. The site reads var(--token); switching
+   themes is just changing which per-theme block is active.
+
+   Adding a theme
+   ----------------------------------------------------------------------
+   1. Copy [data-theme="ct-dark"] below.
+   2. Rename the selector (kebab-case).
+   3. Edit the source values.
+   4. Add the theme name to KNOWN_THEMES in default.html.
+   5. Open a PR. /themes is your live preview.
+
+   color-mix() requires Chrome 111+, Safari 16.2+, Firefox 113+ (2023+).
+   ====================================================================== */
+
+/* ======================================================================
+   1. UNIVERSAL — shell + derived. Applies to every theme.
+   ====================================================================== */
+[data-theme] {
+    /* ── Shell (header / navbar / footer; constant across themes) ── */
+    --shell-bg: #0f0f0f;
+    --shell-bg-overlay: rgba(24, 24, 24, 0.8);
+    --shell-bg-overlay-subtle: rgba(24, 24, 24, 0.7);
+    --shell-text: #ffffff;
+    --shell-text-faded: #777777;
+    --shell-accent: #58a6ff;
+    --shell-border: #333333;
+    --shell-border-strong: #444444;
+
+    /* ── Per-accent derivations: <color>-strong / -tint / -glow / -bg-hover ── */
+    --rosewater-strong:    color-mix(in srgb, var(--rosewater), black var(--alpha-strong));
+    --rosewater-tint:      color-mix(in srgb, var(--rosewater) var(--alpha-tint), transparent);
+    --rosewater-glow:      color-mix(in srgb, var(--rosewater) var(--alpha-glow), transparent);
+    --rosewater-bg-hover:  color-mix(in srgb, var(--rosewater) 10%, var(--base));
+
+    --flamingo-strong:     color-mix(in srgb, var(--flamingo), black var(--alpha-strong));
+    --flamingo-tint:       color-mix(in srgb, var(--flamingo) var(--alpha-tint), transparent);
+    --flamingo-glow:       color-mix(in srgb, var(--flamingo) var(--alpha-glow), transparent);
+    --flamingo-bg-hover:   color-mix(in srgb, var(--flamingo) 10%, var(--base));
+
+    --pink-strong:         color-mix(in srgb, var(--pink), black var(--alpha-strong));
+    --pink-tint:           color-mix(in srgb, var(--pink) var(--alpha-tint), transparent);
+    --pink-glow:           color-mix(in srgb, var(--pink) var(--alpha-glow), transparent);
+    --pink-bg-hover:       color-mix(in srgb, var(--pink) 10%, var(--base));
+
+    --mauve-strong:        color-mix(in srgb, var(--mauve), black var(--alpha-strong));
+    --mauve-tint:          color-mix(in srgb, var(--mauve) var(--alpha-tint), transparent);
+    --mauve-glow:          color-mix(in srgb, var(--mauve) var(--alpha-glow), transparent);
+    --mauve-bg-hover:      color-mix(in srgb, var(--mauve) 10%, var(--base));
+
+    --red-strong:          color-mix(in srgb, var(--red), black var(--alpha-strong));
+    --red-tint:            color-mix(in srgb, var(--red) var(--alpha-tint), transparent);
+    --red-glow:            color-mix(in srgb, var(--red) var(--alpha-glow), transparent);
+    --red-bg-hover:        color-mix(in srgb, var(--red) 10%, var(--base));
+
+    --maroon-strong:       color-mix(in srgb, var(--maroon), black var(--alpha-strong));
+    --maroon-tint:         color-mix(in srgb, var(--maroon) var(--alpha-tint), transparent);
+    --maroon-glow:         color-mix(in srgb, var(--maroon) var(--alpha-glow), transparent);
+    --maroon-bg-hover:     color-mix(in srgb, var(--maroon) 10%, var(--base));
+
+    --peach-strong:        color-mix(in srgb, var(--peach), black var(--alpha-strong));
+    --peach-tint:          color-mix(in srgb, var(--peach) var(--alpha-tint), transparent);
+    --peach-glow:          color-mix(in srgb, var(--peach) var(--alpha-glow), transparent);
+    --peach-bg-hover:      color-mix(in srgb, var(--peach) 10%, var(--base));
+
+    --yellow-strong:       color-mix(in srgb, var(--yellow), black var(--alpha-strong));
+    --yellow-tint:         color-mix(in srgb, var(--yellow) var(--alpha-tint), transparent);
+    --yellow-glow:         color-mix(in srgb, var(--yellow) var(--alpha-glow), transparent);
+    --yellow-bg-hover:     color-mix(in srgb, var(--yellow) 10%, var(--base));
+
+    --green-strong:        color-mix(in srgb, var(--green), black var(--alpha-strong));
+    --green-tint:          color-mix(in srgb, var(--green) var(--alpha-tint), transparent);
+    --green-glow:          color-mix(in srgb, var(--green) var(--alpha-glow), transparent);
+    --green-bg-hover:      color-mix(in srgb, var(--green) 10%, var(--base));
+
+    --teal-strong:         color-mix(in srgb, var(--teal), black var(--alpha-strong));
+    --teal-tint:           color-mix(in srgb, var(--teal) var(--alpha-tint), transparent);
+    --teal-glow:           color-mix(in srgb, var(--teal) var(--alpha-glow), transparent);
+    --teal-bg-hover:       color-mix(in srgb, var(--teal) 10%, var(--base));
+
+    --sky-strong:          color-mix(in srgb, var(--sky), black var(--alpha-strong));
+    --sky-tint:            color-mix(in srgb, var(--sky) var(--alpha-tint), transparent);
+    --sky-glow:            color-mix(in srgb, var(--sky) var(--alpha-glow), transparent);
+    --sky-bg-hover:        color-mix(in srgb, var(--sky) 10%, var(--base));
+
+    --sapphire-strong:     color-mix(in srgb, var(--sapphire), black var(--alpha-strong));
+    --sapphire-tint:       color-mix(in srgb, var(--sapphire) var(--alpha-tint), transparent);
+    --sapphire-glow:       color-mix(in srgb, var(--sapphire) var(--alpha-glow), transparent);
+    --sapphire-bg-hover:   color-mix(in srgb, var(--sapphire) 10%, var(--base));
+
+    --blue-strong:         color-mix(in srgb, var(--blue), black var(--alpha-strong));
+    --blue-tint:           color-mix(in srgb, var(--blue) var(--alpha-tint), transparent);
+    --blue-glow:           color-mix(in srgb, var(--blue) var(--alpha-glow), transparent);
+    --blue-bg-hover:       color-mix(in srgb, var(--blue) 10%, var(--base));
+
+    --lavender-strong:     color-mix(in srgb, var(--lavender), black var(--alpha-strong));
+    --lavender-tint:       color-mix(in srgb, var(--lavender) var(--alpha-tint), transparent);
+    --lavender-glow:       color-mix(in srgb, var(--lavender) var(--alpha-glow), transparent);
+    --lavender-bg-hover:   color-mix(in srgb, var(--lavender) 10%, var(--base));
+
+    /* ── Border variations from --surface2 ── */
+    --border-default:  var(--surface2);
+    --border-strong:   color-mix(in srgb, var(--surface2), white 12%);
+    --border-subtle:   color-mix(in srgb, var(--surface2), black 12%);
+    --border-divider:  color-mix(in srgb, var(--surface2), black 25%);
+
+    /* ── Scrollbar from --surface2 ── */
+    --scrollbar-track:        color-mix(in srgb, var(--surface2), black 30%);
+    --scrollbar-thumb:        var(--surface2);
+    --scrollbar-thumb-hover:  color-mix(in srgb, var(--surface2), white 20%);
+
+    /* ── Callouts ── */
+    --callout-bg:               color-mix(in srgb, var(--text) 5%, transparent);
+    --callout-info-border:      var(--blue);
+    --callout-info-bg:          color-mix(in srgb, var(--blue)         var(--alpha-callout), var(--mantle));
+    --callout-success-border:   var(--green-strong);
+    --callout-success-bg:       color-mix(in srgb, var(--green-strong) var(--alpha-callout), var(--mantle));
+    --callout-danger-border:    var(--red-strong);
+    --callout-danger-bg:        color-mix(in srgb, var(--red-strong)   var(--alpha-callout), var(--mantle));
+    --callout-warning-border:   var(--peach);
+    --callout-warning-bg:       color-mix(in srgb, var(--peach)        var(--alpha-callout), var(--mantle));
+    --callout-question-border:  var(--mauve);
+    --callout-question-bg:      color-mix(in srgb, var(--mauve)        var(--alpha-callout), var(--mantle));
+    --callout-note-border:      var(--blue);
+    --callout-note-bg:          var(--callout-info-bg);
+}
+
+/* ======================================================================
+   2. PER-THEME — source palette only. Edit this block when forking.
+   ====================================================================== */
+
+[data-theme="ct-dark"] {
+    /* ── Neutrals (light → dark scale) ── */
+    --text:      #ffffff;
+    --subtext1:  #dddddd;
+    --subtext0:  #cccccc;
+    --overlay2:  #999999;
+    --overlay1:  #777777;
+    --overlay0:  #555555;
+    --surface2:  #333333;
+    --surface1:  #2a2a2a;
+    --surface0:  #252525;
+    --base:      #1e1e1e;
+    --mantle:    #1a1a1a;
+    --crust:     #181818;
+
+    /* ── Accents (14 hues) ── */
+    --rosewater: #f5e0dc;
+    --flamingo:  #f2cdcd;
+    --pink:      #f5c2e7;
+    --mauve:     #a371f7;
+    --red:       #ff5252;
+    --maroon:    #eba0ac;
+    --peach:     #d29922;
+    --yellow:    #f9e2af;
+    --green:     #6bff77;
+    --teal:      #94e2d5;
+    --sky:       #89dceb;
+    --sapphire:  #74c7ec;
+    --blue:      #58a6ff;
+    --lavender:  #b4befe;
+
+    /* ── Code surfaces ── */
+    --code-bg:     #0d1117;
+    --code-text:   #c9d1d9;
+    --code-border: #30363d;
+
+    /* ── Mix percentages ── */
+    --alpha-strong:  15%;
+    --alpha-tint:    15%;
+    --alpha-glow:    25%;
+    --alpha-callout: 18%;
+
+    /* ── Solid-accent contrast ── */
+    --on-accent: #0f0f0f;
+
+    /* ── Shadows ── */
+    --shadow-card:        0 3px 10px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover:  0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ======================================================================
+   Theme menu picker (button + dropdown)
+   ====================================================================== */
+.theme-menu {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--shell-border);
+    color: var(--shell-accent);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    line-height: 1;
+    padding: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--shell-accent);
+    background-color: rgba(88, 166, 255, 0.12);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--shell-accent);
+    outline-offset: 2px;
+}
+
+.theme-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: var(--shell-bg);
+    border: 1px solid var(--shell-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.85em;
+    color: var(--shell-text);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    z-index: 1100;
+}
+
+.theme-menu-dropdown[hidden] {
+    display: none;
+}
+
+.theme-menu-dropdown .theme-menu-title {
+    color: var(--shell-accent);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.theme-menu-dropdown .theme-menu-sub {
+    color: var(--shell-text-faded);
+    font-size: 0.85em;
+}
+
+@media (max-width: 480px) {
+    .theme-menu {
+        right: 10px;
+    }
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85em;
+    }
+    .theme-menu-dropdown {
+        min-width: 160px;
+    }
+}
+
+/* Utility text-color classes */
+.t-red { color: var(--red); }
+.t-blue { color: var(--blue); }
+.t-green { color: var(--green); }
+.t-primary { color: var(--text); }
+.t-muted { color: var(--overlay2); }

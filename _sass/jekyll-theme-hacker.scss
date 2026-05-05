@@ -17,8 +17,8 @@ $container-max-width: 1000px;
 body {
   margin: 0;
   padding: 0;
-  background: $body-background url("../images/bkg.png") 0 0;
-  color: $body-foreground;
+  background: var(--base);
+  color: var(--text);
   font-size: 16px;
   line-height: 1.5;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
@@ -52,9 +52,9 @@ li {
 */
 
 header {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--shell-bg-overlay-subtle);
   width: 100%;
-  border-bottom: 1px solid $conifer; //header;
+  border-bottom: 1px solid var(--blue);
   padding: 20px 0 0 0;
   margin: 0 0 40px 0;
 }
@@ -65,7 +65,7 @@ header h1 {
   margin: 0 0 0 -40px;
   font-weight: bold;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $conifer;//$header;
+  color: var(--blue);
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
                0 0 10px rgba(181, 232, 83, 0.1);
@@ -85,7 +85,7 @@ header h1:before {
 header h2 {
   font-size: 18px;
   font-weight: 300;
-  color: #666;
+  color: var(--overlay1);
 }
 
 #downloads .btn {
@@ -108,7 +108,7 @@ section img {
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $header;
+  color: var(--text);
   letter-spacing: -0.03em;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
 #main_content h6 {
   font-size: 12px;
   text-transform: uppercase;
-  color: #999;
+  color: var(--overlay2);
   margin: 0 0 5px 0;
 }
 
@@ -154,17 +154,17 @@ ul li {
 }
 
 blockquote {
-  color: $blockquote-color;
+  color: var(--subtext0);
   padding-left: 10px;
-  border-left: 1px dotted $blockquote-border;
+  border-left: 1px dotted var(--border-default);
 }
 
 pre {
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
   padding: 10px;
   font-size: 16px;
-  color: #b5e853;
+  color: var(--code-text);
   border-radius: 2px;
   word-wrap: normal;
   overflow: auto;
@@ -172,11 +172,11 @@ pre {
 }
 
 code.highlighter-rouge {
-  background: rgba(0,0,0,0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
   padding: 0px 3px;
   margin: 0px -3px;
-  color: #aa759f;
+  color: var(--mauve);
   border-radius: 2px;
 }
 
@@ -187,7 +187,7 @@ table {
 
 th {
   text-align: left;
-  border-bottom: 1px dashed #b5e853;
+  border-bottom: 1px dashed var(--blue);
   padding: 5px 10px;
 }
 
@@ -198,8 +198,8 @@ td {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #b5e853;
-  color: #b5e853;
+  border-bottom: 1px dashed var(--blue);
+  color: var(--blue);
 }
 
 /* Buttons
@@ -244,8 +244,8 @@ hr {
 */
 
 a {
-  color: #63c0f5;
-  text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
+  color: var(--blue);
+  text-shadow: 0 0 5px var(--blue-tint);
 }
 
 /* Clearfix */

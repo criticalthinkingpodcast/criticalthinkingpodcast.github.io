@@ -1,0 +1,133 @@
+/* Post TOC — used by post.html (auto-built) and the themes page (hard-coded). */
+
+html { scroll-behavior: smooth; }
+
+.post-content h2,
+.post-content h3,
+.themes-container h2[id] {
+    scroll-margin-top: 90px;
+}
+
+.post-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post-toc-list-h2 > .post-toc-item-h2 {
+    margin-bottom: 4px;
+}
+
+.post-toc-list-h3 {
+    margin: 2px 0 8px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--border-subtle);
+}
+
+.post-toc-link {
+    display: block;
+    color: var(--subtext0);
+    text-decoration: none;
+    border: none !important;
+    padding: 4px 8px 4px 10px;
+    border-left: 2px solid transparent;
+    line-height: 1.35;
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    word-break: break-word;
+}
+
+.post-toc-item-h2 > .post-toc-link {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.post-toc-item-h3 > .post-toc-link {
+    font-size: 0.82em;
+    font-weight: 400;
+    color: var(--overlay2);
+}
+
+.post-toc-link:hover {
+    color: var(--blue);
+    background-color: var(--blue-tint);
+}
+
+.post-toc-link.is-active {
+    color: var(--blue);
+    font-weight: 600;
+    border-left-color: var(--blue);
+    background-color: var(--blue-tint);
+}
+
+/* Floating "Sections" pill (all viewports) */
+.post-toc-mobile {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    font-family: 'Fira Code', monospace;
+}
+
+.post-toc-mobile-toggle {
+    background: var(--shell-bg-overlay);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--blue);
+    border: 1px solid var(--shell-border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.post-toc-mobile-toggle:hover,
+.post-toc-mobile.is-open .post-toc-mobile-toggle {
+    border-color: var(--blue);
+}
+
+.post-toc-caret {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+.post-toc-mobile.is-open .post-toc-caret {
+    transform: rotate(180deg);
+}
+
+.post-toc-mobile-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(320px, calc(100vw - 24px));
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--shell-bg-overlay);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--shell-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    box-shadow: var(--shadow-card-hover);
+}
+
+.post-toc-mobile.is-open .post-toc-mobile-panel {
+    display: block;
+}
+
+.post-toc-mobile-panel::-webkit-scrollbar { width: 6px; }
+.post-toc-mobile-panel::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 3px; }
+
+@media (max-width: 768px) {
+    .post-toc-mobile { top: 16px; right: 16px; }
+    .post-toc-mobile-toggle { padding: 5px 12px; font-size: 0.8em; }
+}

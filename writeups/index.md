@@ -4,21 +4,6 @@ title: Writeups - Critical Thinking Bug Bounty Podcast
 permalink: /writeups/
 ---
 <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-        background: #222;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    body {
-        background-color: #1e1e1e;
-        color: #ffffff;
-    }
     .writeups-container {
         max-width: 1100px;
         margin: 0 auto;
@@ -45,35 +30,35 @@ permalink: /writeups/
     .writeups-breadcrumb {
         margin-top: 10px;
         font-size: 0.9em;
-        color: #999;
+        color: var(--overlay2);
     }
 
     .writeups-breadcrumb a {
-        color: #58a6ff;
+        color: var(--blue);
         text-decoration: none;
         transition: color 0.2s;
     }
 
     .writeups-breadcrumb a:hover {
-        color: #fff;
+        color: var(--text);
         text-decoration: underline;
-    }    
-    
+    }
+
     .article-list {
         margin-top: 30px;
     }
 
     .article-item {
-        background-color: #252525;
+        background-color: var(--surface0);
         margin-bottom: 15px;
         padding: 15px;
         border-radius: 4px;
-        border-left: 3px solid #6bff77ff;
+        border-left: 3px solid var(--green);
         transition: all 0.3s ease;
     }
 
     .article-item:hover {
-        background-color: #2a2a2a;
+        background-color: var(--surface1);
         transform: translateX(3px);
     }
 
@@ -82,34 +67,34 @@ permalink: /writeups/
         margin-bottom: 8px;
         font-size: 1.2em;
     }
-    
+
     .article-title a {
-        color: #6bff77ff;
+        color: var(--green);
         text-decoration: none;
     }
-    
+
     .article-title a code {
-        background-color: rgba(88, 166, 255, 0.15);
+        background-color: var(--green-tint);
         padding: 2px 6px;
         border-radius: 4px;
-        color: #6bff77ff;
+        color: var(--green);
         font-size: inherit;
     }
-    
+
     .article-title a:hover {
         text-decoration: underline;
     }
 
     .article-subtitle {
         font-size: 0.9em;
-        color: #ccc;
+        color: var(--subtext0);
         margin-bottom: 10px;
         font-style: italic;
     }
 
     .article-meta {
         font-size: 0.8em;
-        color: #999;
+        color: var(--overlay2);
         margin-bottom: 8px;
     }
 
@@ -124,14 +109,14 @@ permalink: /writeups/
         display: inline-block;
         font-size: 0.75em;
         padding: 3px 8px;
-        background-color: #333;
+        background-color: var(--surface2);
         border-radius: 12px;
-        color: #6bff77ff;
+        color: var(--green);
     }
 
     .new-badge {
-        background-color: #ff4757;
-        color: white;
+        background-color: var(--red);
+        color: var(--text);
         padding: 3px 8px;
         border-radius: 4px;
         font-size: 0.7em;
@@ -145,8 +130,8 @@ permalink: /writeups/
     .read-more {
         display: inline-block;
         padding: 6px 14px;
-        background-color: #333;
-        color: #6bff77ff;
+        background-color: var(--surface2);
+        color: var(--green);
         border-radius: 4px;
         text-decoration: none;
         font-size: 0.9em;
@@ -154,31 +139,31 @@ permalink: /writeups/
     }
 
     .read-more:hover {
-        background-color: #444;
-        color: #fff;
+        background-color: var(--border-strong);
+        color: var(--text);
     }
-    
+
     .all-articles {
         text-align: center;
         margin-top: 30px;
     }
-    
+
     .all-articles-btn {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #333;
-        color: #6bff77ff;
+        background-color: var(--surface2);
+        color: var(--green);
         border-radius: 4px;
         text-decoration: none;
         font-weight: 500;
-        border: 1px solid #444;
+        border: 1px solid var(--border-strong);
         transition: all 0.3s ease;
     }
-    
+
     .all-articles-btn:hover {
-        background-color: #444;
-        color: #fff;
-        border-color: #6bff77ff;
+        background-color: var(--border-strong);
+        color: var(--text);
+        border-color: var(--green);
     }
 </style>
 
@@ -192,7 +177,7 @@ permalink: /writeups/
         <p>Welcome to our writeups section. Here we share detailed bug bounty writeups, vulnerability discoveries, and practical exploitation techniques. <br> Each writeup provides step-by-step analysis to help you understand real-world security testing scenarios and improve your bug hunting skills.</p>
 </div>
     <div style="text-align: center; margin-bottom: 30px;">
-        <a href="https://www.criticalthinkingpodcast.io/p/critical-research-lab" style="color: #58a6ff; text-decoration: underline; font-weight: 500;">
+        <a href="/submit/" class="t-blue" style="text-decoration: underline; font-weight: 500;">
         - More info on how to submit your writeup -
         </a>
     </div>

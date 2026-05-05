@@ -5,6 +5,7 @@ layout: default
 <link rel="stylesheet" href="/assets/css/code-highlighting.css">
 <link rel="stylesheet" href="/assets/css/vibrant-syntax.css">
 <link rel="stylesheet" href="/assets/css/graphql-highlighting.css">
+<link rel="stylesheet" href="/assets/css/post-toc.css">
 <script src="/assets/js/research-utils.js"></script>
 <script src="/assets/js/code-formatting.js"></script>
 <script src="/assets/js/scroll-to-top.js"></script>
@@ -15,18 +16,18 @@ layout: default
 <style>
 ::-webkit-scrollbar {
     width: 8px;
-    background: #222;
+    background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-    background: #444;
+    background: var(--scrollbar-thumb);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--scrollbar-thumb-hover);
 }
 body {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: var(--base);
+    color: var(--text);
 }
 .post-container {
     max-width: 1100px;
@@ -34,8 +35,8 @@ body {
     padding: 20px;
     text-align: left;
     animation: fadeIn 0.6s ease-in;
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: var(--base);
+    color: var(--text);
 }
 
 .post-header {
@@ -44,19 +45,18 @@ body {
 }
 
 .post-header h1 code {
-    background-color: rgba(88, 166, 255, 0.15);
     padding: 2px 6px;
     border-radius: 4px;
-    color: #58a6ff;
+    color: var(--blue);
     font-size: inherit;
-    background-color: rgba(47, 48, 49, 0.15);
+    background-color: var(--blue-tint);
     padding: 2px;
     border-radius: 10px;
 }
 
 .post-meta {
     margin-bottom: 20px;
-    color: #999;
+    color: var(--overlay2);
     font-size: 0.9em;
     text-align: center;
 }
@@ -70,28 +70,28 @@ body {
     font-size: 2em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .post-content h2 {
     font-size: 1.75em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .post-content h3 {
     font-size: 1.5em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .post-content h4 {
     font-size: 1.25em;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: #ffffff;
+    color: var(--text);
 }
 
 .post-content h1 code,
@@ -101,10 +101,10 @@ body {
 .post-content h5 code,
 .post-content h6 code {
     font-size: inherit;
-    background-color: rgba(47, 48, 49, 0.15);
+    background-color: var(--red-tint);
     padding: 2px;
     border-radius: 10px;
-    color: #fb6961;
+    color: var(--red);
 }
 
 .post-content p {
@@ -112,9 +112,9 @@ body {
 }
 
 .post-content a {
-    color: #58a6ff;
+    color: var(--blue);
     text-decoration: none;
-    border-bottom: 1px solid rgba(88, 166, 255, 0.3);
+    border-bottom: 1px solid var(--blue-tint);
     transition: all 0.2s ease;
     word-break: break-all !important;
     overflow-wrap: anywhere !important;
@@ -137,8 +137,8 @@ body {
 }
 
 .post-content a:hover {
-    color: #ffffff;
-    border-bottom-color: #ffffff;
+    color: var(--text);
+    border-bottom-color: var(--text);
 }
 
 .post-content ul, .post-content ol {
@@ -160,16 +160,16 @@ body {
 }
 
 .post-content blockquote {
-    border-left: 4px solid #58a6ff;
+    border-left: 4px solid var(--blue);
     padding-left: 1em;
-    color: #999;
+    color: var(--overlay2);
     font-style: italic;
     margin: 1.5em 0;
 }
 
 .post-content hr {
     border: none;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-default);
     margin: 2em 0;
 }
 
@@ -187,17 +187,17 @@ body {
 }
 
 .post-content table th, .post-content table td {
-    border: 1px solid #333;
+    border: 1px solid var(--border-default);
     padding: 0.5em;
     text-align: left;
 }
 
 .post-content table th {
-    background-color: #252525;
+    background-color: var(--surface0);
 }
 
 .post-content table tr:nth-child(even) {
-    background-color: #1a1a1a;
+    background-color: var(--mantle);
 }
 
 .post-nav {
@@ -205,7 +205,7 @@ body {
     justify-content: space-between;
     margin-top: 50px;
     padding-top: 25px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-default);
 }
 
 .post-nav-item {
@@ -223,12 +223,12 @@ body {
 .post-nav-label {
     display: block;
     font-size: 0.8em;
-    color: #999;
+    color: var(--overlay2);
     margin-bottom: 5px;
 }
 
 .post-nav a {
-    color: #58a6ff;
+    color: var(--blue);
     text-decoration: none;
     font-weight: bold;
 }
@@ -244,8 +244,8 @@ body {
 
 .post-tag {
     display: inline-block;
-    background-color: #2d333b;
-    color: #58a6ff;
+    background-color: var(--surface2);
+    color: var(--blue);
     padding: 3px 10px;
     margin: 0 5px 5px 0;
     border-radius: 12px;
@@ -255,8 +255,8 @@ body {
 }
 
 .post-tag:hover {
-    background-color: #354052;
-    color: white;
+    background-color: var(--border-strong);
+    color: var(--text);
 }
 
 /* Enhanced post navigation */
@@ -265,8 +265,8 @@ body {
     justify-content: space-between;
     margin-top: 50px;
     padding-top: 25px;
-    border-top: 1px solid #333;
-    background-color: #1a1a1a;
+    border-top: 1px solid var(--border-default);
+    background-color: var(--mantle);
     border-radius: 8px;
     padding: 15px;
 }
@@ -291,19 +291,19 @@ body {
 .post-nav-label {
     display: block;
     font-size: 0.8em;
-    color: #999;
+    color: var(--overlay2);
     margin-bottom: 5px;
 }
 
 .post-nav a {
-    color: #58a6ff;
+    color: var(--blue);
     text-decoration: none;
     font-weight: 500;
     display: block;
 }
 
 .post-nav a:hover {
-    color: white;
+    color: var(--text);
 }
 
 .post-profile-picture {
@@ -335,7 +335,7 @@ body {
     margin: 16px 0;
     border-left: 4px solid;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--callout-bg);
 }
 
 .callout-title {
@@ -362,49 +362,42 @@ body {
 
 /* Callout Types */
 
-.callout-info { 
-    border-color: #58a6ff; 
-    background-color: #182c3a; 
+.callout-info {
+    border-color: var(--callout-info-border);
+    background-color: var(--callout-info-bg);
 }
 .callout-info .callout-title::before { content: "ℹ️"; }
 
-.callout-success { 
-    border-color: #3fb950; 
-    background-color: #1c2e1c; 
+.callout-success {
+    border-color: var(--callout-success-border);
+    background-color: var(--callout-success-bg);
 }
 .callout-success .callout-title::before { content: "✅"; }
 
-.callout-failure, .callout-danger { 
-    border-color: #f85149; 
-    background-color: #2a1818; 
+.callout-failure, .callout-danger {
+    border-color: var(--callout-danger-border);
+    background-color: var(--callout-danger-bg);
 }
-.callout-failure .callout-title::before, 
+.callout-failure .callout-title::before,
 .callout-danger .callout-title::before { content: "❌"; }
 
-.callout-warning { 
-    border-color: #d29922; 
-    background-color: #2e261c; 
+.callout-warning {
+    border-color: var(--callout-warning-border);
+    background-color: var(--callout-warning-bg);
 }
 .callout-warning .callout-title::before { content: "⚠️"; }
 
-.callout-question { 
-    border-color: #a371f7; 
-    background-color: #241c2e; 
+.callout-question {
+    border-color: var(--callout-question-border);
+    background-color: var(--callout-question-bg);
 }
 .callout-question .callout-title::before { content: "❓"; }
 
-.callout-note { 
-    border-color: #79c0ff; 
-    background-color: #1c2630; 
+.callout-note {
+    border-color: var(--callout-note-border);
+    background-color: var(--callout-note-bg);
 }
 .callout-note .callout-title::before { content: "📝"; }
-
-/* Make sure callouts work in dark theme */
-@media (prefers-color-scheme: dark) {
-    .callout {
-        background-color: rgba(255, 255, 255, 0.05);
-    }
-}
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
@@ -429,134 +422,7 @@ body {
     }
 }
 
-/* ======================== Post TOC ======================== */
-html { scroll-behavior: smooth; }
-
-.post-content h2,
-.post-content h3 {
-    scroll-margin-top: 90px;
-}
-
-.post-toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.post-toc-list-h2 > .post-toc-item-h2 {
-    margin-bottom: 4px;
-}
-
-.post-toc-list-h3 {
-    margin: 2px 0 8px 0;
-    padding-left: 18px;
-    border-left: 1px solid #2a2a2a;
-}
-
-.post-toc-link {
-    display: block;
-    color: #c9d1d9;
-    text-decoration: none;
-    border: none !important;
-    padding: 4px 8px 4px 10px;
-    border-left: 2px solid transparent;
-    line-height: 1.35;
-    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
-    word-break: break-word;
-}
-
-.post-toc-item-h2 > .post-toc-link {
-    font-size: 1em;
-    font-weight: 600;
-    color: #e6edf3;
-}
-
-.post-toc-item-h3 > .post-toc-link {
-    font-size: 0.82em;
-    font-weight: 400;
-    color: #8b949e;
-}
-
-.post-toc-link:hover {
-    color: #58a6ff;
-    background-color: rgba(88, 166, 255, 0.06);
-}
-
-.post-toc-link.is-active {
-    color: #58a6ff;
-    font-weight: 600;
-    border-left-color: #58a6ff;
-    background-color: rgba(88, 166, 255, 0.08);
-}
-
-/* Floating "Sections" pill (all viewports) */
-.post-toc-mobile {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1100;
-    font-family: 'Fira Code', monospace;
-}
-
-.post-toc-mobile-toggle {
-    background: rgba(24, 24, 24, 0.92);
-    color: #58a6ff;
-    border: 1px solid #333;
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.85em;
-    font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.post-toc-mobile-toggle:hover,
-.post-toc-mobile.is-open .post-toc-mobile-toggle {
-    background: rgba(40, 40, 40, 0.95);
-    border-color: #58a6ff;
-}
-
-.post-toc-caret {
-    display: inline-block;
-    transition: transform 0.2s ease;
-    font-size: 0.9em;
-    line-height: 1;
-}
-
-.post-toc-mobile.is-open .post-toc-caret {
-    transform: rotate(180deg);
-}
-
-.post-toc-mobile-panel {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    width: min(320px, calc(100vw - 24px));
-    max-height: 70vh;
-    overflow-y: auto;
-    background: rgba(20, 20, 20, 0.98);
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 10px 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-}
-
-.post-toc-mobile.is-open .post-toc-mobile-panel {
-    display: block;
-}
-
-.post-toc-mobile-panel::-webkit-scrollbar { width: 6px; }
-.post-toc-mobile-panel::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-@media (max-width: 768px) {
-    .post-toc-mobile { top: 16px; right: 16px; }
-    .post-toc-mobile-toggle { padding: 5px 12px; font-size: 0.8em; }
-}
+/* TOC styles moved to /assets/css/post-toc.css */
 </style>
 
 {% unless page.toc == false %}

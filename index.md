@@ -3,21 +3,6 @@ layout: default
 title: Research - Critical Thinking Bug Bounty Podcast
 ---
 <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-        background: #222;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    body {
-        background-color: #1e1e1e;
-        color: #ffffff;
-    }
     .research-container {
         max-width: 1100px;
         margin: 0 auto;
@@ -51,9 +36,9 @@ title: Research - Critical Thinking Bug Bounty Podcast
         transform: translateX(-50%);
         width: 80%;
         height: 1px;
-        background: #58a6ff;
+        background: var(--blue);
         border-radius: 2px;
-        box-shadow: 0 0 6px #58a6ff, 0 0 12px rgba(88, 166, 255, 0.5), 0 0 22px rgba(88, 166, 255, 0.25);
+        box-shadow: 0 0 6px var(--blue), 0 0 12px var(--blue-glow), 0 0 22px var(--blue-tint);
     }
 
     .research-section {
@@ -64,30 +49,30 @@ title: Research - Critical Thinking Bug Bounty Podcast
     .research-breadcrumb {
         margin-top: 10px;
         font-size: 0.9em;
-        color: #999;
+        color: var(--overlay2);
     }
 
     .research-breadcrumb a {
-        color: #58a6ff;
+        color: var(--blue);
         text-decoration: none;
         transition: color 0.2s;
     }
 
     .research-breadcrumb a:hover {
-        color: #fff;
+        color: var(--text);
         text-decoration: underline;
     }
     .content-section {
         margin-top: 30px;
     }
-    
+
     .section-title {
         margin-bottom: 30px;
         font-size: 2em;
-        color: #fff;
+        color: var(--text);
         text-align: center;
     }
-    
+
     .content-type-badge {
         display: inline-block;
         font-size: 0.7em;
@@ -97,19 +82,19 @@ title: Research - Critical Thinking Bug Bounty Podcast
         margin-left: 10px;
         vertical-align: middle;
     }
-    
+
     .content-type-badge.research {
-        background-color: rgba(119, 119, 119, 0.13);
-        color: #58a6ff;
-        border: 1px solid #58a6ff;
+        background-color: var(--blue-tint);
+        color: var(--blue);
+        border: 1px solid var(--blue);
     }
-    
+
     .content-type-badge.writeup {
-        background-color: rgba(119, 119, 119, 0.13);
-        color: #6bff77ff;
-        border: 1px solid #6bff77ff;
+        background-color: var(--green-tint);
+        color: var(--green);
+        border: 1px solid var(--green);
     }
-    
+
     .nav-buttons {
         display: flex;
         justify-content: center;
@@ -117,44 +102,44 @@ title: Research - Critical Thinking Bug Bounty Podcast
         margin-top: 30px;
         flex-wrap: wrap;
     }
-    
+
     .article-list { margin-top: 30px; }
-    .article-item { background-color: #2a2a2a; margin-bottom: 15px; padding: 15px; border-radius: 4px; border-left: 3px solid #58a6ff; transition: all 0.3s ease; }
-    .article-item.writeup { border-left-color: #6bff77ff; }
-    .article-item:hover { background-color: #333; transform: translateX(3px); }
+    .article-item { background-color: var(--surface1); margin-bottom: 15px; padding: 15px; border-radius: 4px; border-left: 3px solid var(--blue); transition: all 0.3s ease; }
+    .article-item.writeup { border-left-color: var(--green); }
+    .article-item:hover { background-color: var(--surface2); transform: translateX(3px); }
     .article-title { margin-top: 0; margin-bottom: 8px; font-size: 1.2em; }
-    .article-title a { color: #58a6ff; text-decoration: none; }
-    .article-title a code { background-color: rgba(88, 166, 255, 0.15); padding: 2px 6px; border-radius: 4px; color: #58a6ff; font-size: inherit; }
-    .article-title.writeup a { color: #6bff77ff; }
-    .article-title.writeup a code { color: #6bff77ff; background-color: rgba(107, 255, 119, 0.15); }
+    .article-title a { color: var(--blue); text-decoration: none; }
+    .article-title a code { background-color: var(--blue-tint); padding: 2px 6px; border-radius: 4px; color: var(--blue); font-size: inherit; }
+    .article-title.writeup a { color: var(--green); }
+    .article-title.writeup a code { color: var(--green); background-color: var(--green-tint); }
     .article-title a:hover { text-decoration: underline; }
-    .article-subtitle { font-size: 0.9em; color: #ccc; margin-bottom: 8px; font-style: italic; }
-    .article-meta { font-size: 0.8em; color: #999; margin-bottom: 8px; }
+    .article-subtitle { font-size: 0.9em; color: var(--subtext0); margin-bottom: 8px; font-style: italic; }
+    .article-meta { font-size: 0.8em; color: var(--overlay2); margin-bottom: 8px; }
     .article-author { display: inline-flex; align-items: center; gap: 6px; }
-    .author-avatar { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; border: 1px solid #444; margin-left: 6px; }
+    .author-avatar { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-strong); margin-left: 6px; }
     .article-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
-    .article-tag { display: inline-block; font-size: 0.75em; padding: 3px 8px; background-color: #333; border-radius: 10px; color: #58a6ff; }
-    .article-tag.writeup { color: #6bff77ff; }
-    .new-badge { background-color: #ff4757; color: white; padding: 3px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 8px; }
-    .article-summary { margin-bottom: 10px; font-size: 0.85em; color: #ccc; }
-    .read-more { display: inline-block; padding: 6px 14px; background-color: #333; color: #58a6ff; border-radius: 3px; text-decoration: none; font-size: 0.9em; transition: all 0.2s ease; }
-    .read-more.writeup { color: #6bff77ff; }
-    .read-more:hover { background-color: #444; color: #fff; }
+    .article-tag { display: inline-block; font-size: 0.75em; padding: 3px 8px; background-color: var(--surface2); border-radius: 10px; color: var(--blue); }
+    .article-tag.writeup { color: var(--green); }
+    .new-badge { background-color: var(--red); color: var(--text); padding: 3px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 8px; }
+    .article-summary { margin-bottom: 10px; font-size: 0.85em; color: var(--subtext0); }
+    .read-more { display: inline-block; padding: 6px 14px; background-color: var(--surface2); color: var(--blue); border-radius: 3px; text-decoration: none; font-size: 0.9em; transition: all 0.2s ease; }
+    .read-more.writeup { color: var(--green); }
+    .read-more:hover { background-color: var(--border-strong); color: var(--text); }
     .all-articles { text-align: center; margin-top: 20px; }
-    .all-articles-btn { display: inline-block; padding: 8px 16px; background-color: #333; color: #58a6ff; border-radius: 4px; text-decoration: none; font-weight: 500; border: 1px solid #444; transition: all 0.3s ease; font-size: 0.9em; }
-    .all-articles-btn.writeup { color: #6bff77ff; border-color: #444; }
-    .all-articles-btn:hover { background-color: #444; color: #fff; }
-    .all-articles-btn.writeup:hover { border-color: #6bff77ff; }
+    .all-articles-btn { display: inline-block; padding: 8px 16px; background-color: var(--surface2); color: var(--blue); border-radius: 4px; text-decoration: none; font-weight: 500; border: 1px solid var(--border-strong); transition: all 0.3s ease; font-size: 0.9em; }
+    .all-articles-btn.writeup { color: var(--green); border-color: var(--border-strong); }
+    .all-articles-btn:hover { background-color: var(--border-strong); color: var(--text); }
+    .all-articles-btn.writeup:hover { border-color: var(--green); }
 
     .submit-chip {
         display: inline-flex;
         align-items: center;
         gap: 10px;
         padding: 9px 18px;
-        background-color: #1a1a1a;
-        border: 1px solid #333;
+        background-color: var(--mantle);
+        border: 1px solid var(--border-default);
         border-radius: 999px;
-        color: #58a6ff;
+        color: var(--blue);
         text-decoration: none;
         font-size: 0.9em;
         font-weight: 500;
@@ -162,9 +147,9 @@ title: Research - Critical Thinking Bug Bounty Podcast
     }
 
     .submit-chip:hover {
-        border-color: #58a6ff;
-        background-color: #1f242c;
-        color: #fff;
+        border-color: var(--blue);
+        background-color: var(--blue-bg-hover);
+        color: var(--text);
         transform: translateY(-1px);
     }
 

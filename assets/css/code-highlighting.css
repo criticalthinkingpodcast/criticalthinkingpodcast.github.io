@@ -5,8 +5,8 @@
 
 /* Code blocks - the <pre><code> combination */
 pre {
-    background-color: #1a1a1a !important;
-    border: 1px solid #383838 !important;
+    background-color: var(--code-bg) !important;
+    border: 1px solid var(--code-border) !important;
     border-left: 4px solid #3b9cff !important; /* More vibrant blue border */
     border-radius: 5px !important;
     margin: 20px 0 !important;
@@ -85,12 +85,12 @@ pre[data-language="DOCKERFILE"] {
 
 pre[data-language="GRAPHQL"] {
     border-left-color: #ff38c3 !important; /* More vibrant pink */
-    background-color: #1a1a1a !important;
+    background-color: var(--code-bg) !important;
 }
 
 pre[data-language="OAUTH"] {
     border-left-color: #FF7A33 !important; /* More vibrant orange */
-    background-color: #1a1a1a !important;
+    background-color: var(--code-bg) !important;
 }
 
 /* Code language label */
@@ -98,8 +98,8 @@ pre[data-language="OAUTH"] {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: var(--surface2);
+    color: var(--text);
     font-size: 0.7rem;
     padding: 2px 8px;
     border-bottom-left-radius: 4px;
@@ -191,8 +191,8 @@ pre[data-language="OAUTH"] .code-language-label {
     position: absolute;
     top: 0;
     right: 45px;
-    background-color: #333;
-    color: #fff;
+    background-color: var(--surface2);
+    color: var(--text);
     border: none;
     border-radius: 4px;
     font-size: 0.7rem;
@@ -205,7 +205,8 @@ pre[data-language="OAUTH"] .code-language-label {
 }
 
 .copy-code-button.copied {
-    background-color: #58a6ff;
+    background-color: var(--blue);
+    color: var(--on-accent);
 }
 
 pre:hover .copy-code-button {
@@ -214,7 +215,7 @@ pre:hover .copy-code-button {
 
 .copy-code-button:hover {
     opacity: 1 !important;
-    background-color: #444;
+    background-color: var(--border-strong);
 }
 
 /* Responsive design for mobile */

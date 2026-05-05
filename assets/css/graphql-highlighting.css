@@ -5,13 +5,17 @@
 
 /* GraphQL-specific highlighting overrides */
 pre[data-language="GRAPHQL"] .highlight {
-  color: #f0f0f0;
-  background-color: #1a1a1a;
+  color: var(--code-text);
+  background-color: var(--code-bg);
 }
 
 pre[data-language="GRAPHQL"] code {
-  background-color: #1a1a1a !important;
+  background-color: var(--code-bg) !important;
 }
+
+/* Add per-theme overrides here, e.g.:
+   [data-theme="my-theme"] pre[data-language="GRAPHQL"] .highlight .k { color: …; }
+*/
 
 /* Query keyword */
 pre[data-language="GRAPHQL"] .highlight .k {

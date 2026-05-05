@@ -4,22 +4,6 @@ title: Submit Research - Critical Thinking Bug Bounty Podcast
 permalink: /submit/
 ---
 <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-        background: #222;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    body {
-        background-color: #1e1e1e;
-        color: #ffffff;
-    }
-
     .submit-container {
         max-width: 900px;
         margin: 0 auto;
@@ -40,7 +24,7 @@ permalink: /submit/
 
     .skip-link {
         display: inline-block;
-        color: #58a6ff;
+        color: var(--blue);
         font-size: 0.95em;
         margin-bottom: 10px;
         text-decoration: none;
@@ -48,7 +32,7 @@ permalink: /submit/
     }
 
     .skip-link:hover {
-        color: #fff;
+        color: var(--text);
         animation: none;
         text-decoration: underline;
     }
@@ -61,11 +45,11 @@ permalink: /submit/
     .submit-header h1 {
         font-size: 2.4em;
         margin: 0 0 15px 0;
-        color: #ffffff;
+        color: var(--text);
     }
 
     .submit-header .tagline {
-        color: #ccc;
+        color: var(--subtext0);
         font-size: 1.05em;
         line-height: 1.6;
         max-width: 640px;
@@ -74,15 +58,15 @@ permalink: /submit/
 
     .section-title {
         font-size: 1.3em;
-        color: #58a6ff;
+        color: var(--blue);
         margin: 0 0 20px 0;
         padding-bottom: 8px;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid var(--border-default);
     }
 
     .section-title::before {
         content: "// ";
-        color: #555;
+        color: var(--overlay0);
     }
 
     .perks-list {
@@ -94,7 +78,7 @@ permalink: /submit/
     .perks-list li {
         position: relative;
         padding: 8px 0 8px 28px;
-        color: #ddd;
+        color: var(--subtext1);
         font-size: 1em;
         line-height: 1.6;
     }
@@ -104,33 +88,33 @@ permalink: /submit/
         position: absolute;
         left: 4px;
         top: 8px;
-        color: #58a6ff;
+        color: var(--blue);
         font-weight: 600;
     }
 
     .perks-list li strong {
-        color: #58a6ff;
+        color: var(--blue);
     }
 
     .perks-list li .note {
         display: block;
-        color: #999;
+        color: var(--overlay2);
         font-size: 0.9em;
         margin-top: 4px;
     }
 
     .info-block {
-        background-color: #1a1a1a;
+        background-color: var(--mantle);
         padding: 25px 30px;
         border-radius: 6px;
         margin-bottom: 50px;
         line-height: 1.7;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border-subtle);
     }
 
     .info-block p {
         margin: 0 0 12px 0;
-        color: #ddd;
+        color: var(--subtext1);
     }
 
     .info-block p:last-child {
@@ -138,7 +122,7 @@ permalink: /submit/
     }
 
     .info-block strong {
-        color: #58a6ff;
+        color: var(--blue);
     }
 
     .payouts {
@@ -149,10 +133,10 @@ permalink: /submit/
     }
 
     .payout {
-        background-color: #1a1a1a;
+        background-color: var(--mantle);
         padding: 20px;
         border-radius: 6px;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border-subtle);
         position: relative;
         transition: all 0.25s ease;
         display: flex;
@@ -160,14 +144,14 @@ permalink: /submit/
     }
 
     .payout:hover {
-        border-color: #58a6ff;
+        border-color: var(--blue);
         transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(88, 166, 255, 0.15);
+        box-shadow: 0 0 20px var(--blue-tint);
     }
 
     .payout-tag {
         font-size: 0.75em;
-        color: #999;
+        color: var(--overlay2);
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 8px;
@@ -175,35 +159,40 @@ permalink: /submit/
 
     .payout-label {
         font-size: 1em;
-        color: #ddd;
+        color: var(--subtext1);
         margin-bottom: 12px;
+    }
+
+    .payout-sub {
+        color: var(--overlay1);
+        font-size: 0.85em;
     }
 
     .payout-amount {
         font-size: 1.4em;
-        color: #58a6ff;
+        color: var(--blue);
         font-weight: 600;
         margin-top: auto;
     }
 
     .budget-note {
-        background-color: #181818;
-        border-left: 3px solid #ff5252;
+        background-color: var(--crust);
+        border-left: 3px solid var(--red);
         padding: 15px 20px;
         border-radius: 4px;
-        color: #ccc;
+        color: var(--subtext0);
         font-size: 0.95em;
         margin-bottom: 50px;
     }
 
     .exclusivity-callout {
         position: relative;
-        background: linear-gradient(135deg, #2a1414 0%, #1a1a1a 100%);
-        border: 1px solid #ff5252;
+        background-color: color-mix(in srgb, var(--red) var(--alpha-callout), var(--mantle));
+        border: 1px solid var(--red);
         border-radius: 6px;
         padding: 25px 30px;
         margin-bottom: 30px;
-        box-shadow: 0 0 20px rgba(255, 82, 82, 0.1);
+        box-shadow: 0 0 20px var(--red-tint);
     }
 
     .exclusivity-badge-wrap {
@@ -213,8 +202,8 @@ permalink: /submit/
 
     .exclusivity-badge {
         display: inline-block;
-        background-color: #ff5252;
-        color: #0f0f0f;
+        background-color: var(--red);
+        color: var(--on-accent);
         font-size: 1.1em;
         font-weight: 700;
         padding: 8px 18px;
@@ -225,23 +214,27 @@ permalink: /submit/
 
     .exclusivity-callout p.lead {
         font-size: 1.15em;
-        color: #ffffff;
+        color: var(--text);
         line-height: 1.5;
+    }
+
+    .exclusivity-callout p.lead strong.t-red {
+        color: var(--red);
     }
 
     .exclusivity-headline {
         font-size: 1.25em;
-        color: #ffffff;
+        color: var(--text);
         margin: 0 0 12px 0;
         line-height: 1.4;
     }
 
     .exclusivity-headline .highlight {
-        color: #ff5252;
+        color: var(--red);
     }
 
     .exclusivity-callout p {
-        color: #ccc;
+        color: var(--subtext0);
         line-height: 1.6;
         margin: 0 0 10px 0;
         font-size: 0.95em;
@@ -252,7 +245,7 @@ permalink: /submit/
     }
 
     .exclusivity-callout .examples {
-        color: #888;
+        color: var(--overlay1);
         font-size: 0.85em;
         margin-top: 12px;
         font-style: italic;
@@ -261,14 +254,14 @@ permalink: /submit/
     .cta-section {
         text-align: center;
         padding: 40px 20px;
-        background-color: #1a1a1a;
+        background-color: var(--mantle);
         border-radius: 8px;
         margin-bottom: 30px;
-        border: 1px solid #2a2a2a;
+        border: 1px solid var(--border-subtle);
     }
 
     .cta-section p {
-        color: #ddd;
+        color: var(--subtext1);
         margin: 0 0 25px 0;
         line-height: 1.6;
     }
@@ -276,21 +269,19 @@ permalink: /submit/
     .cta-button {
         display: inline-block;
         padding: 14px 36px;
-        background-color: #58a6ff;
-        color: #0f0f0f;
+        background-color: var(--blue);
+        color: var(--on-accent);
         text-decoration: none;
         border-radius: 4px;
         font-weight: 600;
         font-size: 1.05em;
-        transition: all 0.25s ease;
-        border: 1px solid #58a6ff;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        border: 1px solid var(--blue);
     }
 
     .cta-button:hover {
-        background-color: transparent;
-        color: #58a6ff;
         transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(88, 166, 255, 0.25);
+        box-shadow: 0 6px 16px var(--blue-glow);
     }
 
     .cta-arrow {
@@ -319,7 +310,7 @@ permalink: /submit/
 <div class="submit-container">
 
     <div class="submit-header">
-        <a class="skip-link" href="https://forms.gle/Rjm2Qn8aFn4fSxHp8" target="_blank" rel="noopener">// already read this? <span style="color:#ff5252;">skip</span> to the form →</a>
+        <a class="skip-link" href="https://forms.gle/Rjm2Qn8aFn4fSxHp8" target="_blank" rel="noopener">// already read this? <span class="t-red">skip</span> to the form →</a>
         <h1>Sup, hackers!</h1>
         <p class="tagline">
             We're opening up the Critical Thinking Research Team to more people.
@@ -340,17 +331,17 @@ permalink: /submit/
     <div class="payouts">
         <div class="payout">
             <div class="payout-tag">Our main focus</div>
-            <div class="payout-label">Micro research<br><span style="color:#888;font-size:0.85em;">under 8 paragraphs</span></div>
+            <div class="payout-label">Micro research<br><span class="payout-sub">under 8 paragraphs</span></div>
             <div class="payout-amount">$20 – $50</div>
         </div>
         <div class="payout">
             <div class="payout-tag">Long-form</div>
-            <div class="payout-label">Full write-ups<br><span style="color:#888;font-size:0.85em;">1k – 5k words</span></div>
+            <div class="payout-label">Full write-ups<br><span class="payout-sub">1k – 5k words</span></div>
             <div class="payout-amount">$100 – $250</div>
         </div>
         <div class="payout">
             <div class="payout-tag">Deep dive</div>
-            <div class="payout-label">Mega research<br><span style="color:#888;font-size:0.85em;">5k+ words</span></div>
+            <div class="payout-label">Mega research<br><span class="payout-sub">5k+ words</span></div>
             <div class="payout-amount">$500</div>
         </div>
         <div class="payout">
@@ -369,7 +360,7 @@ permalink: /submit/
         <div class="exclusivity-badge-wrap">
             <span class="exclusivity-badge">⚠ !important</span>
         </div>
-        <p class="lead">We ask for <strong style="color:#ff5252;">30 days of exclusivity</strong> on our Research Page, just so we can flex on the pod that these techniques dropped here first.</p>
+        <p class="lead">We ask for <strong class="t-red">30 days of exclusivity</strong> on our Research Page, just so we can flex on the pod that these techniques dropped here first.</p>
         <p>We used to ask for perpetual exclusivity, but your personal site/blog shouldn't be held back. So for the first 30 days, don't post it anywhere else. After that, feel free to publish it on your own pages too!</p>
     </div>
 

@@ -3,25 +3,13 @@ layout: default
 title: Episodes - Critical Thinking Bug Bounty Podcast
 ---
 <style>
-::-webkit-scrollbar {
-    width: 8px;
-    background: #222;
-}
-::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-body { background-color: #1e1e1e; color: #ffffff; }
 .home-container { max-width: 1100px; margin: 0 auto; padding: 20px; text-align: left; animation: fadeIn 0.6s ease-in; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .home-header { margin-bottom: 15px; text-align: center; }
 .home-section { margin-bottom: 20px; line-height: 1.7; }
 .episode-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-.episode-title { margin: 20px 0 10px 0; font-size: 1.2em; color: #ffffff; }
-a { color: #58a6ff; text-decoration: none; }
+.episode-title { margin: 20px 0 10px 0; font-size: 1.2em; color: var(--text); }
+a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1, h2 { text-align: center; }
 .welcome-text { line-height: 1.7; margin-bottom: 10px; margin-top: 0px; text-align: center; }
@@ -66,7 +54,7 @@ h1, h2 { text-align: center; }
     </div>
     
 <div class="home-section welcome-text">
-    <p><strong><span style="color: #ff5252;">Crit</span>ical <span style="color: #58a6ff;">Thinking</span> is a "by hackers, for hackers" podcast</strong> designed to be both technical and fun to listen to.</p>
+    <p><strong><span class="t-red">Crit</span>ical <span class="t-blue">Thinking</span> is a "by hackers, for hackers" podcast</strong> designed to be both technical and fun to listen to.</p>
 </div>
 
 <div class="home-section">
@@ -94,6 +82,6 @@ h1, h2 { text-align: center; }
 </div>
 
 <div class="home-section" style="text-align: center; margin: 30px 0;">
-    <a href="https://www.youtube.com/playlist?list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7" style="display: inline-block; padding: 12px 25px; background-color: #252525; color: #58a6ff; border: 1px solid #444; border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">View All Episodes →</a>
+    <a href="https://www.youtube.com/playlist?list=PLO-h_HEvT1ysKxfLkI-uk3_vxzxoUHCD7" style="display: inline-block; padding: 12px 25px; background-color: var(--surface0); color: var(--blue); border: 1px solid var(--border-strong); border-radius: 4px; text-decoration: none; font-size: 1.1em; transition: all 0.3s ease; box-shadow: var(--shadow-card);">View All Episodes →</a>
 </div>
 </div>

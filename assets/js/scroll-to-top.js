@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollButton.style.width = '40px';
     scrollButton.style.fontSize = '20px';
     scrollButton.style.lineHeight = '1';
-    scrollButton.style.background = '#333';
-    scrollButton.style.color = '#58a6ff';
-    scrollButton.style.border = '1px solid #444';
+    scrollButton.style.background = 'var(--bg-tag)';
+    scrollButton.style.color = 'var(--accent-blue)';
+    scrollButton.style.border = '1px solid var(--border-strong)';
     scrollButton.style.borderRadius = '50%';
     scrollButton.style.cursor = 'pointer';
     scrollButton.style.display = 'none'; // Initially hidden
@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hover effect
     scrollButton.addEventListener('mouseover', function() {
         this.style.opacity = '1';
-        this.style.backgroundColor = '#444';
+        this.style.backgroundColor = 'var(--border-strong)';
     });
-    
+
     scrollButton.addEventListener('mouseout', function() {
         this.style.opacity = '0.8';
-        this.style.backgroundColor = '#333';
+        this.style.backgroundColor = 'var(--bg-tag)';
     });
     
     // Click behavior to scroll to top

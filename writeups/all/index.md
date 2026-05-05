@@ -3,21 +3,6 @@ layout: default
 title: All Writeups - Critical Thinking Bug Bounty Podcast
 ---
 <style>
-    ::-webkit-scrollbar {
-        width: 8px;
-        background: #222;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    body {
-        background-color: #1e1e1e;
-        color: #ffffff;
-    }
     .writeups-container {
         max-width: 1100px;
         margin: 0 auto;
@@ -39,17 +24,17 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     .writeups-breadcrumb {
         margin-top: 10px;
         font-size: 0.9em;
-        color: #999;
+        color: var(--overlay2);
     }
 
     .writeups-breadcrumb a {
-        color: #6bff77ff;
+        color: var(--green);
         text-decoration: none;
         transition: color 0.2s;
     }
 
     .writeups-breadcrumb a:hover {
-        color: #fff;
+        color: var(--text);
         text-decoration: underline;
     }
 
@@ -65,15 +50,15 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         width: 100%;
         padding: 8px 35px 8px 12px;
         border-radius: 4px;
-        border: 1px solid #333;
-        background-color: #252525;
-        color: white;
+        border: 1px solid var(--border-default);
+        background-color: var(--surface0);
+        color: var(--text);
         font-size: 0.85em;
     }
 
     #articleSearch:focus {
         outline: none;
-        border-color: #6bff77ff;
+        border-color: var(--green);
     }
 
     #searchClear {
@@ -83,7 +68,7 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         transform: translateY(-50%);
         background: none;
         border: none;
-        color: #999;
+        color: var(--overlay2);
         cursor: pointer;
         font-size: 0.8em;
     }
@@ -95,7 +80,7 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     .filter-label {
         display: block;
         margin-bottom: 8px;
-        color: #999;
+        color: var(--overlay2);
         font-size: 0.85em;
     }
 
@@ -108,17 +93,17 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     .filter-tag {
         display: inline-block;
         padding: 4px 10px;
-        background-color: #252525;
-        color: #6bff77ff;
-        border: 1px solid #333;
+        background-color: var(--surface0);
+        color: var(--green);
+        border: 1px solid var(--border-default);
         border-radius: 12px;
         font-size: 0.8em;
         cursor: pointer;
     }
 
     .filter-tag.active {
-        background-color: rgba(255, 107, 107, 0.2);
-        border-color: #6bff77ff;
+        background-color: var(--green-tint);
+        border-color: var(--green);
     }
 
     .article-list {
@@ -128,14 +113,14 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     }
 
     .article-item {
-        background-color: #252525;
+        background-color: var(--surface0);
         padding: 15px;
         border-radius: 5px;
-        border-left: 3px solid #6bff77ff;
+        border-left: 3px solid var(--green);
     }
 
     .article-item:hover {
-        background-color: #2a2a2a;
+        background-color: var(--surface1);
     }
 
     .article-title {
@@ -144,43 +129,43 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     }
 
     .article-title a {
-        color: #6bff77ff;
+        color: var(--green);
         text-decoration: none;
     }
-    
+
     .article-title a code {
-        background-color: rgba(88, 166, 255, 0.15);
+        background-color: var(--green-tint);
         padding: 2px 6px;
         border-radius: 4px;
-        color: #6bff77ff;
+        color: var(--green);
         font-size: inherit;
-    }    
-    
+    }
+
     .article-title a:hover {
         text-decoration: underline;
     }
 
     .article-subtitle {
         font-size: 0.9em;
-        color: #ccc;
+        color: var(--subtext0);
         margin-bottom: 10px;
         font-style: italic;
     }
-    
+
     .article-excerpt {
         margin: 8px 0;
         font-size: 0.85em;
-        color: #bbb;
+        color: var(--subtext0);
         line-height: 1.4;
     }
 
     .article-meta {
         font-size: 0.8em;
-        color: #999;
+        color: var(--overlay2);
     }
-    
+
     .article-author {
-        color: #aaa;
+        color: var(--overlay2);
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -191,12 +176,12 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         height: 3em;
         border-radius: 50%;
         object-fit: cover;
-        border: 1px solid #444;
+        border: 1px solid var(--border-strong);
         margin-left: 6px;
     }
 
     .article-date {
-        color: #888;
+        color: var(--overlay1);
     }
 
     .article-tags {
@@ -210,19 +195,19 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         display: inline-block;
         font-size: 0.75em;
         padding: 2px 8px;
-        background-color: #333;
+        background-color: var(--surface2);
         border-radius: 12px;
-        color: #6bff77ff;
+        color: var(--green);
         cursor: pointer;
     }
 
     .article-tag:hover {
-        background-color: #444;
+        background-color: var(--border-strong);
     }
 
     .new-badge {
-        background-color: #ff4757;
-        color: white;
+        background-color: var(--red);
+        color: var(--text);
         padding: 2px 6px;
         border-radius: 4px;
         font-size: 0.7em;
@@ -245,18 +230,18 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         align-items: center;
         width: 30px;
         height: 30px;
-        background-color: #252525;
-        color: #6bff77ff;
-        border: 1px solid #333;
+        background-color: var(--surface0);
+        color: var(--green);
+        border: 1px solid var(--border-default);
         border-radius: 3px;
         text-decoration: none;
         font-size: 0.8em;
     }
 
     .pagination .active span {
-        background-color: rgba(255, 107, 107, 0.2);
-        color: white;
-        border-color: #6bff77ff;
+        background-color: var(--green-tint);
+        color: var(--text);
+        border-color: var(--green);
     }
 
     .page-size-controls {
@@ -265,9 +250,9 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     }
 
     .page-size-btn {
-        background-color: #252525;
-        color: #6bff77ff;
-        border: 1px solid #333 !important;
+        background-color: var(--surface0);
+        color: var(--green);
+        border: 1px solid var(--border-default) !important;
         padding: 3px 10px 2px 10px;
         margin: 0 2px;
         border-radius: 5px;
@@ -281,20 +266,20 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
     }
 
     .page-size-btn:hover {
-        background-color: #333;
-        border: 1px solid #6bff77ff !important;
+        background-color: var(--surface2);
+        border: 1px solid var(--green) !important;
     }
 
     .page-size-btn.active {
-        background-color: rgba(107, 255, 156, 0.2);
-        border: 1px solid #6bff77ff !important;
-        color: white;
+        background-color: var(--green-tint);
+        border: 1px solid var(--green) !important;
+        color: var(--text);
     }
 
     .pagination-info {
         text-align: center;
         margin: 0 0 20px 0;
-        color: #999;
+        color: var(--overlay2);
         font-size: 0.85em;
     }
 
@@ -310,19 +295,19 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         display: flex;
         align-items: center;
         padding: 0 10px;
-        background-color: #252525;
-        border: 1px solid #333;
+        background-color: var(--surface0);
+        border: 1px solid var(--border-default);
         border-radius: 15px;
-        color: #ccc;
+        color: var(--subtext0);
         text-decoration: none;
         font-size: 2em;
         transition: all 0.2s ease;
     }
 
     .nav-button:hover {
-        background-color: #333;
-        border-color: #6bff77ff;
-        color: white;
+        background-color: var(--surface2);
+        border-color: var(--green);
+        color: var(--text);
         text-decoration: none;
     }
 
@@ -335,11 +320,11 @@ title: All Writeups - Critical Thinking Bug Bounty Podcast
         .writeups-container {
             padding: 15px;
         }
-        
+
         .page-size-btn {
             font-size: 0.8em;
             padding: 5px 10px;
-            border: 1px solid #333 !important;
+            border: 1px solid var(--border-default) !important;
             min-width: 35px;
             text-align: center;
             display: inline-block;

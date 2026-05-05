@@ -174,11 +174,23 @@ pre[data-language="YAML"] .highlight .s {
 
 /* Extra styling for copy button */
 .copy-code-button {
-  background-color: #444 !important;
-  color: #ddd !important;
+  background-color: var(--surface2) !important;
+  color: var(--subtext1) !important;
 }
 
 .copy-code-button.copied {
-  background-color: #50fa7b !important;
-  color: #333 !important;
+  background-color: var(--green) !important;
+  color: var(--on-accent) !important;
 }
+
+/* ====================================================================
+   To add per-theme syntax colors, append a block here matching the
+   data-theme value, e.g.:
+
+       [data-theme="my-theme"] .highlight .k { color: #ff79c6; }
+       [data-theme="my-theme"] .highlight .s { color: #50fa7b; }
+       …
+
+   The dark palette above is the default and applies whenever no other
+   theme overrides win on specificity.
+   ==================================================================== */
