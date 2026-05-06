@@ -2,7 +2,7 @@
 layout: post
 title: "Breaking SameSite=Strict in Chrome"
 author: Mian
-date: 2026-05-07
+date: 2026-05-06
 tags: [cookies, csrf, service-workers, chrome, devtools]
 profile_picture: /assets/images/mian.png
 handle: mianHIZB
