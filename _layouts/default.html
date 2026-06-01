@@ -318,7 +318,7 @@
   <body>
     
     <div class="page-wrapper">
-        <div id="main-header">
+        <div id="main-header" style="position: relative; z-index: 1100;">
 <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: var(--shell-bg-overlay); transition: transform 0.3s ease-in-out;">
         <div style="position: relative; width: 100%; height: 150px; overflow: hidden;">
           <!-- Background animation -->
@@ -334,7 +334,7 @@
       </header>
       
       <!-- Navigation Menu -->
-      <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: var(--shell-bg); z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: transform 0.3s ease-in-out;">
+      <nav style="position: fixed; top: 150px; left: 0; width: 100%; background-color: var(--shell-bg); z-index: 1200; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: transform 0.3s ease-in-out;">
         <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: center; position: relative;">
                     <a href="{{ '/episodes/' | relative_url }}" style="padding: 10px 15px; color: var(--shell-accent); text-decoration: none; font-size: 0.9em;">Episodes</a>
                     <a href="{{ '/research/all' | relative_url }}" style="padding: 10px 15px; color: var(--shell-accent); text-decoration: none; font-size: 0.9em;">Research</a>
@@ -464,7 +464,7 @@
                 var optionsContainer = document.getElementById('theme-options-container');
                 if (optionsContainer && window.SITE_THEMES) {
                     optionsContainer.innerHTML = '';
-                    window.SITE_THEMES.forEach(function(t) {
+                    var makeOption = function(t) {
                         var btn = document.createElement('button');
                         btn.className = 'theme-option';
                         btn.type = 'button';
@@ -472,7 +472,29 @@
                         btn.setAttribute('data-theme-value', t.id);
                         btn.innerHTML = '<span class="theme-option-preview" aria-hidden="true"></span><span class="theme-option-label"></span>';
                         btn.querySelector('.theme-option-label').textContent = t.label;
-                        optionsContainer.appendChild(btn);
+                        return btn;
+                    };
+                    // Group into dark / light columns by each theme's --base
+                    // luminance (probed live, so no hardcoded list to maintain).
+                    var darkCol = [], lightCol = [];
+                    window.SITE_THEMES.forEach(function(t) {
+                        var probe = document.createElement('div');
+                        probe.setAttribute('data-theme', t.id);
+                        probe.style.cssText = 'position:fixed;left:-9999px;width:0;height:0;visibility:hidden;pointer-events:none;';
+                        document.body.appendChild(probe);
+                        var base = getComputedStyle(probe).getPropertyValue('--base').trim();
+                        document.body.removeChild(probe);
+                        (relativeLuminance(parseColorToRGB(base)) > 0.5 ? lightCol : darkCol).push(t);
+                    });
+                    [['Dark', darkCol], ['Light', lightCol]].forEach(function(group) {
+                        var col = document.createElement('div');
+                        col.className = 'theme-column';
+                        var title = document.createElement('div');
+                        title.className = 'theme-column-title';
+                        title.textContent = group[0];
+                        col.appendChild(title);
+                        group[1].forEach(function(t) { col.appendChild(makeOption(t)); });
+                        optionsContainer.appendChild(col);
                     });
                 }
 
