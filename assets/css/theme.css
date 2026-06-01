@@ -328,7 +328,9 @@
     min-width: 180px;
     max-height: 78vh;
     overflow-y: auto;
-    background: var(--shell-bg);
+    background: var(--shell-bg-overlay);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--shell-border);
     border-radius: 8px;
     padding: 14px 16px;
