@@ -328,7 +328,10 @@
     min-width: 180px;
     max-height: 78vh;
     overflow-y: auto;
-    background: var(--shell-bg-overlay);
+    /* Uniform frost: derive from the solid --shell-bg at a fixed opacity
+       rather than --shell-bg-overlay, whose per-theme alpha ranges from
+       near-invisible to fully opaque. */
+    background: color-mix(in srgb, var(--shell-bg) 85%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--shell-border);
