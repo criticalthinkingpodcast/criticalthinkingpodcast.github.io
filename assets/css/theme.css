@@ -218,6 +218,66 @@
     --logo-image: url(/assets/images/CTLogo.png);
 }
 
+[data-theme="ct-noir"] {
+    /* ── Neutrals (light → dark scale) ── */
+    --text:      #ededed;
+    --subtext1:  #c9c9c9;
+    --subtext0:  #a1a1a1;
+    --overlay2:  #888888;
+    --overlay1:  #666666;
+    --overlay0:  #444444;
+    --surface2:  #2a2a2a;
+    --surface1:  #1a1a1a;
+    --surface0:  #111111;
+    --base:      #000000;
+    --mantle:    #050505;
+    --crust:     #0a0a0a;
+
+    /* ── Accents (14 hues) ── */
+    --rosewater: #f5e0dc;
+    --flamingo:  #f2cdcd;
+    --pink:      #f5c2e7;
+    --mauve:     #a371f7;
+    --red:       #ff6b6b;
+    --maroon:    #eba0ac;
+    --peach:     #d29922;
+    --yellow:    #f9e2af;
+    --green:     #4ade80;
+    --teal:      #94e2d5;
+    --sky:       #89dceb;
+    --sapphire:  #74c7ec;
+    --blue:      #ededed;
+    --lavender:  #b4befe;
+
+    /* ── Code surfaces ── */
+    --code-bg:     #0a0a0a;
+    --code-text:   #ededed;
+    --code-border: #1a1a1a;
+
+    /* ── Mix percentages ── */
+    --alpha-strong:  10%;
+    --alpha-tint:    10%;
+    --alpha-glow:    18%;
+    --alpha-callout: 12%;
+
+    /* ── Solid-accent contrast ── */
+    --on-accent: #000000;
+
+    /* ── Shadows ── */
+    --shadow-card:        0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover:  0 1px 3px rgba(0, 0, 0, 0.6), 0 8px 30px rgba(0, 0, 0, 0.6);
+
+    /* ── Shell — header / nav / footer ── */
+    --shell-bg: #000000;
+    --shell-bg-overlay: rgba(0, 0, 0, 0.85);
+    --shell-bg-overlay-subtle: rgba(0, 0, 0, 0.7);
+    --shell-text: #ededed;
+    --shell-text-faded: #888888;
+    --shell-accent: #ededed;
+    --shell-border: #1a1a1a;
+    --shell-border-strong: #2a2a2a;
+}
+
 /* ======================================================================
    Theme menu picker (button + dropdown)
    ====================================================================== */
