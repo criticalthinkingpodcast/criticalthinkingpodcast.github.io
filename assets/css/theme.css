@@ -290,8 +290,13 @@
 .theme-menu {
     position: absolute;
     right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    /* Center vertically with flex, NOT transform: a transformed ancestor
+       disables backdrop-filter on the dropdown, killing the frosted-glass
+       blur (most visible on light themes, where raw alpha looks opaque). */
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
 }
 
 .theme-toggle {
@@ -331,7 +336,7 @@
     /* Uniform frost: derive from the solid --shell-bg at a fixed opacity
        rather than --shell-bg-overlay, whose per-theme alpha ranges from
        near-invisible to fully opaque. */
-    background: color-mix(in srgb, var(--shell-bg) 85%, transparent);
+    background: color-mix(in srgb, var(--shell-bg) 75%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--shell-border);

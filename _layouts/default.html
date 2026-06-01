@@ -562,7 +562,13 @@
                         try { localStorage.setItem('theme', theme); } catch (e) {}
                         applyThemeLogo(theme);
                         markActiveOption();
-                        closeThemeMenu();
+                        // Desktop: keep the menu open so themes can be browsed
+                        // by clicking through them; it closes on an outside
+                        // click. Mobile: close on select so the dropdown (which
+                        // can fill the screen) doesn't trap the user.
+                        if (window.matchMedia('(max-width: 768px)').matches) {
+                            closeThemeMenu();
+                        }
                     });
                 });
                 document.addEventListener('click', closeThemeMenu);
