@@ -474,10 +474,18 @@
                         btn.querySelector('.theme-option-label').textContent = t.label;
                         return btn;
                     };
+                    // Sort CT (default) themes first, then alphabetical by
+                    // label — the registry stays append-only and any new
+                    // theme slots into place automatically.
+                    var sorted = window.SITE_THEMES.slice().sort(function(a, b) {
+                        var aCT = /^ct-/i.test(a.id), bCT = /^ct-/i.test(b.id);
+                        if (aCT !== bCT) return aCT ? -1 : 1;
+                        return a.label.localeCompare(b.label);
+                    });
                     // Group into dark / light columns by each theme's --base
                     // luminance (probed live, so no hardcoded list to maintain).
                     var darkCol = [], lightCol = [];
-                    window.SITE_THEMES.forEach(function(t) {
+                    sorted.forEach(function(t) {
                         var probe = document.createElement('div');
                         probe.setAttribute('data-theme', t.id);
                         probe.style.cssText = 'position:fixed;left:-9999px;width:0;height:0;visibility:hidden;pointer-events:none;';
