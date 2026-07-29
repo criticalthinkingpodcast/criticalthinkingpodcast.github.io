@@ -360,7 +360,7 @@ permalink: /submit/
         <div class="exclusivity-badge-wrap">
             <span class="exclusivity-badge">⚠ !important</span>
         </div>
-        <p class="lead">We ask for <strong class="t-red">30 days of exclusivity</strong> on our Research Page, just so we can flex on the pod that these techniques dropped here first.</p>
+        <p class="lead">We ask for <strong class="t-red">30 days of exclusivity</strong> on our Research Page, just so we can flex on the pod that these techniques dropped here first. So upload it to a Drive and send us the link to it using the form below, do <strong>not</strong> host it on your blog/medium/anywhere easily reachable.</p>
         <p>We used to ask for perpetual exclusivity, but your personal site/blog shouldn't be held back. So for the first 30 days, don't post it anywhere else. After that, feel free to publish it on your own pages too!</p>
     </div>
 
