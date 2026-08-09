@@ -7,3 +7,7 @@ url: "https://lab.ctbb.show"
 
 exclude:
   - README.md
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - script

@@ -1,0 +1,22 @@
+#!/bin/sh
+# Preview the site locally at http://127.0.0.1:4000 with live reload.
+# Self-contained: pins the Homebrew Ruby the gems were built against, so it
+# works regardless of what `ruby` the calling shell resolves to.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+RUBY_BIN="/opt/homebrew/opt/ruby@3.3/bin"
+
+if [ ! -x "$RUBY_BIN/ruby" ]; then
+  echo "Ruby 3.3 not found at $RUBY_BIN — run: brew install ruby@3.3" >&2
+  exit 1
+fi
+
+PATH="$RUBY_BIN:$PATH"
+export PATH
+
+bundle check >/dev/null 2>&1 || bundle install
+
+exec bundle exec jekyll serve --livereload "$@"

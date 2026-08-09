@@ -24,22 +24,15 @@
         { id: 'amber-crt', label: 'amber-crt' },
         { id: 'blood-moon', label: 'blood-moon' },
         { id: 'dracula-night', label: 'dracula-night' },
-        { id: 'latte', label: 'latte' },
         { id: 'rose-pine-dawn', label: 'rose-pine-dawn' },
-        { id: 'solarized-light', label: 'solarized-light' },
-        { id: 'gruvbox-light', label: 'gruvbox-light' },
         { id: 'github-light', label: 'github-light' },
         { id: 'ayu-light', label: 'ayu-light' },
-        { id: 'everforest-light', label: 'everforest-light' },
         { id: 'paper-color', label: 'paper-color' },
         { id: 'tokyo-day', label: 'tokyo-day' },
         { id: 'iceberg-light', label: 'iceberg-light' },
-        { id: 'min-light', label: 'min-light' },
         { id: 'selene', label: 'selene' },
         { id: 'lapis', label: 'lapis' },
         { id: 'dayfox', label: 'dayfox' },
-        { id: 'horizon-light', label: 'horizon-light' },
-        { id: 'bear', label: 'bear' },
         { id: 'tokyo-night', label: 'tokyo-night' },
         { id: 'gruvbox-dark', label: 'gruvbox-dark' },
         { id: 'rose-pine-moon', label: 'rose-pine-moon' },
@@ -158,16 +151,20 @@
         object-fit: contain;
     }
 
-    /* Override code keyword color for dark backgrounds with higher specificity */
+    /* Override code keyword color for dark backgrounds with higher
+       specificity — beats the stock rouge `.kd { color: #000 }` that
+       ships in style.css. Uses --code-keyword, not --peach directly:
+       code blocks are always dark, so the raw accent goes unreadable
+       on light themes. See the code surface block in theme.css. */
     .highlight code .kd,
     .highlight .kd {
-        color: var(--peach) !important;
+        color: var(--code-keyword) !important;
         font-weight: bold !important;
     }
 
     .highlight code .kc,
     .highlight .kc {
-        color: var(--peach) !important;
+        color: var(--code-keyword) !important;
         font-weight: bold !important;
     }
     

@@ -1,8 +1,8 @@
 /* Badges and special effects for research articles */
 
 .new-badge {
-    background-color: var(--red);
-    color: var(--text);
+    background-color: var(--chip-red-bg);
+    color: var(--chip-fg);
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 0.7em;
@@ -15,15 +15,17 @@
     z-index: 1;
 }
 
+/* Scale only — the old 0.7 opacity dip faded the label into the card
+   every cycle, which is half of why the badge read as unreadable. */
 @keyframes pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .featured-badge {
-    background-color: var(--blue);
-    color: var(--on-accent);
+    background-color: var(--chip-blue-bg);
+    color: var(--chip-fg);
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 0.7em;

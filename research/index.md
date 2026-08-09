@@ -116,8 +116,8 @@ redirect_to: /
     }
 
     .new-badge {
-        background-color: var(--red);
-        color: var(--text);
+        background-color: var(--chip-red-bg);
+        color: var(--chip-fg);
         padding: 3px 8px;
         border-radius: 4px;
         font-size: 0.7em;

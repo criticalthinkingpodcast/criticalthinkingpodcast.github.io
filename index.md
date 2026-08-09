@@ -120,7 +120,7 @@ title: Research - Critical Thinking Bug Bounty Podcast
     .article-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
     .article-tag { display: inline-block; font-size: 0.75em; padding: 3px 8px; background-color: var(--surface2); border-radius: 10px; color: var(--blue); }
     .article-tag.writeup { color: var(--green); }
-    .new-badge { background-color: var(--red); color: var(--text); padding: 3px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 8px; }
+    .new-badge { background-color: var(--chip-red-bg); color: var(--chip-fg); padding: 3px 8px; border-radius: 3px; font-size: 0.7em; margin-left: 8px; }
     .article-summary { margin-bottom: 10px; font-size: 0.85em; color: var(--subtext0); }
     .read-more { display: inline-block; padding: 6px 14px; background-color: var(--surface2); color: var(--blue); border-radius: 3px; text-decoration: none; font-size: 0.9em; transition: all 0.2s ease; }
     .read-more.writeup { color: var(--green); }

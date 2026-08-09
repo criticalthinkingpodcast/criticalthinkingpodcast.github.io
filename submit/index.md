@@ -185,6 +185,76 @@ permalink: /submit/
         margin-bottom: 50px;
     }
 
+    .format-block {
+        background-color: var(--mantle);
+        padding: 25px 30px;
+        border-radius: 6px;
+        margin-bottom: 50px;
+        line-height: 1.7;
+        border: 1px solid var(--border-subtle);
+    }
+
+    .format-block > p {
+        margin: 0 0 12px 0;
+        color: var(--subtext1);
+    }
+
+    .format-block strong {
+        color: var(--blue);
+    }
+
+    .fm-code {
+        position: relative;
+        margin: 20px 0;
+    }
+
+    .format-block pre {
+        margin: 0;
+        font-size: 0.9em;
+        line-height: 1.6;
+        white-space: pre;
+        padding-right: 90px;
+    }
+
+    /* Code blocks are always dark on this site, in every theme —
+       so this button styles off the code tokens, not the surfaces. */
+    .fm-copy {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: var(--code-border);
+        color: var(--code-text);
+        border: 1px solid var(--code-border);
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 0.75em;
+        padding: 4px 10px;
+        cursor: pointer;
+        opacity: 0.85;
+        transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .fm-copy:hover,
+    .fm-copy:focus-visible {
+        opacity: 1;
+        border-color: var(--blue);
+    }
+
+    .fm-copy.copied {
+        background-color: var(--blue);
+        border-color: var(--blue);
+        color: var(--on-accent);
+        opacity: 1;
+    }
+
+    .format-block pre .fm-c {
+        color: var(--overlay1);
+    }
+
+    .format-block pre .fm-k {
+        color: var(--blue);
+    }
+
     .exclusivity-callout {
         position: relative;
         background-color: color-mix(in srgb, var(--red) var(--alpha-callout), var(--mantle));
@@ -202,8 +272,8 @@ permalink: /submit/
 
     .exclusivity-badge {
         display: inline-block;
-        background-color: var(--red);
-        color: var(--on-accent);
+        background-color: var(--chip-red-bg);
+        color: var(--chip-fg);
         font-size: 1.1em;
         font-weight: 700;
         padding: 8px 18px;
@@ -324,7 +394,8 @@ permalink: /submit/
         <li>Extra distribution for your work</li>
         <li>Your name + research shouted out on the podcast</li>
         <li>Access to the private <strong>#research</strong> channel in the CTBB Discord</li>
-        <li>To submit, upload your research to a drive and share the link with us using the form below.</li>
+        <li>To submit, upload your research to a drive and share the link with us using the form below.
+            <span class="note">Markdown file (.md) with front matter — details below.</span></li>
     </ul>
 
     <h2 class="section-title">Payouts</h2>
@@ -356,6 +427,30 @@ permalink: /submit/
         <p>If it's interesting, it gets published, and we'll cover it on the pod.</p>
     </div>
 
+    <h2 class="section-title">Format</h2>
+    <div class="format-block">
+        <p>One small favor: send it as <strong>markdown</strong> (<strong>.md</strong>) with front matter on top.</p>
+        <div class="fm-code">
+            <button type="button" class="fm-copy" id="fm-copy-btn" aria-label="Copy front matter template">Copy</button>
+<pre id="fm-template"><span class="fm-c">---</span>
+<span class="fm-k">layout:</span> post
+<span class="fm-k">title:</span> Title for the post
+<span class="fm-k">author:</span> Researcher's Name
+<span class="fm-k">date:</span> YYYY-MM-DD
+<span class="fm-k">tags:</span> [comma, separated, tags]
+<span class="fm-k">image:</span> /thumbnail.png (this is optional)
+<span class="fm-k">profile_picture:</span> /assets/images/yourHandle.jpg
+<span class="fm-k">handle:</span> YourHandle
+<span class="fm-k">social_links:</span> [https://x.com/researcher, https://researchersSite.com/]
+
+<span class="fm-k">description:</span> "A short description of what the research is about"
+<span class="fm-k">permalink:</span> /research/link-you-want
+<span class="fm-c">---</span>
+</pre>
+        </div>
+        <p>Fill in whatever you know and leave the rest — we'll handle the paths, permalink and thumbnail on our end.</p>
+    </div>
+
     <div class="exclusivity-callout">
         <div class="exclusivity-badge-wrap">
             <span class="exclusivity-badge">⚠ !important</span>
@@ -372,3 +467,50 @@ permalink: /submit/
     </div>
 
 </div>
+
+<script>
+(function () {
+    var btn = document.getElementById('fm-copy-btn');
+    var tpl = document.getElementById('fm-template');
+    if (!btn || !tpl) return;
+
+    var resetTimer;
+
+    function flash(label) {
+        btn.textContent = label;
+        btn.classList.add('copied');
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+
+    function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        return ok;
+    }
+
+    btn.addEventListener('click', function () {
+        var text = tpl.textContent;
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(function () {
+                flash('Copied!');
+            }, function () {
+                flash(fallbackCopy(text) ? 'Copied!' : 'Press Ctrl+C');
+            });
+        } else {
+            flash(fallbackCopy(text) ? 'Copied!' : 'Press Ctrl+C');
+        }
+    });
+})();
+</script>

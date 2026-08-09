@@ -143,10 +143,54 @@
        universal token, NOT a per-theme choice: derived from the theme's
        own --blue accent over a dark anchor, so each theme's code blocks
        carry a subtle hint of its palette while staying readable. Adding
-       a theme never touches this. */
-    --code-bg:      color-mix(in srgb, var(--blue) 7%, #15171c);
+       a theme never touches this.
+
+       The anchor is lifted by --code-lift of the theme's own --base, so
+       it self-adjusts instead of being hand-tuned per theme: on a light
+       theme --base is near-white and the block softens to a slate grey;
+       on a dark theme --base is near-black and the anchor stays put.
+       Raise --code-lift to lighten every light theme's code blocks at
+       once; it needs no light/dark list to maintain. Don't push it much
+       past 8% — the vibrant-syntax palette's darkest tokens (#ff5555,
+       #779db0, #ae81ff) already sit near their contrast floor, and a
+       higher lift is what starts to eat into them. */
+    --code-lift:     8%;
+    --code-anchor:   color-mix(in srgb, var(--base) var(--code-lift), #15171c);
+    --code-anchor-2: color-mix(in srgb, var(--base) var(--code-lift), #262a31);
+
+    --code-bg:      color-mix(in srgb, var(--blue) 7%,  var(--code-anchor));
     --code-text:    #d4d4d4;
-    --code-border:  color-mix(in srgb, var(--blue) 15%, #262a31);
+    --code-border:  color-mix(in srgb, var(--blue) 15%, var(--code-anchor-2));
+
+    /* Keyword colour for .kd/.kc (const, let, function, true/false).
+       Same rule as the surface above: a raw theme accent can't be used
+       on the always-dark code block. A light theme's --peach is a dark
+       ink meant for a pale page — dayfox's #a5222f lands at 1.86:1 here
+       — so the accent is blended toward a bright anchor and only
+       --code-accent-keep of the theme's own hue is carried through.
+       Dark themes barely move (their peach is already bright); light
+       themes get pulled up. Lowering --code-accent-keep trades theme
+       character for contrast. */
+    --code-accent-keep: 35%;
+    --code-keyword: color-mix(in srgb, var(--peach) var(--code-accent-keep), #ffb86c);
+
+    /* ── Brand ──────────────────────────────────────────────────────
+       Sampled from the "crit" and "thinking" glyphs in CTLogo.png.
+       Fixed marks, not theme palette: they must look the same on
+       every theme, the way the logo does. */
+    --brand-red:    #ea1c24;
+    --brand-blue:   #6fcbf3;
+
+    /* ── Accent chips (NEW / FEATURED / !important badges) ─────────
+       A filled chip needs a background that carries white text on
+       every theme, and --red/--blue can't: they swing from bright
+       salmon on dark themes to deep ink on light ones, so no fixed
+       foreground reads on all 35 (--text failed on all of them,
+       --on-accent on 9-10). The red chip is simply the brand red —
+       one badge colour everywhere, matching the logo. */
+    --chip-fg:      #ffffff;
+    --chip-red-bg:  var(--brand-red);
+    --chip-blue-bg: color-mix(in srgb, var(--blue) 40%, #0b2547);
 
     /* ── Callouts ── */
     --callout-bg:               color-mix(in srgb, var(--text) 5%, transparent);
@@ -1042,50 +1086,6 @@
     --shell-border-strong:      rgba(255,46,62,0.34);
 }
 
-/* latte — light warm cream pastel, catppuccin latte */
-[data-theme="latte"] {
-    --text: #4c4f69;
-    --subtext1: #5c5f77;
-    --subtext0: #6c6f85;
-    --overlay2: #7c7f93;
-    --overlay1: #8c8fa1;
-    --overlay0: #9ca0b0;
-    --surface2: #acb0be;
-    --surface1: #bcc0cc;
-    --surface0: #ccd0da;
-    --base: #eff1f5;
-    --mantle: #e6e9ef;
-    --crust: #dce0e8;
-    --rosewater: #dc8a78;
-    --flamingo: #dd7878;
-    --pink: #ea76cb;
-    --mauve: #8839ef;
-    --red: #d20f39;
-    --maroon: #e64553;
-    --peach: #fe640b;
-    --yellow: #df8e1d;
-    --green: #40a02b;
-    --teal: #179299;
-    --sky: #04a5e5;
-    --sapphire: #209fb5;
-    --blue: #1e66f5;
-    --lavender: #7287fd;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #ffffff;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #dce0e8;
-    --shell-bg-overlay: rgba(220,224,232,.85);
-    --shell-bg-overlay-subtle: rgba(220,224,232,.5);
-    --shell-text: #4c4f69;
-    --shell-text-faded: #7c7f93;
-    --shell-accent: #1e66f5;
-    --shell-border: #bcc0cc;
-    --shell-border-strong: #9ca0b0;
-}
 
 /* rose-pine-dawn — light classy minimalist */
 [data-theme="rose-pine-dawn"] {
@@ -1132,95 +1132,7 @@
     --shell-border-strong: #9893a5;
 }
 
-/* solarized-light — precision palette, ochre + cyan */
-[data-theme="solarized-light"] {
-    --text: #073642;
-    --subtext1: #586e75;
-    --subtext0: #657b83;
-    --overlay2: #839496;
-    --overlay1: #93a1a1;
-    --overlay0: #aab7b7;
-    --surface2: #c2c8c4;
-    --surface1: #d6cfc1;
-    --surface0: #e5dec8;
-    --base: #fdf6e3;
-    --mantle: #eee8d5;
-    --crust: #e3dabb;
-    --rosewater: #cb4b16;
-    --flamingo: #d33682;
-    --pink: #d33682;
-    --mauve: #6c71c4;
-    --red: #dc322f;
-    --maroon: #cb4b16;
-    --peach: #cb4b16;
-    --yellow: #b58900;
-    --green: #859900;
-    --teal: #2aa198;
-    --sky: #268bd2;
-    --sapphire: #268bd2;
-    --blue: #268bd2;
-    --lavender: #6c71c4;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #fdf6e3;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #eee8d5;
-    --shell-bg-overlay: rgba(238,232,213,.85);
-    --shell-bg-overlay-subtle: rgba(238,232,213,.5);
-    --shell-text: #073642;
-    --shell-text-faded: #657b83;
-    --shell-accent: #268bd2;
-    --shell-border: #d6cfc1;
-    --shell-border-strong: #93a1a1;
-}
 
-/* gruvbox-light — warm paper, earthy retro */
-[data-theme="gruvbox-light"] {
-    --text: #3c3836;
-    --subtext1: #504945;
-    --subtext0: #665c54;
-    --overlay2: #7c6f64;
-    --overlay1: #928374;
-    --overlay0: #a89984;
-    --surface2: #bdae93;
-    --surface1: #d5c4a1;
-    --surface0: #ebdbb2;
-    --base: #fbf1c7;
-    --mantle: #f2e5bc;
-    --crust: #ebdbb2;
-    --rosewater: #d65d0e;
-    --flamingo: #af3a03;
-    --pink: #d3869b;
-    --mauve: #b16286;
-    --red: #cc241d;
-    --maroon: #9d0006;
-    --peach: #d65d0e;
-    --yellow: #d79921;
-    --green: #98971a;
-    --teal: #689d6a;
-    --sky: #458588;
-    --sapphire: #076678;
-    --blue: #458588;
-    --lavender: #b16286;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #fbf1c7;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #ebdbb2;
-    --shell-bg-overlay: rgba(235,219,178,.85);
-    --shell-bg-overlay-subtle: rgba(235,219,178,.5);
-    --shell-text: #3c3836;
-    --shell-text-faded: #665c54;
-    --shell-accent: #076678;
-    --shell-border: #d5c4a1;
-    --shell-border-strong: #928374;
-}
 
 /* github-light — clean cool gray */
 [data-theme="github-light"] {
@@ -1312,50 +1224,6 @@
     --shell-border-strong: #abb0b6;
 }
 
-/* everforest-light — sage + paper, forest calm */
-[data-theme="everforest-light"] {
-    --text: #5c6a72;
-    --subtext1: #708089;
-    --subtext0: #829181;
-    --overlay2: #939f91;
-    --overlay1: #9da9a0;
-    --overlay0: #a6b0a0;
-    --surface2: #bec5b2;
-    --surface1: #d3c6aa;
-    --surface0: #dcd3b1;
-    --base: #fdf6e3;
-    --mantle: #f4f0d9;
-    --crust: #efebd4;
-    --rosewater: #df69ba;
-    --flamingo: #df69ba;
-    --pink: #df69ba;
-    --mauve: #df69ba;
-    --red: #f85552;
-    --maroon: #f85552;
-    --peach: #f57d26;
-    --yellow: #dfa000;
-    --green: #8da101;
-    --teal: #35a77c;
-    --sky: #3a94c5;
-    --sapphire: #3a94c5;
-    --blue: #3a94c5;
-    --lavender: #df69ba;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #fdf6e3;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #efebd4;
-    --shell-bg-overlay: rgba(239,235,212,.88);
-    --shell-bg-overlay-subtle: rgba(239,235,212,.55);
-    --shell-text: #5c6a72;
-    --shell-text-faded: #829181;
-    --shell-accent: #3a94c5;
-    --shell-border: #d3c6aa;
-    --shell-border-strong: #9da9a0;
-}
 
 /* paper-color — paper bg, pen-ink accents */
 [data-theme="paper-color"] {
@@ -1492,50 +1360,6 @@
     --shell-border-strong: #7a8aa9;
 }
 
-/* min-light — minimal cool whites */
-[data-theme="min-light"] {
-    --text: #222222;
-    --subtext1: #3a3a3a;
-    --subtext0: #525252;
-    --overlay2: #6a6a6a;
-    --overlay1: #828282;
-    --overlay0: #9a9a9a;
-    --surface2: #b6b6b6;
-    --surface1: #c8c8c8;
-    --surface0: #dcdcdc;
-    --base: #ffffff;
-    --mantle: #f6f6f6;
-    --crust: #ececec;
-    --rosewater: #d65656;
-    --flamingo: #d65656;
-    --pink: #c33b8d;
-    --mauve: #7a4cad;
-    --red: #c33b3b;
-    --maroon: #a83232;
-    --peach: #d6802b;
-    --yellow: #c79b1c;
-    --green: #3aa84d;
-    --teal: #1aa6a6;
-    --sky: #3a8ed6;
-    --sapphire: #266bb8;
-    --blue: #266bb8;
-    --lavender: #7a4cad;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #ffffff;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #ececec;
-    --shell-bg-overlay: rgba(236,236,236,.92);
-    --shell-bg-overlay-subtle: rgba(236,236,236,.55);
-    --shell-text: #222222;
-    --shell-text-faded: #525252;
-    --shell-accent: #266bb8;
-    --shell-border: #dcdcdc;
-    --shell-border-strong: #9a9a9a;
-}
 
 /* selene — moonlit pearl, cool silvery */
 [data-theme="selene"] {
@@ -1672,95 +1496,7 @@
     --shell-border-strong: #92889b;
 }
 
-/* horizon-light — pinkish dawn, soft warmth */
-[data-theme="horizon-light"] {
-    --text: #403c59;
-    --subtext1: #5a4f6f;
-    --subtext0: #6c5b75;
-    --overlay2: #7a677e;
-    --overlay1: #9b8b94;
-    --overlay0: #b6a4ac;
-    --surface2: #cdb7be;
-    --surface1: #dcc5cd;
-    --surface0: #ead2d9;
-    --base: #fdf0ed;
-    --mantle: #f6e6e3;
-    --crust: #f0d9d5;
-    --rosewater: #e96379;
-    --flamingo: #e96379;
-    --pink: #e95678;
-    --mauve: #b877db;
-    --red: #dc1768;
-    --maroon: #dc1768;
-    --peach: #f09483;
-    --yellow: #fab795;
-    --green: #3fdaa4;
-    --teal: #25b0bc;
-    --sky: #26bbd9;
-    --sapphire: #26bbd9;
-    --blue: #26bbd9;
-    --lavender: #b877db;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #fdf0ed;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #f0d9d5;
-    --shell-bg-overlay: rgba(240,217,213,.88);
-    --shell-bg-overlay-subtle: rgba(240,217,213,.55);
-    --shell-text: #403c59;
-    --shell-text-faded: #6c5b75;
-    --shell-accent: #dc1768;
-    --shell-border: #dcc5cd;
-    --shell-border-strong: #9b8b94;
-}
 
-/* bear — soft cream, bear-app inspired */
-[data-theme="bear"] {
-    --text: #3a2e2a;
-    --subtext1: #5a4a44;
-    --subtext0: #7a665e;
-    --overlay2: #937e74;
-    --overlay1: #a89489;
-    --overlay0: #bba89c;
-    --surface2: #cdbdb1;
-    --surface1: #dccfc4;
-    --surface0: #ebe1d6;
-    --base: #fbf6ef;
-    --mantle: #f5ede1;
-    --crust: #ede2d3;
-    --rosewater: #d49a89;
-    --flamingo: #d49a89;
-    --pink: #c0568f;
-    --mauve: #9b59b6;
-    --red: #c94e4e;
-    --maroon: #a04040;
-    --peach: #d27c3a;
-    --yellow: #cba747;
-    --green: #719d4d;
-    --teal: #3aa295;
-    --sky: #3a8db5;
-    --sapphire: #2c6e9a;
-    --blue: #2c6e9a;
-    --lavender: #9b59b6;
-    --alpha-strong:  15%;
-    --alpha-tint:    15%;
-    --alpha-glow:    25%;
-    --alpha-callout: 18%;
-    --on-accent: #fbf6ef;
-    --shadow-card: 0 3px 10px rgba(0,0,0,0.08);
-    --shadow-card-hover: 0 6px 18px rgba(0,0,0,0.14);
-    --shell-bg: #ede2d3;
-    --shell-bg-overlay: rgba(237,226,211,.88);
-    --shell-bg-overlay-subtle: rgba(237,226,211,.55);
-    --shell-text: #3a2e2a;
-    --shell-text-faded: #7a665e;
-    --shell-accent: #2c6e9a;
-    --shell-border: #dccfc4;
-    --shell-border-strong: #a89489;
-}
 
 /* tokyo-night — dark cool indigo neon */
 [data-theme="tokyo-night"] {

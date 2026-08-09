@@ -206,8 +206,8 @@ title: All Research Articles - Critical Thinking Bug Bounty Podcast
     }
 
     .new-badge {
-        background-color: var(--red);
-        color: var(--text);
+        background-color: var(--chip-red-bg);
+        color: var(--chip-fg);
         padding: 2px 6px;
         border-radius: 4px;
         font-size: 0.7em;
