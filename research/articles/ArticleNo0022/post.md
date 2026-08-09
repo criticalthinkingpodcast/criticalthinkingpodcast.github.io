@@ -34,7 +34,7 @@ User `@wenwiper.` (Wiper) asked an [innocent question](https://discord.com/chann
 > probeError('https://google.com/');
 > ```
 > 
-> As expected, I get `Onload event triggered in the console`. However, when I run it on a different website, I get `Error event triggered` instead. I know this may be due to browser security mechanisms such as opaque response blocking, but then why does it succeed for the xsleaks website?
+> As expected, I get `Onload event triggered` in the console. However, when I run it on a different website, I get `Error event triggered` instead. I know this may be due to browser security mechanisms such as opaque response blocking, but then why does it succeed for the xsleaks website?
 
 A lot of important information is already given here.
 
@@ -47,7 +47,7 @@ Then some more messages made it weirder:
 > This is on firefox btw, on chrome I always get `ERR_BLOCKED_BY_ORB` which makes sense. Also the requests and responses are the same on chrome, unlike firefox which I also find weird (like the redirect on example.com but no xsleaks.dev).  
 > Tried this in private mode on firefox and it doesn't work anymore, the request looks exactly the same as from example.com.
 
-So according to them:
+So according to the witness:
 
 * It only happens in Firefox
 * When it works, `https://google.com` isn't redirected to `https://www.google.com` but instead instantly gets a response in the Network tab
@@ -67,7 +67,7 @@ I asked to Wiper if he could try it on a new profile to confirm the "stored" the
 
 That's strange, it still works on a new profile which should rule out it beign stored. And it has nothing to do with extensions.
 
-Then I tried reproducing it again. And now it worked! Weirdly, I could also reproduce it on *Chrome*. I consistently got `Onload event triggered in the console` on xsleaks.dev and `Error event triggered` on example.com. Now the question remains, why?
+Then I tried reproducing it again. And now it worked! Weirdly, I could also reproduce it on *Chrome*. I consistently got `Onload event triggered` on xsleaks.dev and `Error event triggered` on example.com. Now the question remains, why?
 
 ## First clue: Service Worker
 
@@ -130,7 +130,7 @@ self.addEventListener("activate", (event) => {
 });
 ```
 
-But xsleaks.dev's service worker doesn't do this. So in all the testing between browsers, we visited the xsleaks.dev website once and immediately opened the console to test. The service worker was registered but not connected to the tab yet, so requests weren't affected by it yet. Only after testing a 2nd time does the service worker claim the client automatically and can we reproduce the bug.
+But xsleaks.dev's service worker doesn't do this. So during all the testing between browsers, we visited the xsleaks.dev website once and immediately opened the console to test. The service worker was registered but not connected to the tab yet, so requests weren't affected by it yet. Only after testing a 2nd time does the service worker claim the client automatically and can we reproduce the bug.
 
 ## Second clue: Sec-Fetch-Dest
 
@@ -165,7 +165,7 @@ OpaqueResponseBlockingAnalyzer::ShouldHandleBlockedResponseAs() const {
 }
 ```
 
-It can't get clearer than this. If the destination is **not** "empty" (example.com), return a network error. Otherwise, it **is** "empty" (xsleaks.dev), return a successful but blank response. When a script tag receives a network error, it always throws the `error` event, no matter the status code. But if it receives a blank response, the network layer checks the status code to determine whether to throw an `error` event or start executing the JavaScript and trigger `load`. In this case, the JavaScript in question will be 0 bytes, blank, so nothing actually executes.
+It can't get clearer than this. If the destination is **not** "empty" (example.com), return a network error. Otherwise, when it **is** "empty" (xsleaks.dev), return a successful but blank response. When a script tag receives a network error, it always throws the `error` event, no matter the status code. But if it receives a blank response, the network layer checks the status code to determine whether to throw an `error` event or start executing the JavaScript and trigger `load`. In this case, the JavaScript in question will be 0 bytes, blank, so nothing actually executes.
 
 For our XS-Leak purposes that means when ORB normally blocks the response, a service worker overwriting the destination *changes* it to not be a network error and lets us differentiate the ORB error from a 4XX error.
 
