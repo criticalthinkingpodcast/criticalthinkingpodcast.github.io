@@ -11,9 +11,9 @@ description: "A Discord question about inconsistent XS-Leak behaviour turns into
 permalink: /research/solving-an-orb-mystery
 ---
 
-This is a mini-investigation that happened in the [CTBB discord](https://www.criticalthinkingpodcast.io/discord-landing/). From asking a simple question we go deep into the browser's darkest secrets and accidentally uncover what is essentially a bypass of Opaque Response Blocking (ORB) for the purposes of an XS-Leak.
+This is a mini-investigation that happened in the [CTBB Discord](https://www.criticalthinkingpodcast.io/discord-landing/). From asking a simple question, we go deep into the browser's darkest secrets and accidentally uncover what is essentially a bypass of Opaque Response Blocking (ORB) for the purposes of an XS-Leak.
 
-As all good investigations go, let's first collect our evidence...
+As with all good investigations, let's first collect our evidence...
 
 ## The evidence
 
@@ -59,27 +59,27 @@ Can you, reader, figure out how all these things can be true? Or, as Wiper nicel
 
 ## Reproducing
 
-I quickly opened my Firefox, visited xsleaks.dev and example.com and ran the JavaScript code in both consoles. Unfortunately I wasn't able to reproduce it, both just said `Error event triggered`. So far we've only seen it be reproduced on Wiper's personal Firefox instance on https://xsleaks.dev, nowhere else. My thinking is now that it has to be something stored in Wiper's browser that's making a difference, could be cookies, a service worker, or an extension maybe?
+I quickly opened my Firefox, visited xsleaks.dev and example.com, and ran the JavaScript code in both consoles. Unfortunately, I wasn't able to reproduce it. Both just said `Error event triggered`. So far we've only seen it be reproduced on Wiper's personal Firefox instance on https://xsleaks.dev, nowhere else. My thinking now is that it has to be something stored in Wiper's browser that's making the difference. It could be cookies, a service worker, or maybe an extension?
 
-I asked to Wiper if he could try it on a new profile to confirm the "stored" theory even more, and to inspect the difference in HTTP traffic between xsleaks.dev and example.com in Burp Suite. Why would one response error and the other be successfully loaded as a script?
+I asked Wiper to try it on a new profile to further confirm the "stored" theory and to inspect the difference in HTTP traffic between xsleaks.dev and example.com in Burp Suite. Why would one response error and the other be successfully loaded as a script?
 
 > The onload event is also triggered in a new profile and it's still triggered even when all extensions are disabled.
 
-That's strange, it still works on a new profile which should rule out it beign stored. And it has nothing to do with extensions.
+That's strange. It still works on a new profile, which should rule out it being stored. And it has nothing to do with extensions.
 
-Then I tried reproducing it again. And now it worked! Weirdly, I could also reproduce it on *Chrome*. I consistently got `Onload event triggered` on xsleaks.dev and `Error event triggered` on example.com. Now the question remains, why?
+Then I tried reproducing it again. And now it worked! Weirdly, I could also reproduce it on *Chrome*. I consistently got `Onload event triggered` on xsleaks.dev and `Error event triggered` on example.com. Now the question remains: why?
 
 ## First clue: Service Worker
 
 The original poster already mentioned the error might have to do with [Opaque Response Blocking (ORB)](https://github.com/annevk/orb). This is a security feature that blocks resource loads (eg. `<script>` tags) where the response's content type does not match its destination at a process-level. Because cross-origin resource loads don't use CORS, such features would otherwise be impossible to mitigate from Spectre attacks. When the browser sees a `text/html` response to a request, the ORB algorithm parses the content as JavaScript, and if it doesn't pass, blocks the request.
 
-Important to understand is that the `load` event is triggered even when a script contains syntax/runtime errors. An `error` event is only sent if something network-wise fails. The XS-Leak takes advantage of the fact that the browser treats a 4XX response code as a network failure, triggering the `error` event. With ORB in the mix, however, any cross-origin content that doesn't parse as valid JavaScript *also* becomes a network error, triggering the `error` event. So it is logical to assume this is the reason the XS-Leak is not working like we see for example.com.
+Important to understand is that the `load` event is triggered even when a script contains syntax/runtime errors. An `error` event is only sent if something network-wise fails. The XS-Leak takes advantage of the fact that the browser treats a 4XX response code as a network failure, triggering the `error` event. With ORB in the mix, however, any cross-origin content that doesn't parse as valid JavaScript *also* becomes a network error, triggering the `error` event. So it is logical to assume this is the reason the XS-Leak is not working, as we see for example.com.
 
-But now what's the difference with xsleaks.dev where it *does* work? Looking at the network tab of a successful load something caught my eye:
+But now what's the difference with xsleaks.dev where it *does* work? Looking at the network tab of a successful load, something caught my eye:
 
 ![Network tab for xsleaks.dev script request](network-xsleaks.png)
 
-The **Transferred** column says "service worker". Compare that to the error case, where there are 2 requests, the last of which failing with a generic `NS_ERROR_FAILURE` (likely ORB): 
+The **Transferred** column says "service worker". Compare that to the error case, where there are 2 requests, the last of which fails with a generic `NS_ERROR_FAILURE` (likely ORB): 
 
 ![Network tab for example.com script requests](network-example.png)
 
@@ -116,7 +116,7 @@ self.addEventListener("fetch", (event) => {
 });
 ```
 
-We found *a* difference, but is it *the* difference? We can Unregister the service worker temporarily and try to XS-Leak again to see if it fails now on xsleaks.dev:
+We found *a* difference, but is it *the* difference? We can unregister the service worker temporarily and try to XS-Leak again to see if it fails now on xsleaks.dev:
 
 ```js
 probeError('https://google.com');  // Error event triggered
@@ -130,13 +130,13 @@ self.addEventListener("activate", (event) => {
 });
 ```
 
-But xsleaks.dev's service worker doesn't do this. So during all the testing between browsers, we visited the xsleaks.dev website once and immediately opened the console to test. The service worker was registered but not connected to the tab yet, so requests weren't affected by it yet. Only after testing a 2nd time does the service worker claim the client automatically and can we reproduce the bug.
+But xsleaks.dev's service worker doesn't do this. So during all the testing between browsers, we visited the xsleaks.dev website once and immediately opened the console to test. The service worker was registered but not connected to the tab yet, so requests weren't affected by it yet. Only after testing a 2nd time does the service worker claim the client automatically, and can we reproduce the bug.
 
 ## Second clue: Sec-Fetch-Dest
 
 We've determined the service worker is the cause, but we still aren't at the root cause. We should continue to ask ourselves "why?". All the service worker does is listen for the `fetch` event, then fetches the request for you, and returns you the response. Shouldn't that be a [no-op](https://en.wikipedia.org/wiki/NOP_(code))?
 
-In one more bit of information we can see another difference. Not in the network tab but in the raw HTTP requests:
+In one more bit of information, we can see another difference. Not in the network tab but in the raw HTTP requests:
 
 **From xsleaks.dev**:
 
@@ -216,4 +216,4 @@ console.log(await probeError("https://google.com"));      // true
 console.log(await probeError("https://google.com/404"));  // false
 ```
 
-This is why you ask questions folks, we just fixed an anchient XS-Leak to work in modern browsers!
+This is why you ask questions, folks! We just fixed an ancient XS-Leak to work in modern browsers.
