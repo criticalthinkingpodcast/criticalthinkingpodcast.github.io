@@ -1,6 +1,6 @@
 ---
 layout: post
-title: From DEF CON Research to Automated Supply Chain Defense, finding npx confusion vulnerabilitie  with npxconfuse
+title: From DEF CON Research to Automated Supply Chain Defense, finding npx confusion vulnerabilities  with npxconfuse
 author: Muhammad Mukhtar Mahmud
 date: 2026-08-11
 tags: [ supply chain Security, Security Tooling , RCE , Javascript]
