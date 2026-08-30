@@ -444,7 +444,7 @@ permalink: /submit/
 <span class="fm-k">social_links:</span> [https://x.com/researcher, https://researchersSite.com/]
 
 <span class="fm-k">description:</span> "A short description of what the research is about"
-<span class="fm-k">permalink:</span> /research-OR-writeup/link-you-want
+<span class="fm-k">permalink:</span> /research-OR-writeups/link-you-want
 <span class="fm-c">---</span>
 </pre>
         </div>
