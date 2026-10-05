@@ -2,7 +2,7 @@
 layout: post
 title: Challenge - Not just another XSS (lab)
 author: Macabely
-date: 2026-10-04
+date: 2026-10-05
 tags: [challenge, csp, xss, client-side]
 profile_picture: /assets/images/macabely.jpg
 handle: macabely
