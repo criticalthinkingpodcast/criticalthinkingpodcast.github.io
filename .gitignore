@@ -4,3 +4,6 @@ _site
 .jekyll-metadata
 vendor
 .bundle
+
+# VPS-only operational tooling for the hosted challenge, not part of the site
+statsChallenge.sh
