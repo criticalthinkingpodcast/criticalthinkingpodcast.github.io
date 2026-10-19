@@ -21,3 +21,7 @@ Get Cross-Site Scripting (XSS) to pop an `alert(origin)` on this page, working o
 Oh, and before you go spin up your recon pipeline, please don't because fuzzing is **not** needed.
 
 Try not to share solutions too publicly. A writeup follows this post soon.
+
+---
+
+- (2026/10/20) PS: CHALLENGE is OFFLINE. It was about a 0day in Chrome that allows bypassing any CSP. The writeup will be published once a fix release in the stable version. 
